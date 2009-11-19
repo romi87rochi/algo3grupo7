@@ -18,7 +18,7 @@ public class Fruta extends Item{
 	}
 
 	public void comido(Juego unJuego){
-		unJuego.sumaPuntajes(this);
+		unJuego.setPuntaje(puntajePredeterminado);
 	}
 	
 	public int getPuntaje(){
@@ -27,3 +27,4 @@ public class Fruta extends Item{
 
 
 }
+      

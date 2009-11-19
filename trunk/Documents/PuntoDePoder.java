@@ -6,7 +6,7 @@ public class PuntoDePoder extends Item{
 	
 	public PuntoDePoder(Juego unJuego, int puntaje){
 		int nivel=unJuego.getNivel();
-		this.tiempoDePoder=20; //ejemplo
+		this.setTiempoPoder(20);
 		this.puntajePredeterminado=puntaje;
 		if(tiempoDePoder>nivel)
 			this.setTiempoDePoder(tiempoDePoder - nivel);
@@ -23,8 +23,9 @@ public class PuntoDePoder extends Item{
 	}
 	
 	public void comido(Juego unJuego){
-		unJuego.sumaPuntajes(this);
-		unJuego.cambiarEstadoPersonajes(); // corroborar con metodo de Diego
+		unJuego.setPuntaje(puntajePredeterminado);
+		unJuego.cambiarEstadoDeLosFantasmas();
+		unJuego.cambiarEstadoPackman();
 	}
 	
 	public int getPuntaje(){
