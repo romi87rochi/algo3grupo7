@@ -8,7 +8,7 @@ public class Punto extends Item{
 	}
 	
 	public void comido(Juego unJuego){
-		unJuego.sumaPuntajes(this);
+		unJuego.setPuntaje(puntajePredeterminado);
 	}
 	
 	public int getPuntaje(){
