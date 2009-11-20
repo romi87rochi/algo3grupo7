@@ -6,15 +6,14 @@ public class Fruta extends Item{
 	
 	public Fruta(int puntaje){
 		this.puntajePredeterminado=puntaje;
-		int rango= this.setRangoDeVida(20); //ejemplo
+		/*int rango= this.setRangoDeVida(20); //ejemplo
 		Controlador controla= new controlador(rango);
 		this.comenzarJuego(rango); // metodo de titiritero, para que viva solo por un tiempo
-		// no se si esta bien usarlo
+		// no se si esta bien usarlo  */
 	}
 	
-	private int setRangoDeVida(int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getRangoDeVida() {
+	   return rangoDeTiempoDeVida;
 	}
 
 	public void comido(Juego unJuego){
