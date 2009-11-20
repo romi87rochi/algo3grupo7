@@ -1,74 +1,68 @@
 
-public class Personaje {
+public abstract class Personaje {
 	
-	private int posX;
-	private int posY;
+  private int velocidad;
+  private Juego juego;
+  private Posicion posicion;
+  private Posicion posicionOriginal;
+  private boolean puedeSerComido;
 	
 	/**
 	 * Constructor
 	 */	
-	public Personaje() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Personaje(Juego nuevoJuego, Posicion posicionOriginal, int velocidad, boolean puedeSerComido) {
+		this.juego=nuevoJuego;
+		this.posicion=nuevaPosicionOriginal; //inicialmente la posicion actual sera la original
+		this.posicionOriginal=nuevaPosicioOriginal;
+		this.puedeSerComido=puedeSerComido;
 	}
 
-	/**
-	 * 
-	 */	
-	public void  comer() {
+
+	public abstract void  comer() {
+		
+	}
+
+	public abstract void mover(){
 		
 	}
 	
-	/**
-	 * 
-	 */
-	public void mover(){
-		
-	}
-	
-	/**
-	 * 
-	 */
+   /*cuando pacman pueda ser comido los fantasmas no y viseversa
+    * por eso este algoritmo debe funcionar
+    */
 	public void cambiarEstado(){
-		
+		 if (this.getPuedeSerComido()){
+			 this.setPuedeSerComidio=true;
+		 }else{
+			 this.setPuedeSerComido=false;
+		 }
 	}
 	
-	/**
-	 * 
-	 */
-	public void revivir(){
-		
-	}
 	
-	/**
-	 * 
-	 */
-	public void setPosiciones(int x, int y){
-		this.posX = x;
-		this.posY = y;
-	}
-	
-	/**
-	 * 
-	 */
-	public int getX(){
-		return this.posX;
-	}
-	
-	/**
-	 * 
-	 */
-	public int getY(){
-		
-		return this.posY;
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+	public  void reubicar(Posicion posicionOriginal){
+		/*escribir codigo*/
+	}
+	
+	public Juego getJuego(){
+		return juego;
 	}
 
+	public Posicion getPosicion(){
+		return posicion;
+	}
+	 
+	public Posicion getPosicionOriginal(){
+		return posicionOriginal;
+	}
+
+	public int getVelocidad(){
+    	return velocidad;
+    }
+
+	
+	public boolean getPuedeSerComido(){
+		return this.puedeSerComido;
+	}
+	
+	
 }

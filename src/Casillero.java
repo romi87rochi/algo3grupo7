@@ -4,19 +4,29 @@ import java.util.Iterator;
 
 public class Casillero {
 
-	private ArrayList listaPersonajes;
+	private ArrayList fantasmas;
+	private Pacman pacman;
     private Item item;
+    private boolean puedeSerVisitado;
     
 
  /* El Casillero queda instanciado sin item ni personajes*/
 public Casillero(){
-	listaPersonajes=new ArrayList(); 
+	fantasmas=new ArrayList(); 
+	item=null;
+	pacman=null;
+	puedeSerVisitado=true;
   
 }
 
-/*Agrega un nuevo personaje al final de la lista*/
-public void agregarPersonaje(Personaje nuevoPersonaje){
-	this.listaPersonajes.add(nuevoPersonaje);
+/*Agrega un nuevo fantasma al final de la lista*/
+public void agregarFantama(Personaje nuevoFantasma){
+	this.fantasmas.add(nuevoPersonaje);
+}
+
+/*Agrega un pacman al casillero*/
+public void agregarPacman(Personaje nuevoPacman){
+	this.pacman=nuevoPacman;
 }
 
 public void setItem(Item nuevoItem){
@@ -42,15 +52,31 @@ public Item getItem(){
 /*Quita un personaje de la lista, este metodo sera utilizado para que un personaje
  * pueda eliminar su posicion del casillero al desplazarse
  */
-public void removerPersonaje(Personaje estePersonaje){
-	Iterator itListaPersonajes= listaPersonajes.iterator();
+public void removerFantasma(Personaje estePersonaje){
+	Iterator itFantasmas= fantasmas.iterator();
 	boolean encontrado=false;
-	  while (itListaPersonajes.hasNext() && !encontrado){
-	       if (itListaPersonajes.next()==estePersonaje){
-	    	   itListaPersonajes.remove();
+	  while (fantasmas.hasNext() && !encontrado){
+	       if (itFantasmas.next()==estePersonaje){
+	    	   itFantasmas.remove();
 	    	   encontrado=true;
 	       }
       }
   }
+
+/*Devuelve una lista con todos los fantasmas que se encuntren 
+ * en un casillero
+ */
+public ArrayList getFantasmas(){
+	return this.fantasmas;
+}
+
+public void removerPacman(Personaje estePersonaje){
+	pacman=null;
+}
+
+public Pacman getPacman(){
+	return pacman;
+}
+
 }
 
