@@ -1,42 +1,19 @@
 
-public class Fantasma {
+public abtract class Fantasma {
 
-	protected int posX;
-	protected int posY;
-	protected int velocidad;
-	protected int estrategia;
-	protected boolean puedeSerComido;
 	
-	public void setVelocidad( int velocidad){
-		
+	protected int estrategia;
+	
+	
+	public Fantastma(Juego nuevoJuego, Posicion posicionOriginal, int velocidad){
+	  super(nuevoJuego, posicionOriginal, velocidad, puedeSerComido)
 	}
 	
 	public void cambiarVelocidad(int nivel){
 		
 	}
-	
-	public void cambiarEstado() {
-		
-	}
-	
-	public void reubicar() {
-		
-	
-	}
-	
-	public void setPosiciones(int x, int y) {
-		
-	}
-	
-	public int getX(){
-		return posX;
-	}
-	
-	public int getY(){
-		return posY;
-	}
-	
-	public void comer(){
+
+	public abstract void comer(){
 		
 	}
 	
