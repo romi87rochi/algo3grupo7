@@ -1,4 +1,3 @@
-package game;
 
 public class Tablero {
 	
@@ -24,7 +23,7 @@ private void incializar(int filas, int columnas) {
 		  }
 	  }
 }
-public void cargarTablero(/*archivo xml*/){
+public void cargarTablero(Map mapas){
 	
 }
 

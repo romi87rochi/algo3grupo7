@@ -1,4 +1,4 @@
-package game;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,6 +21,10 @@ public void agregarPersonaje(Personaje nuevoPersonaje){
 
 public void setItem(Item nuevoItem){
 	item=nuevoItem;
+	
+	celdaDer = this.celda.getDerecha();
+	this.celda.Sacarme(this);
+	celdaDer.agregame(this);
 }
 
 

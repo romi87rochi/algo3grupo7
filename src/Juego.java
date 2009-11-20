@@ -11,10 +11,10 @@ public class Juego {
 	private Tablero tablero;
 	private ArrayList fantasmas;
 	private Personaje packman;
-	private  Maps[] mapas;
+	private  Map[] mapas;
 	private boolean finJuego;
 	private int puntaje;
-	private int cantItemsDelNivel;
+	private int cantPastillasDelNivel;
 	private int vidasPackman;
 	private int nivel;
 
@@ -22,15 +22,15 @@ public class Juego {
 	 * El juego recibe una lista de fantasmas y otra de packman para que este
 	 * conozca a sus personajes. Mapas es un array de mapas predefinidos
 	 */
-	public Juego(ArrayList fantasmas, Personaje packman,Maps[] mapas) {
+	public Juego(ArrayList fantasmas, Personaje packman,Map[] mapas) {
 
 		tablero = new Tablero(FILAS, COLUMNAS);
-		this.mapas = mapas;
+		//this.mapas = mapas;
 		this.fantasmas = fantasmas;
 		this.packman = packman;
-		int cantPasilltas;
+		
 		puntaje = 0;
-		cantItemsDelNivel=0;
+		cantPastillasDelNivel=0;
 		finJuego = false;
 		vidasPackman = 3;
 		nivel = 0;
@@ -64,7 +64,7 @@ public class Juego {
 	}
 
 	/* Cambia el estado de packman dependiendo de puedeSerComido */
-	public void cambiarEstadoPackman(boolean puedeSerComido) {
+	public void cambiarEstadoPackman() {
 		packman.cambiarEstado();
 	}
 
@@ -91,14 +91,14 @@ public class Juego {
 		this.puntaje = this.getPuntaje() + puntaje;
 	}
 
-	public int getCantidadItemsDelNivel() {
+	public int getCantPastillasDelNivel() {
 		return cantItemsDelNivel;
 	}
   
 	/*Decrementa en una unidad la cantidad de items restantes del nivel actual cuando 
 	 * alguno de estos es comido
 	 */
-	public void itemComido(){
+	public void pastillaComida(){
 		--cantItemsDelNivel;
 	}
 	public int getVidasPackman() {
@@ -123,6 +123,9 @@ public class Juego {
 		this.nivel = nivel;
 	}
     
+	/*Finaliza el juego cuando la cantidad de vidas de packman
+	 * es cero.
+	 */
 	public void finalizarJuego(){
 		this.finJuego=true;
 	}	
