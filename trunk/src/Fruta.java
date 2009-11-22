@@ -2,10 +2,12 @@
 public class Fruta extends Item{
 	
 	private int rangoDeTiempoDeVida;
-	private int puntajePredeterminado;
+
 	
-	public Fruta(int puntaje){
-		this.puntajePredeterminado=puntaje;
+	public Fruta(Juego nuevoJuego, int nuevoPuntaje, Posicion posicion){
+		super(Juego nuevoJuego, int nuevoPuntaje, Posicion posicion);
+	}
+	
 		/*int rango= this.setRangoDeVida(20); //ejemplo
 		Controlador controla= new controlador(rango);
 		this.comenzarJuego(rango); // metodo de titiritero, para que viva solo por un tiempo
@@ -16,8 +18,10 @@ public class Fruta extends Item{
 	   return rangoDeTiempoDeVida;
 	}
 
-	public void comido(Juego unJuego){
-		unJuego.setPuntaje(puntajePredeterminado);
+	public void fueComido(Juego unJuego){
+		getJuego().setPuntaje(this.getPuntaje());
+		/* Me revuelve el estomago*/
+		getJuego().getTablero().getCasillero(this.getPosicion()).setItem()=null;
 	}
 	
 	public int getPuntaje(){

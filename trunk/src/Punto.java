@@ -1,19 +1,17 @@
 
 public class Punto extends Item{
 	
-	private int puntajePredeterminado;
 	
-	public Punto(int puntaje){
-		this.puntajePredeterminado=puntaje;
+	
+	public Punto(Juego nuevoJuego, int nuevoPuntaje, Posicion posicion){
+		super(nuevoJuego, nuevoPuntaje, posicion);
 	}
 	
 	public void comido(Juego unJuego){
 		unJuego.setPuntaje(puntajePredeterminado);
 	}
 	
-	public int getPuntaje(){
-		return this.puntajePredeterminado;
-	}
+
 
 	
 }

@@ -7,9 +7,7 @@ public abstract class Personaje {
   private Posicion posicionOriginal;
   private boolean puedeSerComido;
 	
-	/**
-	 * Constructor
-	 */	
+
 	public Personaje(Juego nuevoJuego, Posicion posicionOriginal, int velocidad, boolean puedeSerComido) {
 		this.juego=nuevoJuego;
 		this.posicion=nuevaPosicionOriginal; //inicialmente la posicion actual sera la original
