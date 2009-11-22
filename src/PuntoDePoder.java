@@ -2,14 +2,13 @@
 public class PuntoDePoder extends Item{
 	
 	private int tiempoDePoder;
-	private int puntajePredeterminado;
 	private static final int tiempoPoder=20;
 	
-	public PuntoDePoder(Juego unJuego, int puntaje){
+	public PuntoDePoder(Juego nuevoJuego, int nuevoPuntaje, Posicion posicion){
+			super( nuevoJuego,  nuevoPuntaje, posicion);		
 		int nivel=unJuego.getNivel();
 		this.setTiempoDePoder(tiempoPoder);
-		this.puntajePredeterminado=puntaje;
-		if(tiempoDePoder>nivel)
+				if(tiempoDePoder>nivel)
 			this.setTiempoDePoder(tiempoDePoder - nivel);
 		else
 			this.setTiempoDePoder(10); // ejemplo
