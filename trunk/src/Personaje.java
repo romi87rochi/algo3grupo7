@@ -1,66 +1,79 @@
-
 public abstract class Personaje {
-	
-  private int velocidad;
-  private Juego juego;
-  private Posicion posicion;
-  private Posicion posicionOriginal;
-  private boolean puedeSerComido;
-	
 
-	public Personaje(Juego nuevoJuego, Posicion posicionOriginal, int velocidad, boolean puedeSerComido) {
-		this.juego=nuevoJuego;
-		this.posicion=nuevaPosicionOriginal; //inicialmente la posicion actual sera la original
-		this.posicionOriginal=nuevaPosicioOriginal;
-		this.puedeSerComido=puedeSerComido;
+	private int velocidad;
+	private Juego juego;
+	private Casillero casilleroActual;
+
+
+	private Casillero casilleroOriginal;
+
+
+	private boolean puedeSerComido;
+
+	public Personaje(Juego nuevoJuego, Posicion posicionOriginal,
+			int velocidad, boolean puedeSerComido) {
+		this.juego = nuevoJuego;
+		this.casilleroOriginal = nuevoJuego.getTablero().getCasillero(
+				posicionOriginal); // inicialmente la posicion actual sera la
+		// original
+		this.casilleroActual = casilleroOriginal;
+
+		this.puedeSerComido = puedeSerComido;
+
+		/*
+		 * this.juego=nuevoJuego; this.puedeSerComido = false; this.velocidad =
+		 * velocidad; this.casilleroOriginal = new Casillero(cOriginal);
+		 * this.casilleroActual = casilleroOriginal;
+		 */
 	}
 
+	public void setCasilleroActual(Casillero casilleroActual) {
+		this.casilleroActual = casilleroActual;
+	}
+	
+	public void setCasilleroOriginal(Casillero casilleroOriginal) {
+		this.casilleroOriginal = casilleroOriginal;
+	}
+	
+	public abstract void comer();
 
-	public abstract void  comer() {
+	public abstract void mover();
+
+	/*
+	 * cuando pacman pueda ser comido los fantasmas no y viseversa por eso este
+	 * algoritmo debe funcionar
+	 */
+	public void cambiarEstado() {
+		if (this.puedeSerComido()) {
+			this.puedeSerComido=false;
+		} else {
+			this.puedeSerComido=true;
+		}
+	}
+
+	public void reubicar() {
+
 		
 	}
 
-	public abstract void mover(){
-		
-	}
-	
-   /*cuando pacman pueda ser comido los fantasmas no y viseversa
-    * por eso este algoritmo debe funcionar
-    */
-	public void cambiarEstado(){
-		 if (this.getPuedeSerComido()){
-			 this.setPuedeSerComidio=true;
-		 }else{
-			 this.setPuedeSerComido=false;
-		 }
-	}
-	
-	
-
-	public  void reubicar(Posicion posicionOriginal){
-		/*escribir codigo*/
-	}
-	
-	public Juego getJuego(){
+	public Juego getJuego() {
 		return juego;
 	}
 
-	public Posicion getPosicion(){
-		return posicion;
-	}
-	 
-	public Posicion getPosicionOriginal(){
-		return posicionOriginal;
+	public Casillero getCasillero() {
+		return casilleroActual;
 	}
 
-	public int getVelocidad(){
-    	return velocidad;
-    }
+	public Casillero getCasilleroOriginal() {
+		return casilleroOriginal;
+	}
 
-	
-	public boolean getPuedeSerComido(){
+	public int getVelocidad() {
+		return velocidad;
+	}
+
+	public boolean puedeSerComido() {
 		return this.puedeSerComido;
 	}
-	
-	
+
 }

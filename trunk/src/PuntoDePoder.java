@@ -3,34 +3,30 @@ public class PuntoDePoder extends Item{
 	
 	private int tiempoDePoder;
 	private static final int tiempoPoder=20;
+	private int[] vTiempo;
 	
-	public PuntoDePoder(Juego nuevoJuego, int nuevoPuntaje, Posicion posicion){
-			super( nuevoJuego,  nuevoPuntaje, posicion);		
-		int nivel=unJuego.getNivel();
-		this.setTiempoDePoder(tiempoPoder);
-				if(tiempoDePoder>nivel)
-			this.setTiempoDePoder(tiempoDePoder - nivel);
-		else
-			this.setTiempoDePoder(10); // ejemplo
-		/*¿Hay que usar comenzarJuego de titiritero
-		 *  con contador para que
-		 * termine el "cambio de estado"?
-	*/}
+	public PuntoDePoder(Juego nuevoJuego, int nuevoPuntaje){
+			super( nuevoJuego, nuevoPuntaje);		
+		vTiempo[0]=20;
+	    vTiempo[1]=15;
+		vTiempo[2]=10;
+			
+		this.setTiempoDePoder(vTiempo[this.getJuego().getNivel()]);
+
+	}
 
 	private void setTiempoDePoder(int tiempo) {
 		this.tiempoDePoder=tiempo;
 		
 	}
 	
-	public void comido(Juego unJuego){
-		unJuego.setPuntaje(puntajePredeterminado);
-		unJuego.cambiarEstadoDeLosFantasmas();
-		unJuego.cambiarEstadoPackman();
+	public void fueComido(){
+		
+		this.getJuego().setPuntaje(this.getPuntaje());
+         this.getJuego().cambiarEstadoPackman();
+         this.getJuego().cambiarEstadoDeLosFantasmas();
 	}
 	
-	public int getPuntaje(){
-		return this.puntajePredeterminado;
-	}
 
 
 }
