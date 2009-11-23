@@ -43,7 +43,7 @@ public class Pacman extends Personaje {
 
 		this.setCasilleroActual(casilleroOriginal);
 		this.getCasillero().agregarPacman(this);
-		casilleroAux.removerFantasma(this);
+		casilleroAux.removerPacman(this);
 
 	}
 }
