@@ -9,30 +9,30 @@ public class Juego {
 	private static final int FILAS = 200;
 	private static final int COLUMNAS = 200;
 	private Tablero tablero;
-	private ArrayList fantasmas;
-	private Personaje packman;
+	private ArrayList<Fantasma> fantasmas;
+	private Personaje pacman;
 	private  Map[] mapas;
 	private boolean finJuego;
 	private int puntaje;
 	private int cantPastillasDelNivel;
-	private int vidasPackman;
+	private int vidasPacman;
 	private int nivel;
 
 	/*
 	 * El juego recibe una lista de fantasmas y otra de packman para que este
 	 * conozca a sus personajes. Mapas es un array de mapas predefinidos
 	 */
-	public Juego(ArrayList fantasmas, Personaje packman,Map[] mapas) {
+	public Juego(ArrayList<Fantasma> fantasmas, Personaje pacman,Map[] mapas) {
 
 		tablero = new Tablero(FILAS, COLUMNAS);
 		//this.mapas = mapas;
 		this.fantasmas = fantasmas;
-		this.packman = packman;
+		this.pacman = pacman;
 		
 		puntaje = 0;
 		cantPastillasDelNivel=0;
 		finJuego = false;
-		vidasPackman = 3;
+		vidasPacman = 3;
 		nivel = 0;
 
 	}
@@ -41,15 +41,21 @@ public class Juego {
 
 		this.nuevoNivel();
 	}
-
+	
+	public void reubicarTodosLosPersonajes(){
+		Iterator<Fantasma> itFantasmas = fantasmas.iterator();
+		while (itFantasmas.hasNext()) {
+			Personaje fantasmaAux=(Personaje)itFantasmas.next();
+			fantasmaAux.reubicar();
+		}
+		pacman.reubicar();
+	}
+	
+	
 	/*Carga el mapa segun el nivel y obliga a los fantasmas y a packman regresar a sus posiciones predefinidas*/
 	public void nuevoNivel() {
 		tablero.cargarTablero(mapas[nivel]);
-		Iterator itFantasmas = fantasmas.iterator();
-		while (itFantasmas.hasNext()) {
-			((Personaje)itFantasmas.next()).reubicar();
-		}
-		packman.reubicar();
+		this.reubicarTodosLosPersonajes();
 	}
 
 	/*
@@ -57,7 +63,7 @@ public class Juego {
 	 * fantasmas del juego cambian su estado.
 	 */
 	public void cambiarEstadoDeLosFantasmas() {
-		Iterator itFantasmas = fantasmas.iterator();
+		Iterator<Fantasma> itFantasmas = fantasmas.iterator();
 		while (itFantasmas.hasNext()) {
 			((Personaje)itFantasmas.next()).cambiarEstado();
 		}
@@ -65,7 +71,7 @@ public class Juego {
 
 	/* Cambia el estado de packman dependiendo de puedeSerComido */
 	public void cambiarEstadoPackman() {
-		packman.cambiarEstado();
+		pacman.cambiarEstado();
 	}
 
 	public Tablero getTablero() {
@@ -92,25 +98,25 @@ public class Juego {
 	}
 
 	public int getCantPastillasDelNivel() {
-		return cantItemsDelNivel;
+		return cantPastillasDelNivel;
 	}
   
 	/*Decrementa en una unidad la cantidad de items restantes del nivel actual cuando 
 	 * alguno de estos es comido
 	 */
 	public void pastillaComida(){
-		--cantItemsDelNivel;
+		--cantPastillasDelNivel;
 	}
 	public int getVidasPackman() {
-		return vidasPackman;
+		return vidasPacman;
 	}
 
 	/*Decrementa una vida a packman cuando este es comido por 
 	 * un fantasma si el total de vidas es cero finaliza el juego
 	 */
 	public void decrementarVidaPackman() {
-		--vidasPackman;
-		if (vidasPackman==0){
+		--vidasPacman;
+		if (vidasPacman==0){
 			 this.finalizarJuego();
 		}		
 	}

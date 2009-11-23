@@ -3,15 +3,15 @@ public class Punto extends Item{
 	
 	
 	
-	public Punto(Juego nuevoJuego, int nuevoPuntaje, Posicion posicion){
-		super(nuevoJuego, nuevoPuntaje, posicion);
+	public Punto(Juego nuevoJuego, int nuevoPuntaje){
+		super(nuevoJuego, nuevoPuntaje);
+	}
+
+	public void fueComido(){
+		
+		this.getJuego().setPuntaje(this.getPuntaje());
+
 	}
 	
-	public void comido(Juego unJuego){
-		unJuego.setPuntaje(puntajePredeterminado);
-	}
-	
-
-
 	
 }

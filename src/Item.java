@@ -2,28 +2,26 @@
 abstract class Item {
 	private Juego juego;
 	private int puntajePredeterminado;
-	private Posicion posicion
+	//private Casillero casillero;
 	
-	public Item (Juego nuevoJuego, int nuevoPuntaje, Posicion posicion){
+	public Item (Juego nuevoJuego, int nuevoPuntaje){
 		this.juego=nuevoJuego;
 		this.puntajePredeterminado=nuevoPuntaje;
-		this.posicion=posicion;
+		
+		
 	}
 	
 	public int getPuntaje(){
 		return this.puntajePredeterminado;
 	}
-	public Posicion getPosicion(){
-		return posicion;
-	}
+
 	
-	public void getJuego(){
+	public Juego getJuego(){
 		return juego;
 	}
 	public abstract void fueComido();
 		
 	
-	
-	
+
 
 }

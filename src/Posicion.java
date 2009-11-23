@@ -1,13 +1,8 @@
-package PaquetePruebasMatrizPosiciones;
-
-
-//import java.util.ArrayList;
-
 
 public class Posicion {
 	private int posX;
 	private int posY;
-	private MatrizPosiciones matriz;
+ 	private MatrizPosiciones matriz;
 	
 
 	public Posicion(int posicionX, int posicionY, MatrizPosiciones matriz){
@@ -27,25 +22,38 @@ public class Posicion {
 	
 	public Posicion getArriba(){
 		Posicion arriba = null;
-		arriba = this.matriz.obtenerPosicion(this.posX,this.posY++);
+		int posX = this.posX;
+		int posY = this.posY;
+		posY++;
+		
+		arriba = this.matriz.obtenerPosicion(posX,posY);
 		return arriba;
 	}
 	
 	public Posicion getAbajo(){
 		Posicion abajo = null;
-		abajo = this.matriz.obtenerPosicion(this.posX,this.posY--);
+		int posX = this.posX;
+		int posY = this.posY;
+		posY--;
+		abajo = this.matriz.obtenerPosicion(posX,posY);
 		return abajo;
 	}	
 	
 	public Posicion getIzquierda(){
 		Posicion izquierda = null;
-		izquierda = this.matriz.obtenerPosicion(this.posX--,this.posY);
+		int posX = this.posX;
+		int posY = this.posY;
+		posX--;
+		izquierda = this.matriz.obtenerPosicion(posX,posY);
 		return izquierda;
 	}	
 
 	public Posicion getDerecha(){
 		Posicion derecha = null;
-		derecha = this.matriz.obtenerPosicion(this.posX--,this.posY);
+		int posX = this.posX;
+		int posY = this.posY;
+		posX++;
+		derecha = this.matriz.obtenerPosicion(posX,posY);
 		return derecha;
 	}	
 	
