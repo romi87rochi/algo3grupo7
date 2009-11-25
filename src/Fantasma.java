@@ -29,6 +29,7 @@ public abstract class Fantasma extends Personaje {
 
 		nuevoCasillero.agregarFantasma(this);
 		casilleroActual.removerFantasma(this);
+		//this.comer();
 
 	}
 

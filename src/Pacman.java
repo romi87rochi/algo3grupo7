@@ -16,6 +16,8 @@ public class Pacman extends Personaje {
 		 
 		    nuevoCasillero.agregarPacman(this);
 		    casilleroActual.removerPacman(this);
+		    this.setCasilleroActual(nuevoCasillero);
+		    this.comer();
 	}
 
 	private void comerFantasmas(){
