@@ -13,7 +13,7 @@ public class Pacman extends Personaje {
 
 	}
 
-	public void comer() {
+	private void comerFantasmas(){
 		ArrayList<Fantasma> listaFantasmas = this.getCasilleroActual().getFantasmas();
         
 		boolean pacmanVivo=true;
@@ -26,13 +26,27 @@ public class Pacman extends Personaje {
 			} else {
 				this.getJuego().decrementarVidaPackman();
 				this.getJuego().reubicarTodosLosPersonajes();
-                pacmanVivo=false;			
+                pacmanVivo=false;	
 			}
-	   this.getCasilleroActual().getItem().fueComido();		
-       this.getCasilleroActual().setItem(null);
+		
+	}
+}		
+	private void comerItem(){
+		if (this.getCasilleroActual().getItem()!=null){
+			   this.getCasilleroActual().getItem().fueComido();		
+		       this.getCasilleroActual().setItem(null);
+		}
+	}
+	/*Pacman intenta comer lo que haya en el casillero, primero
+	 * el item y luego los fantasmas
+	 */
+	public void comer() {
+        this.comerItem();
+        this.comerFantasmas();
+
 		}
 
-	}
+	
 
 	public void reubicar() {
 		/*
