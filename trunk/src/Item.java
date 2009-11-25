@@ -20,6 +20,8 @@ abstract class Item {
 		return juego;
 	}
 	public abstract void fueComido();
+	
+
 		
 	
 

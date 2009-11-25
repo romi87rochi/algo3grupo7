@@ -14,7 +14,7 @@ public class Pacman extends Personaje {
 	}
 
 	public void comer() {
-		ArrayList<Fantasma> listaFantasmas = this.getCasillero().getFantasmas();
+		ArrayList<Fantasma> listaFantasmas = this.getCasilleroActual().getFantasmas();
         
 		boolean pacmanVivo=true;
 		Iterator<Fantasma> itFantasmas = listaFantasmas.iterator();
@@ -28,7 +28,7 @@ public class Pacman extends Personaje {
 				this.getJuego().reubicarTodosLosPersonajes();
                 pacmanVivo=false;			
 			}
-
+       this.getCasilleroActual().setItem(null);
 		}
 
 	}
@@ -38,11 +38,11 @@ public class Pacman extends Personaje {
 		 * mueve a pacman al casillero original y lo borra del casillero en que
 		 * se encontraba
 		 */
-		Casillero casilleroAux = this.getCasillero();
+		Casillero casilleroAux = this.getCasilleroActual();
 		Casillero casilleroOriginal = this.getCasilleroOriginal();
 
 		this.setCasilleroActual(casilleroOriginal);
-		this.getCasillero().agregarPacman(this);
+		this.getCasilleroActual().agregarPacman(this);
 		casilleroAux.removerPacman(this);
 
 	}

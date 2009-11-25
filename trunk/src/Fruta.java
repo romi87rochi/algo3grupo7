@@ -16,7 +16,7 @@ public class Fruta extends Item{
 	public void fueComido(){
 		
 		this.getJuego().setPuntaje(this.getPuntaje());
-
+      
 	}
 	
 	

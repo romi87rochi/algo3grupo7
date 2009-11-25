@@ -60,7 +60,7 @@ public abstract class Personaje {
 		return juego;
 	}
 
-	public Casillero getCasillero() {
+	public Casillero getCasilleroActual() {
 		return casilleroActual;
 	}
 
