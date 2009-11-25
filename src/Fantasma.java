@@ -7,6 +7,7 @@ public abstract class Fantasma extends Personaje  {
 	
 	public Fantasma(Juego nuevoJuego, Posicion posicionOriginal, int velocidad){
 	  super(nuevoJuego, posicionOriginal, velocidad, false);
+	  getJuego().conocerFantasma(this);
 	  //this.reubicar(posicionOriginal);
 	}
 	

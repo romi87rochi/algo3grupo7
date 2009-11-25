@@ -6,6 +6,7 @@ public class Pacman extends Personaje {
 
 	public Pacman(Juego nuevoJuego, Posicion posicionOriginal, int velocidad) {
 		super(nuevoJuego, posicionOriginal, velocidad, true);
+		this.getJuego().conocerPacman(this);
 		// this.reubicar(posicionOriginal);
 	}
 
@@ -41,6 +42,7 @@ public class Pacman extends Personaje {
 	 * el item y luego los fantasmas
 	 */
 	public void comer() {
+		
         this.comerItem();
         this.comerFantasmas();
 

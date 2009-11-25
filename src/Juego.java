@@ -22,13 +22,12 @@ public class Juego {
 	 * El juego recibe una lista de fantasmas y otra de packman para que este
 	 * conozca a sus personajes. Mapas es un array de mapas predefinidos
 	 */
-	public Juego(ArrayList<Fantasma> fantasmas, Personaje pacman,Map[] mapas) {
+	public Juego(Map[] mapas) {
 
 		tablero = new Tablero(FILAS, COLUMNAS);
 		//this.mapas = mapas;
-		this.fantasmas = fantasmas;
-		this.pacman = pacman;
-		
+		this.fantasmas = new ArrayList<Fantasma>();
+		this.pacman =  null;
 		puntaje = 0;
 		cantPastillasDelNivel=0;
 		finJuego = false;
@@ -135,4 +134,14 @@ public class Juego {
 	public void finalizarJuego(){
 		this.finJuego=true;
 	}	
+	
+	/*Agrega como atributo del juego un obejto Pacman*/
+	public void conocerPacman(Personaje unPacman){
+		this.pacman=unPacman;
+	}
+	
+	/*Agrega como atributo del juego un objeto Fantasma*/
+	public void conocerFantasma(Personaje unFantasma){
+		fantasmas.add((Fantasma)unFantasma);
+	}
 	}

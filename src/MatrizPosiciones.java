@@ -9,8 +9,6 @@ public class MatrizPosiciones {
     
     
 	public MatrizPosiciones(int filas, int columnas) {
-		super();
-		// TODO Auto-generated constructor stub
 		
 		this.filas    = filas;
 		this.columnas = columnas;
@@ -27,13 +25,7 @@ public class MatrizPosiciones {
 				  }
 			  }
 	}
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 	public Posicion obtenerPosicion(int posX, int posY) {
 		Posicion posicion = null;
