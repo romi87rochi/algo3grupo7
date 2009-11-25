@@ -4,9 +4,7 @@ public abstract class Personaje {
 	private Juego juego;
 	private Casillero casilleroActual;
 
-
 	private Casillero casilleroOriginal;
-
 
 	private boolean puedeSerComido;
 
@@ -30,14 +28,14 @@ public abstract class Personaje {
 	public void setCasilleroActual(Casillero casilleroActual) {
 		this.casilleroActual = casilleroActual;
 	}
-	
+
 	public void setCasilleroOriginal(Casillero casilleroOriginal) {
 		this.casilleroOriginal = casilleroOriginal;
 	}
-	
+
 	public abstract void comer();
 
-	public abstract void mover();
+	public abstract void mover(Posicion posicion);
 
 	/*
 	 * cuando pacman pueda ser comido los fantasmas no y viseversa por eso este
@@ -45,15 +43,14 @@ public abstract class Personaje {
 	 */
 	public void cambiarEstado() {
 		if (this.puedeSerComido()) {
-			this.puedeSerComido=false;
+			this.puedeSerComido = false;
 		} else {
-			this.puedeSerComido=true;
+			this.puedeSerComido = true;
 		}
 	}
 
 	public void reubicar() {
 
-		
 	}
 
 	public Juego getJuego() {

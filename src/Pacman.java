@@ -10,8 +10,12 @@ public class Pacman extends Personaje {
 		// this.reubicar(posicionOriginal);
 	}
 
-	public void mover() {
-
+	public void mover(Posicion posicion) {
+		 Casillero nuevoCasillero= this.getJuego().getTablero().getCasillero(posicion);
+		 Casillero casilleroActual=this.getCasilleroActual();
+		 
+		    nuevoCasillero.agregarPacman(this);
+		    casilleroActual.removerPacman(this);
 	}
 
 	private void comerFantasmas(){
