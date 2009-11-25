@@ -27,8 +27,8 @@ public abstract class Fantasma extends Personaje {
 				posicion);
 		Casillero casilleroActual = this.getCasilleroActual();
 
-		nuevoCasillero.agregarPacman(this);
-		casilleroActual.removerPacman(this);
+		nuevoCasillero.agregarFantasma(this);
+		casilleroActual.removerFantasma(this);
 
 	}
 
