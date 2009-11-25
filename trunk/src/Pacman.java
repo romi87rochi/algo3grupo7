@@ -28,6 +28,7 @@ public class Pacman extends Personaje {
 				this.getJuego().reubicarTodosLosPersonajes();
                 pacmanVivo=false;			
 			}
+	   this.getCasilleroActual().getItem().fueComido();		
        this.getCasilleroActual().setItem(null);
 		}
 
