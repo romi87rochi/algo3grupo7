@@ -37,7 +37,7 @@ public class Pacman extends Personaje {
 		       this.getCasilleroActual().setItem(null);
 		}
 	}
-	/*Pacman intenta comer lo que haya en el casillero, primero
+	/*Intenta comer lo que haya en el casillero, primero
 	 * el item y luego los fantasmas
 	 */
 	public void comer() {
