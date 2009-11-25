@@ -15,7 +15,7 @@ public abstract class Fantasma extends Personaje  {
 	}
 
 	public void comer(){
-		Personaje pacmanAux = this.getCasillero().getPacman(); 
+		Personaje pacmanAux = this.getCasilleroActual().getPacman(); 
 		if ( pacmanAux != null && pacmanAux.puedeSerComido()){
 			this.getJuego().decrementarVidaPackman();
 			this.getJuego().reubicarTodosLosPersonajes();
@@ -30,14 +30,14 @@ public abstract class Fantasma extends Personaje  {
 	
 	/*Traslada al fantasma a su posicion de origen*/
 	public void reubicar(){
-		Casillero casilleroAux   = this.getCasillero();
+		Casillero casilleroAux   = this.getCasilleroActual();
 		Casillero casilleroOriginalAux = this.getCasilleroOriginal();
 		/*
 		 * mueve el fantasma al casillero original y lo borra del casillero en que
 		 *  se encontraba
 		 * */
 		this.setCasilleroActual(casilleroOriginalAux);
-		this.getCasillero().agregarFantasma(this);
+		this.getCasilleroActual().agregarFantasma(this);
 		casilleroAux.removerFantasma(this);
 		
 	}
