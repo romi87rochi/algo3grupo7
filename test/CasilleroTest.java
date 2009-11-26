@@ -6,6 +6,8 @@ import junit.framework.TestCase;
 
 public class CasilleroTest extends TestCase {
 
+	
+	
 	public void testCeldaConDosFantasmas(){
 		
 		Map[] mapas=null;
@@ -97,59 +99,104 @@ public class CasilleroTest extends TestCase {
 
 	}
 	
-	public void testGetPuedeSerVisitado() {
+
+
+	public void testAgregarFantasma() {
 		Map[] mapas=null;
 		Juego juego= new Juego(mapas);
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =juego.getTablero().getCasillero(posicion);
-		Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
 		
-	}
-
-	public void testCasillero() {
-		fail("Not yet implemented");
-	}
-
-	public void testAgregarFantasma() {
-		fail("Not yet implemented");
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+	
+		
+		int velocidad=1;
+		Blinky fan1 = new Blinky(juego,posicion, velocidad);
+		celda.agregarFantasma(fan1);
+		
+		assertTrue(celda.getFantasmas().get(0)== fan1);
 	}
 
 	public void testAgregarPacman() {
-		fail("Not yet implemented");
+		Map[] mapas=null;
+		Juego juego= new Juego(mapas);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+	
+		
+		int velocidad=1;
+		Pacman pacman = new Pacman(juego,posicion, velocidad);
+		celda.agregarPacman(pacman);
+		
+		assertTrue(celda.getPacman()== pacman);
 	}
 
 	public void testSetItem() {
-		fail("Not yet implemented");
-	}
+		Map[] mapas=null;
+		Juego juego= new Juego(mapas);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+		
+		int puntaje=100;
+		Punto pastilla = new Punto(juego,puntaje);		
 
-	public void testGetPosicion() {
-		fail("Not yet implemented");
+		celda.setItem(pastilla);
+		assertTrue(celda.getItem()==pastilla);
 	}
 
 	public void testRemoverItem() {
-		fail("Not yet implemented");
+		Map[] mapas=null;
+		Juego juego= new Juego(mapas);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+		
+		int puntaje=100;
+		Punto pastilla = new Punto(juego,puntaje);		
+
+		celda.setItem(pastilla);
+		celda.removerItem();
+		assertTrue(celda.getItem()==null);
 	}
 
-	public void testGetItem() {
-		fail("Not yet implemented");
-	}
 
 	public void testRemoverFantasma() {
-		fail("Not yet implemented");
+		Map[] mapas=null;
+		Juego juego= new Juego(mapas);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Casillero celda =juego.getTablero().getCasillero(posicion);		
+		
+		int velocidad=1;
+		Blinky fan1 = new Blinky(juego,posicion, velocidad);
+		celda.agregarFantasma(fan1);
+		celda.removerFantasma(fan1);
+		
+		assertTrue(celda.getFantasmas().isEmpty());
+
 	}
 
-	public void testGetFantasmas() {
-		fail("Not yet implemented");
-	}
 
 	public void testRemoverPacman() {
-		fail("Not yet implemented");
+		Map[] mapas=null;
+		Juego juego= new Juego(mapas);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Casillero celda =juego.getTablero().getCasillero(posicion);		
+		
+		int velocidad=1;
+		Pacman pacman = new Pacman(juego, posicion, velocidad);
+		
+		celda.agregarPacman(pacman);
+		celda.removerPacman(pacman);
+		assertTrue(celda.getPacman()==null);
+		
 	}
 
-	public void testGetPacman() {
-		fail("Not yet implemented");
-	}
 
 }

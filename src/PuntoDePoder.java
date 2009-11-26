@@ -1,5 +1,5 @@
 
-public class PuntoDePoder extends Item{
+public class PuntoDePoder extends ItemComible{
 	
 	private int tiempoDePoder;
 	private static final int tiempoPoder=20;
@@ -7,6 +7,7 @@ public class PuntoDePoder extends Item{
 	
 	public PuntoDePoder(Juego nuevoJuego, int nuevoPuntaje){
 			super( nuevoJuego, nuevoPuntaje);		
+			vTiempo=new int[3];
 		vTiempo[0]=20;
 	    vTiempo[1]=15;
 		vTiempo[2]=10;

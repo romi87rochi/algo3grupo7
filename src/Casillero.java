@@ -5,7 +5,7 @@ public class Casillero {
 
 	private ArrayList<Fantasma> fantasmas;
 	private Personaje pacman;
-	private Item item;
+	private ItemComible item;
 	private boolean puedeSerVisitado;
 	
 	public boolean getPuedeSerVisitado() {
@@ -34,7 +34,7 @@ public class Casillero {
 		this.pacman = nuevoPacman;
 	}
 
-	public void setItem(Item nuevoItem) {
+	public void setItem(ItemComible nuevoItem) {
 		item = nuevoItem;
 
 	}
@@ -48,7 +48,7 @@ public class Casillero {
 		item = null;
 	}
 
-	public Item getItem() {
+	public ItemComible getItem() {
 		return item;
 	}
 
@@ -57,7 +57,7 @@ public class Casillero {
 	 * personaje pueda eliminar su posicion del casillero al desplazarse
 	 */
 	public void removerFantasma(Personaje estePersonaje) {
-		Iterator<Fantasma> itFantasmas = fantasmas.iterator();
+		Iterator<Fantasma> itFantasmas = this.fantasmas.iterator();
 		boolean encontrado = false;
 		while (itFantasmas.hasNext() && !encontrado) {
 			if (itFantasmas.next() == estePersonaje) {
