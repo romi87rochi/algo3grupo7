@@ -10,6 +10,7 @@ public class Punto extends ItemComible{
 	public void fueComido(){
 		
 		this.getJuego().setPuntaje(this.getPuntaje());
+		this.getJuego().pastillaComida();
 
 	}
 	

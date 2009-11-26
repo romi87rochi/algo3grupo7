@@ -29,7 +29,7 @@ public class Juego {
 		this.fantasmas = new ArrayList<Fantasma>();
 		this.pacman =  null;
 		puntaje = 0;
-		cantPastillasDelNivel=0;
+		cantPastillasDelNivel=100;
 		finJuego = false;
 		vidasPacman = 3;
 		nivel = 0;
@@ -53,7 +53,7 @@ public class Juego {
 	
 	/*Carga el mapa segun el nivel y obliga a los fantasmas y a packman regresar a sus posiciones predefinidas*/
 	public void nuevoNivel() {
-		tablero.cargarTablero(mapas[nivel]);
+		//tablero.cargarTablero(mapas[nivel]);
 		this.reubicarTodosLosPersonajes();
 	}
 
