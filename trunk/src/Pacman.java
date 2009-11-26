@@ -10,14 +10,18 @@ public class Pacman extends Personaje {
 		// this.reubicar(posicionOriginal);
 	}
 
-	public void mover(Posicion posicion) {
+	public boolean mover(Posicion posicion) {
 		 Casillero nuevoCasillero= this.getJuego().getTablero().getCasillero(posicion);
-		 Casillero casilleroActual=this.getCasilleroActual();
+		 
+		 if(nuevoCasillero!=null){
+		 Casillero casilleroActual=this.getCasilleroActual();//tendria que fijarse si no es una pared
 		 
 		    nuevoCasillero.agregarPacman(this);
 		    casilleroActual.removerPacman(this);
 		    this.setCasilleroActual(nuevoCasillero);
 		    this.comer();
+		    return true;} else
+		    	return false;
 	}
 
 	private void comerFantasmas(){

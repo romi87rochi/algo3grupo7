@@ -35,7 +35,7 @@ public abstract class Personaje {
 
 	public abstract void comer();
 
-	public abstract void mover(Posicion posicion);
+	public abstract boolean mover(Posicion posicion);
 
 	/*
 	 * cuando pacman pueda ser comido los fantasmas no y viseversa por eso este
