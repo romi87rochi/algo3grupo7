@@ -1,10 +1,10 @@
 
-abstract class Item {
+abstract class ItemComible {
 	private Juego juego;
 	private int puntajePredeterminado;
 	//private Casillero casillero;
 	
-	public Item (Juego nuevoJuego, int nuevoPuntaje){
+	public ItemComible (Juego nuevoJuego, int nuevoPuntaje){
 		this.juego=nuevoJuego;
 		this.puntajePredeterminado=nuevoPuntaje;
 		

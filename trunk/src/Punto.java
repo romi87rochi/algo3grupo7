@@ -1,5 +1,5 @@
 
-public class Punto extends Item{
+public class Punto extends ItemComible{
 	
 	
 	

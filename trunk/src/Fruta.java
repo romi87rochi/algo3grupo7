@@ -1,5 +1,5 @@
 
-public class Fruta extends Item{
+public class Fruta extends ItemComible{
 	
 	
 	public Fruta(Juego nuevoJuego, int nuevoPuntaje){
