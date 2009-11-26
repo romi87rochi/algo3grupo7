@@ -22,16 +22,20 @@ public abstract class Fantasma extends Personaje {
 
 	}
 
-	public void mover(Posicion posicion) {
+	public boolean mover(Posicion posicion) {
 		Casillero nuevoCasillero = this.getJuego().getTablero().getCasillero(
-				posicion);
-		Posicion pos=this.getCasilleroActual().getPosicion();
+				posicion);// tendria que fijarse si no es una pared o eso lo hace en la estrategia
+		
+		 if(nuevoCasillero!=null){ //null = pared hasta que no lo cambiemos
+			 Posicion pos=this.getCasilleroActual().getPosicion();
 		Casillero casilleroActual =this.getJuego().getTablero().getCasillero(pos);
 
 		nuevoCasillero.agregarFantasma(this);
 		casilleroActual.removerFantasma(this);
 		this.setCasilleroActual(nuevoCasillero);
 		this.comer();
+		return true;}else
+			return false;
 
 	}
 
