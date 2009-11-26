@@ -13,9 +13,10 @@ public class CasilleroTest extends TestCase {
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
 		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda = new Casillero(posicion);
-		Casillero otracelda = new Casillero(otraPosicion); 
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+		Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
 		
+		 
 		
 		int velocidad=1;
 		Blinky fan1 = new Blinky(juego,posicion, velocidad);
@@ -26,17 +27,14 @@ public class CasilleroTest extends TestCase {
 		
 		otracelda.agregarFantasma(fan2);
 		
-	
-		
-		// pacman recibe un juego y juego recibe un pacman, lo mismo para fantasma :S
-		Posicion lala=fan1.getCasilleroActual().getPosicion();
 		fan1.mover(posicion.getDerecha()); // tendria que moverse a la otraCelda
 		
-		
-		//assertTrue(celda.getFantasmas().isEmpty());
-		//EL DE ARRIBA NO ANDA!!
 	
+		assertTrue(celda.getFantasmas().isEmpty());
+		assertTrue(celda.getPacman()==null); // la celda queda vacia, sin pacman y sin fantasmas
+							
 		assertTrue((fan1.getCasilleroActual().getPosicion()).equals(fan2.getCasilleroActual().getPosicion())) ;
+	// ambos fantasmas estan en el mismo casillero
 	}
 	
 	public void testCeldaConPacman(){
@@ -47,8 +45,8 @@ public class CasilleroTest extends TestCase {
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
 		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda = new Casillero(posicion);
-		Casillero otracelda = new Casillero(otraPosicion); 
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+		Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
 		
 		
 		int velocidad=1;
@@ -58,18 +56,16 @@ public class CasilleroTest extends TestCase {
 		
 		celda.agregarFantasma(fan1);
 		otracelda.agregarPacman(pacman);
-		// pacman recibe un juego y juego recibe un pacman, lo mismo para fantasma :S
-		Posicion lala=fan1.getCasilleroActual().getPosicion();
+		
 		fan1.mover(posicion.getDerecha()); // tendria que moverse a la otraCelda
 		
 	
 		Posicion posicionFantasma=new Posicion(2,1,matriz);
-		assertTrue(celda.getPacman()==null);
-		//assertFalse(otracelda.getFantasmas().isEmpty());
-		int x=fan1.getCasilleroActual().getPosicion().getPosX();
-			int y=fan1.getCasilleroActual().getPosicion().getPosY();
-		//assertTrue((fan1.getCasilleroActual().getPosicion()).equals(posicionFantasma)) ;
-		//assertTrue(pacman.getJuego().getVidasPackman()==3); //no baja vidassss
+		assertTrue(otracelda.getPacman()==null);
+		assertTrue(pacman.getCasilleroActual()==pacman.getCasilleroOriginal());
+		assertTrue(fan1.getCasilleroActual()==fan1.getCasilleroOriginal()); // todos los personajes vuelven a su posicion original
+		
+		assertTrue(pacman.getJuego().getVidasPackman()==2); // baja vidas de pacman
 		
 	}
 	
@@ -79,8 +75,8 @@ public class CasilleroTest extends TestCase {
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
 		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda = new Casillero(posicion);
-		Casillero otracelda = new Casillero(otraPosicion); 
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+		Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
 		
 		
 		int velocidad=1;
@@ -96,11 +92,20 @@ public class CasilleroTest extends TestCase {
 		fan1.mover(posicion.getDerecha());
 		
 		assertTrue(pacman.getJuego().getVidasPackman()==3); //pacman no pierde vidas
+		assertTrue(pacman.getCasilleroActual()==otracelda);
+		assertTrue(fan1.getCasilleroActual()==fan1.getCasilleroOriginal());
 
 	}
 	
 	public void testGetPuedeSerVisitado() {
-		fail("Not yet implemented");
+		Map[] mapas=null;
+		Juego juego= new Juego(mapas);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
+		Casillero celda =juego.getTablero().getCasillero(posicion);
+		Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
+		
 	}
 
 	public void testCasillero() {

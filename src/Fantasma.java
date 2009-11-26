@@ -17,7 +17,7 @@ public abstract class Fantasma extends Personaje {
 		if (pacmanAux != null && pacmanAux.puedeSerComido()) {
 			this.getJuego().decrementarVidaPackman();
 			this.getJuego().reubicarTodosLosPersonajes();
-		} else
+		} else if(pacmanAux != null && (pacmanAux.puedeSerComido()==false))
 			this.reubicar();
 
 	}
@@ -25,11 +25,13 @@ public abstract class Fantasma extends Personaje {
 	public void mover(Posicion posicion) {
 		Casillero nuevoCasillero = this.getJuego().getTablero().getCasillero(
 				posicion);
-		Casillero casilleroActual = this.getCasilleroActual();
+		Posicion pos=this.getCasilleroActual().getPosicion();
+		Casillero casilleroActual =this.getJuego().getTablero().getCasillero(pos);
 
 		nuevoCasillero.agregarFantasma(this);
 		casilleroActual.removerFantasma(this);
-		//this.comer();
+		this.setCasilleroActual(nuevoCasillero);
+		this.comer();
 
 	}
 
