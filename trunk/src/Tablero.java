@@ -20,7 +20,7 @@ private void incializar(int filas, int columnas) {
 	  for(int x=0;x<filas;x++){
 		  y=0;
 		  for(y=0;y<columnas;y++){
-			  casilleros[x][y]=new Casillero(new Posicion(x,y,posiciones));
+			  casilleros[x][y]=new Casillero(new Posicion(x,y,posiciones),this);
 		  }
 	  }
 }
