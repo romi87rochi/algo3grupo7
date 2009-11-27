@@ -7,21 +7,21 @@ public class Casillero {
 	private Personaje pacman;
 	private ItemComible item;
 	private boolean puedeSerVisitado;
+	private Posicion posicion;
+	private Tablero tablero;
 	
 	public boolean getPuedeSerVisitado() {
 		return puedeSerVisitado;
 	}
 
-	private Posicion posicion;
-
 	/* El Casillero queda instanciado sin item ni personajes */
-	public Casillero(Posicion posicion) {
+	public Casillero(Posicion posicion, Tablero tablero) {
 		fantasmas = new ArrayList<Fantasma>();
 		item = null;
 		pacman = null;
 		puedeSerVisitado = true;
 		this.posicion = posicion;
-
+		this.tablero  = tablero;
 	}
 
 	/* Agrega un nuevo fantasma al final de la lista */
@@ -83,4 +83,35 @@ public class Casillero {
 		return pacman;
 	}
 
+	public Casillero getArriba(){
+		Casillero arriba = null;
+		Posicion  posArriba = null;
+		posArriba = this.posicion.getArriba();
+		arriba = this.tablero.getCasillero(posArriba);
+		return arriba;
+	}
+	public Casillero getAbajo(){
+		Casillero abajo = null;
+		Posicion  posAbajo = null;
+		posAbajo = this.posicion.getArriba();
+		abajo = this.tablero.getCasillero(posAbajo);
+		return abajo;
+	}
+	
+	public Casillero getIzquierda(){
+		Casillero izquierda = null;
+		Posicion  posIzquierda = null;
+		posIzquierda = this.posicion.getArriba();
+		izquierda = this.tablero.getCasillero(posIzquierda);
+		return izquierda;
+	}
+	
+	public Casillero getDerecha(){
+		Casillero derecha = null;
+		Posicion  posDerecha = null;
+		posDerecha = this.posicion.getArriba();
+		derecha = this.tablero.getCasillero(posDerecha);
+		return derecha;
+	}
+	
 }
