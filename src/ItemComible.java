@@ -2,11 +2,12 @@
 abstract class ItemComible {
 	private Juego juego;
 	private int puntajePredeterminado;
-	//private Casillero casillero;
+	private boolean esPowa;
 	
-	public ItemComible (Juego nuevoJuego, int nuevoPuntaje){
+	public ItemComible (Juego nuevoJuego, int nuevoPuntaje, boolean esPowa){
 		this.juego=nuevoJuego;
 		this.puntajePredeterminado=nuevoPuntaje;
+		this.esPowa=esPowa;
 		
 		
 	}
@@ -21,7 +22,10 @@ abstract class ItemComible {
 	}
 	public abstract void fueComido();
 	
-
+	protected boolean esDePoder(){
+		return esPowa;
+	}
+	
 		
 	
 

@@ -24,8 +24,8 @@ private void incializar(int filas, int columnas) {
 		  }
 	  }
 }
-public void cargarTablero(Map mapas){
-
+public void cargarTablero(Mapa mapa){
+    casilleros=mapa.get();
 }
 
 public Casillero getCasillero(Posicion posicion){

@@ -3,74 +3,139 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Pacman extends Personaje {
+	private int vidas;
+	private boolean vivo;
+	private static final int CANTVIDAS = 3;
+	private int itemsComidos;
+	private int tiempoDeEfecto;
 
-	public Pacman(Juego nuevoJuego, Posicion posicionOriginal, int velocidad) {
-		super(nuevoJuego, posicionOriginal, velocidad, true);
-		this.getJuego().conocerPacman(this);
-		// this.reubicar(posicionOriginal);
+	public Pacman(Juego nuevoJuego, Casillero casilleroOriginal) {
+		super(nuevoJuego, casilleroOriginal, true);
+		this.vidas = CANTVIDAS;
+		this.vivo = true;
+		this.tiempoDeEfecto = 0;
 	}
 
-	public boolean mover(Posicion posicion) {
-		 Casillero nuevoCasillero= this.getJuego().getTablero().getCasillero(posicion);
-		 
-		 if(nuevoCasillero!=null){
-		 Casillero casilleroActual=this.getCasilleroActual();//tendria que fijarse si no es una pared
-		 
-		    nuevoCasillero.agregarPacman(this);
-		    casilleroActual.removerPacman(this);
-		    this.setCasilleroActual(nuevoCasillero);
-		    this.comer();
-		    return true;} else
-		    	return false;
-	}
-
-	private void comerFantasmas(){
-		ArrayList<Fantasma> listaFantasmas = this.getCasilleroActual().getFantasmas();
-        
-		boolean pacmanVivo=true;
-		Iterator<Fantasma> itFantasmas = listaFantasmas.iterator();
-		while (itFantasmas.hasNext()&& pacmanVivo) {
-			Personaje fantasmaAux = itFantasmas.next();
-			if (fantasmaAux.puedeSerComido()) {
-				fantasmaAux.reubicar();
-				fantasmaAux.cambiarEstado();
-			} else {
-				this.getJuego().decrementarVidaPackman();
-				this.getJuego().reubicarTodosLosPersonajes();
-                pacmanVivo=false;	
-			}
+	public void mover(Casillero nuevoCasillero) {
+		/*
+		 * se aplica el metodo comer para revisar si no se agrego ningun
+		 * fantasma antes de salir
+		 */
+		// this.comer();
 		
+
+		this.comprobarEstado();     
+		nuevoCasillero.agregarPacman(this);
+		this.getCasilleroActual().removerPacman(this);
+		this.setCasilleroActual(nuevoCasillero);
+		this.comer();
+		
+		      
 	}
-}		
-	private void comerItem(){
-		if (this.getCasilleroActual().getItem()!=null){
-			   this.getCasilleroActual().getItem().fueComido();		
-		       this.getCasilleroActual().setItem(null);
-		}
-	}
-	/*Intenta comer lo que haya en el casillero, primero
-	 * el item y luego los fantasmas
+
+	/*
+	 * Busca intenta comer todos los fantasmas contenidos en el casillero si
+	 * come alguno que no puede ser comido pacman muere
 	 */
-	public void comer() {
-		
-        this.comerItem();
-        this.comerFantasmas();
+	private void comerFantasmas() {
+		ArrayList<Fantasma> listaFantasmas = this.getCasilleroActual()
+				.getFantasmas();
+
+		Iterator<Fantasma> itFantasmas = listaFantasmas.iterator();
+		while (itFantasmas.hasNext()) {
+			Fantasma fantasmaAux = itFantasmas.next();
+			if (fantasmaAux.puedeSerComido()) {
+				fantasmaAux.encontrado();
+
+			} else {
+				this.morir();
+				break;
+			}
 
 		}
+	}
 
-	
+	/*Intenta comer algun item que exista en el casillero*/
+	private void comerItem() {
+		if (this.getCasilleroActual().hayItem()) {
+			ItemComible itemAux=this.getCasilleroActual().getItem();
+			itemAux.fueComido();
+			/*Pregunta si es una pastilla de poder y cambia su estado
+			y el tiempo de efecto es caso de serlo*/
+			if (itemAux.esDePoder()) {
+				this.setPuedeSerComido(false);
+				tiempoDeEfecto=((PuntoDePoder)itemAux).getTiempDeEfecto();
+			}
+			this.getCasilleroActual().setItem(null);
+			++itemsComidos;
+		}
+	}
 
-	public void reubicar() {
+	/*
+	 * Intenta comer lo que haya en el casillero, primero el item y luego los
+	 * fantasmas
+	 */
+	private void comer() {
+
+		this.comerItem();
+		this.comerFantasmas();
+	}
+
+	protected void morir() {
+		this.vivo = false;
+		this.reubicar();
+		this.decrementarVida();
+	}
+
+	public boolean estaVivo() {
+		return vivo;
+	}
+
+	protected void encontrado() {
+		this.morir();
+	}
+
+	protected void reubicar() {
 		/*
 		 * mueve a pacman al casillero original y lo borra del casillero en que
 		 * se encontraba
 		 */
-		Casillero casilleroAux = this.getCasilleroActual();
-		Casillero casilleroOriginal = this.getCasilleroOriginal();
 
-		this.setCasilleroActual(casilleroOriginal);
+		this.setCasilleroActual(this.getCasilleroOriginal());
 		this.getCasilleroActual().agregarPacman(this);
-		casilleroAux.removerPacman(this);
+		this.getCasilleroActual().removerPacman(this);
 
 	}
-}
+
+	/*
+	 * Decrementa una vida a packman cuando este es comido por un fantasma si el
+	 * total de vidas es cero finaliza el juego
+	 */
+	private void decrementarVida() {
+		--vidas;
+		if (vidas == 0) {
+			getJuego().finalizarJuego();
+		}
+	}
+
+
+	// Comprueba si culmino el tiempo de poder, si es asi cambia su estado
+	private void comprobarEstado(){
+		if (!this.puedeSerComido()) {
+		   
+			--tiempoDeEfecto;
+			
+		      if(tiempoDeEfecto == 0){ 
+		      this.setPuedeSerComido(true);
+			}
+
+	      }
+		
+	}
+
+ 
+   public int getItemsComidos(){
+	return itemsComidos;   
+   }
+   
+} 

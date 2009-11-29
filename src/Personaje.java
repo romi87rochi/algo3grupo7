@@ -3,16 +3,14 @@ public abstract class Personaje {
 	private int velocidad;
 	private Juego juego;
 	private Casillero casilleroActual;
-
 	private Casillero casilleroOriginal;
-
 	private boolean puedeSerComido;
 
-	public Personaje(Juego nuevoJuego, Posicion posicionOriginal,
-			int velocidad, boolean puedeSerComido) {
+	public Personaje(Juego nuevoJuego, Casillero casilleroOriginal,
+			 boolean puedeSerComido) {
 		this.juego = nuevoJuego;
-		this.casilleroOriginal = nuevoJuego.getTablero().getCasillero(
-				posicionOriginal); // inicialmente la posicion actual sera la
+		this.casilleroOriginal = casilleroOriginal;
+				 // inicialmente la posicion actual sera la
 		// original
 		this.casilleroActual = casilleroOriginal;
 
@@ -25,52 +23,50 @@ public abstract class Personaje {
 		 */
 	}
 
-	public void setCasilleroActual(Casillero casilleroActual) {
+	protected void setCasilleroActual(Casillero casilleroActual) {
 		this.casilleroActual = casilleroActual;
 	}
 
-	public void setCasilleroOriginal(Casillero casilleroOriginal) {
+	protected void setCasilleroOriginal(Casillero casilleroOriginal) {
 		this.casilleroOriginal = casilleroOriginal;
 	}
 
-	public abstract void comer();
 
-	public abstract boolean mover(Posicion posicion);
+
+	protected abstract void mover(Casillero nuevoCasillero);
 
 	/*
 	 * cuando pacman pueda ser comido los fantasmas no y viseversa por eso este
 	 * algoritmo debe funcionar
 	 */
-	public void cambiarEstado() {
-		if (this.puedeSerComido()) {
-			this.puedeSerComido = false;
-		} else {
-			this.puedeSerComido = true;
-		}
+	protected void setPuedeSerComido(boolean valor){
+		puedeSerComido=valor;
 	}
+	
+	protected abstract void encontrado();
 
-	public void reubicar() {
-
-	}
-
-	public Juego getJuego() {
+	protected abstract void reubicar();
+	protected abstract void morir();
+	 
+	protected Juego getJuego() {
 		return juego;
 	}
 
-	public Casillero getCasilleroActual() {
+	protected Casillero getCasilleroActual() {
 		return casilleroActual;
 	}
 
-	public Casillero getCasilleroOriginal() {
+	protected Casillero getCasilleroOriginal() {
 		return casilleroOriginal;
 	}
 
-	public int getVelocidad() {
+	protected int getVelocidad() {
 		return velocidad;
 	}
 
 	public boolean puedeSerComido() {
 		return this.puedeSerComido;
 	}
-
+    
+	
 }

@@ -1,33 +1,22 @@
 
 public class PuntoDePoder extends ItemComible{
 	
-	private int tiempoDePoder;
-	private static final int tiempoPoder=20;
-	private int[] vTiempo;
+	int tiempoDeEfecto;
 	
-	public PuntoDePoder(Juego nuevoJuego, int nuevoPuntaje){
-			super( nuevoJuego, nuevoPuntaje);		
-			vTiempo=new int[3];
-		vTiempo[0]=20;
-	    vTiempo[1]=15;
-		vTiempo[2]=10;
-			
-		this.setTiempoDePoder(vTiempo[this.getJuego().getNivel()]);
-
+	public PuntoDePoder(Juego nuevoJuego, int nuevoPuntaje,int tiempoDeEfecto){
+			super( nuevoJuego, nuevoPuntaje,true);		
+           this.tiempoDePoder=tiempoDeEfecto;      
 	}
 
-	private void setTiempoDePoder(int tiempo) {
-		this.tiempoDePoder=tiempo;
-		
-	}
-	
+
 	public void fueComido(){
 		
 		this.getJuego().setPuntaje(this.getPuntaje());
-         this.getJuego().cambiarEstadoPackman();
-         this.getJuego().cambiarEstadoDeLosFantasmas();
+
 	}
 	
-
+   public int getTiempDeEfecto(){
+	   return tiempoDeEfecto;
+   }
 
 }
