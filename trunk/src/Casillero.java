@@ -114,4 +114,15 @@ public class Casillero {
 		return derecha;
 	}
 	
+	public boolean puedeSerVisitado(){
+		return puedeSerVisitado;
+	}
+	
+	public boolean hayPacman(){
+		return pacman!=null;
+	}
+	
+	public boolean hayItem(){
+		return item!=null;
+	}
 }

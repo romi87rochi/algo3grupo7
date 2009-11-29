@@ -1,11 +1,12 @@
 public abstract class Fantasma extends Personaje {
 
 	protected int estrategia;
+	Pacman pacman;
 
-	public Fantasma(Juego nuevoJuego, Posicion posicionOriginal, int velocidad) {
-		super(nuevoJuego, posicionOriginal, velocidad, false);
-		getJuego().conocerFantasma(this);
-		// this.reubicar(posicionOriginal);
+	public Fantasma(Juego nuevoJuego, Casillero casilleroOriginal,
+			Personaje pacman) {
+		super(nuevoJuego, casilleroOriginal, false);
+		this.pacman = (Pacman)pacman;
 	}
 
 	public void cambiarVelocidad(int nivel) {
@@ -13,43 +14,62 @@ public abstract class Fantasma extends Personaje {
 	}
 
 	public void comer() {
-		Personaje pacmanAux = this.getCasilleroActual().getPacman();
-		if (pacmanAux != null && pacmanAux.puedeSerComido()) {
-			this.getJuego().decrementarVidaPackman();
-			this.getJuego().reubicarTodosLosPersonajes();
-		} else if(pacmanAux != null && (pacmanAux.puedeSerComido()==false))
+
+		if (this.getCasilleroActual().hayPacman() && !pacman.puedeSerComido()) {
+			pacman.encontrado();
+		} else {
 			this.reubicar();
-
+		}
 	}
-
-	public boolean mover(Posicion posicion) {
-		Casillero nuevoCasillero = this.getJuego().getTablero().getCasillero(
-				posicion);// tendria que fijarse si no es una pared o eso lo hace en la estrategia
-		
-		 if(nuevoCasillero!=null){ //null = pared hasta que no lo cambiemos
-			 Posicion pos=this.getCasilleroActual().getPosicion();
-		Casillero casilleroActual =this.getJuego().getTablero().getCasillero(pos);
-
-		nuevoCasillero.agregarFantasma(this);
-		casilleroActual.removerFantasma(this);
-		this.setCasilleroActual(nuevoCasillero);
-		this.comer();
-		return true;}else
-			return false;
+    
+	
+	protected void mover(Casillero nuevoCasillero) {
+      /*Si el pacman no esta vivo es xq otro pj lo comio por 
+       * lo tanto el fantasma se reubica
+       */
+		if (pacman.estaVivo()) {
+			nuevoCasillero.agregarFantasma(this);
+			getCasilleroActual().removerFantasma(this);
+			this.setCasilleroActual(nuevoCasillero);
+			if (pacman.puedeSerComido()) {
+				this.setPuedeSerComido(false);
+				this.comer();
+			} else {
+				this.setPuedeSerComido(true);
+			}
+		} else {
+			this.reubicar();
+		}
 
 	}
 
 	/* Traslada al fantasma a su posicion de origen */
-	public void reubicar() {
+	protected void reubicar() {
 		Casillero casilleroAux = this.getCasilleroActual();
-		Casillero casilleroOriginalAux = this.getCasilleroOriginal();
+
 		/*
 		 * mueve el fantasma al casillero original y lo borra del casillero en
 		 * que se encontraba
 		 */
-		this.setCasilleroActual(casilleroOriginalAux);
+		this.setCasilleroActual(this.getCasilleroOriginal());
 		this.getCasilleroActual().agregarFantasma(this);
 		casilleroAux.removerFantasma(this);
 
 	}
+
+	/*
+	 * metodo que sera utilizado cunaod pacman se cruse con un fantasma
+	 */
+	protected void encontrado() {
+		this.reubicar();
+	}
+
+ 
+   protected void morir(){
+	  /*en el caso de fanstasma el morir solo reubica al pj
+	   * pero semanticamente no es lo mismo encontrado que morir.
+	   */
+	   this.reubicar();
+   }
+   
 }
