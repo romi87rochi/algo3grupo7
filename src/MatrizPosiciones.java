@@ -1,27 +1,34 @@
 
-
 import java.util.ArrayList;
 
 public class MatrizPosiciones {
     private int filas;
     private int columnas;    
     private Posicion posiciones[][];
+	private Mapa mapa;
     
-    
-	public MatrizPosiciones(int filas, int columnas) {
-		
-		this.filas    = filas;
-		this.columnas = columnas;
+	public MatrizPosiciones() {
+		this.mapa     = new Mapa();
+		this.filas    = mapa.getFilas();
+		this.columnas = mapa.getColumnas();
 		posiciones    = new Posicion[filas][columnas];
 		this.incializar();
+		
 	}
 
+	public Mapa getMapa(){
+		return this.mapa;
+	}
+	
+	
 	private void incializar() {
 		  int y;
+		  int tipoPosicion = 0;
 			  for(int x=0;x<filas;x++){
 				  y=0;
 				  for(y=0;y<columnas;y++){
-					  posiciones[x][y]= new Posicion(x,y,this);
+					  tipoPosicion = mapa.getTipoPosicion(x,y);
+					  posiciones[x][y]= new Posicion(x,y,this,tipoPosicion);
 				  }
 			  }
 	}
