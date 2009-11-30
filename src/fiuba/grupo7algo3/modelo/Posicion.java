@@ -24,7 +24,7 @@ public class Posicion {
 		Posicion arriba = null;
 		int posX = this.posX;
 		int posY = this.posY;
-		posY++;
+		posY--;
 		
 		arriba = this.matriz.obtenerPosicion(posX,posY);
 		return arriba;
@@ -34,7 +34,7 @@ public class Posicion {
 		Posicion abajo = null;
 		int posX = this.posX;
 		int posY = this.posY;
-		posY--;
+		posY++;
 		abajo = this.matriz.obtenerPosicion(posX,posY);
 		return abajo;
 	}	
