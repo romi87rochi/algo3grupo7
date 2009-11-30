@@ -93,7 +93,7 @@ public class Casillero {
 	public Casillero getAbajo(){
 		Casillero abajo = null;
 		Posicion  posAbajo = null;
-		posAbajo = this.posicion.getArriba();
+		posAbajo = this.posicion.getAbajo();
 		abajo = this.tablero.getCasillero(posAbajo);
 		return abajo;
 	}
@@ -101,7 +101,7 @@ public class Casillero {
 	public Casillero getIzquierda(){
 		Casillero izquierda = null;
 		Posicion  posIzquierda = null;
-		posIzquierda = this.posicion.getArriba();
+		posIzquierda = this.posicion.getIzquierda();
 		izquierda = this.tablero.getCasillero(posIzquierda);
 		return izquierda;
 	}
@@ -109,7 +109,7 @@ public class Casillero {
 	public Casillero getDerecha(){
 		Casillero derecha = null;
 		Posicion  posDerecha = null;
-		posDerecha = this.posicion.getArriba();
+		posDerecha = this.posicion.getDerecha();
 		derecha = this.tablero.getCasillero(posDerecha);
 		return derecha;
 	}

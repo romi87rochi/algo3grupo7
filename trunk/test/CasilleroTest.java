@@ -49,7 +49,7 @@ public class CasilleroTest extends TestCase {
 		assertTrue(celda.getFantasmas().isEmpty());
 		assertTrue(celda.getPacman()==null); // la celda queda vacia, sin pacman y sin fantasmas
 							
-		assertTrue((fan1.getCasilleroActual().getPosicion()).equals(fan2.getCasilleroActual().getPosicion())) ;
+		assertTrue((fan1.getCasilleroActual()).equals(fan2.getCasilleroActual())) ;
 	// ambos fantasmas estan en el mismo casillero
 		
 		
@@ -180,5 +180,5 @@ public class CasilleroTest extends TestCase {
 		
 	}
 
-
-}
+	
+	}
