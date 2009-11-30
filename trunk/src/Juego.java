@@ -1,12 +1,8 @@
 
-
-
-
 public class Juego {
-	private static final int FILAS = 200;
-	private static final int COLUMNAS = 200;
+
 	private Tablero tablero;
-    private Mapa mapa;
+    //private Mapa mapa;
 	private boolean finJuego;
 	private int puntaje;
 	private int cantPastillasDelNivel;
@@ -17,10 +13,10 @@ public class Juego {
 	 * El juego recibe una lista de fantasmas y otra de packman para que este
 	 * conozca a sus personajes. Mapas es un array de mapas predefinidos
 	 */
-	public Juego(Mapa mapas) {
+	public Juego() {
 
-		tablero = new Tablero(FILAS, COLUMNAS);
-		this.mapa = mapas;
+		tablero = new Tablero();
+		//this.mapa = mapa;
 		puntaje = 0;
 		cantPastillasDelNivel=100;
 		finJuego = false;
@@ -31,17 +27,19 @@ public class Juego {
 
 	public void iniciarJuego() {
 
-		this.nuevoNivel(mapa);
+		//this.nuevoNivel(mapa);
 		finNivel=false;
 	}
 
 
 	public void nuevoNivel(Mapa mapa){
-		tablero.cargarTablero(mapa);
-		cantPastillasDelNivel=mapa.getCantItems();
+		//tablero.cargarTablero(mapa);
+		cantPastillasDelNivel=mapa.getCantPuntos();
 	}
 
-
+	public void adicionarPuntajeItem(ItemComible item){
+		this.puntaje =+ item.getPuntaje();
+	}
 
 
 	public Tablero getTablero() {

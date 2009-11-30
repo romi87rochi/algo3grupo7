@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 import java.util.Iterator;
@@ -57,9 +58,12 @@ public class Pacman extends Personaje {
 
 	/*Intenta comer algun item que exista en el casillero*/
 	private void comerItem() {
+		Juego juegoAux;
 		if (this.getCasilleroActual().hayItem()) {
 			ItemComible itemAux=this.getCasilleroActual().getItem();
-			itemAux.fueComido();
+			// Si no fue comido se le pasa el item para que el juego determine su puntaje 
+			juegoAux = this.getJuego();
+			juegoAux.adicionarPuntajeItem(itemAux);
 			/*Pregunta si es una pastilla de poder y cambia su estado
 			y el tiempo de efecto es caso de serlo*/
 			if (itemAux.esDePoder()) {

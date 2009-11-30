@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,6 +10,7 @@ public class Casillero {
 	private boolean puedeSerVisitado;
 	private Posicion posicion;
 	private Tablero tablero;
+	private int tipoCasillero;//
 	
 	public boolean getPuedeSerVisitado() {
 		return puedeSerVisitado;
@@ -22,6 +24,7 @@ public class Casillero {
 		puedeSerVisitado = true;
 		this.posicion = posicion;
 		this.tablero  = tablero;
+		this.tipoCasillero = posicion.getTipo(); //
 	}
 
 	/* Agrega un nuevo fantasma al final de la lista */
@@ -42,7 +45,11 @@ public class Casillero {
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
-
+	
+	public int getTipoCasillero() {
+		return this.tipoCasillero;
+	}
+	
 	/* quita el item del casillero cuando este es comido por pacman */
 	public void removerItem() {
 		item = null;
@@ -123,6 +130,7 @@ public class Casillero {
 	}
 	
 	public boolean hayItem(){
+		
 		return item!=null;
 	}
 }
