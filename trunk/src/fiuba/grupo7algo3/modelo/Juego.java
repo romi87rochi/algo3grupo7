@@ -60,10 +60,6 @@ public class Juego {
 		return puntaje;
 	}
 
-	/* puntaje es sumado a la cantidad de puntos totales */
-	public void setPuntaje(int puntaje) {
-		this.puntaje = this.getPuntaje() + puntaje;
-	}
 
 	public int getCantPastillasDelNivel() {
 		return cantPastillasDelNivel;
@@ -99,6 +95,11 @@ public class Juego {
 	public void finalizarJuego(){
 		this.finJuego=true;
 	}	
+	
+	public void adicionarPuntajeItem(ItemComible item){
+		this.puntaje =+ item.getPuntaje();
+	}
+
 
 
 	}

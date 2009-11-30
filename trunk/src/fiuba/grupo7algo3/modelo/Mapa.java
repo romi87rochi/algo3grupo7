@@ -19,8 +19,8 @@ public class Mapa {
 		++cantItems;
 	}
 	
-	public void insertarPastillaDePoder(){
-		
+	public void insertarPastillaDePoder(Casillero casillero, ItemComible punto){
+		casillero.setItem(punto);
 		++cantItems;
 	}
 	
@@ -31,4 +31,6 @@ public class Mapa {
 	public int getCantItems(){
 		return cantItems;
 	}
+	
+	
 }

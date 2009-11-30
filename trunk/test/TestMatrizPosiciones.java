@@ -1,4 +1,4 @@
-package PaquetePruebasMatrizPosiciones;
+
 
 import junit.framework.TestCase;
 import java.util.ArrayList;
