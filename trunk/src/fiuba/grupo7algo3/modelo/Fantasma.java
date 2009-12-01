@@ -1,3 +1,4 @@
+package modelo;
 public abstract class Fantasma extends Personaje {
 
 	protected Estrategia estrategia;
@@ -23,6 +24,9 @@ public abstract class Fantasma extends Personaje {
 		}
 	}
     
+	public void vivir(){
+		
+	}
 	
 	protected void mover(Casillero nuevoCasillero) {
       /*Si el pacman no esta vivo es xq otro pj lo comio por 

@@ -1,4 +1,3 @@
-package modelo;
 
 import junit.framework.TestCase;
 
