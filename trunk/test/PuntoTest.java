@@ -1,26 +1,39 @@
+package modelo;
 
 import junit.framework.TestCase;
 
 
 public class PuntoTest extends TestCase {
 	
+	Mapa mapas;
+	Juego unJuego;
+	int puntaje;
+	Punto punto;
+	
+	public void setUp(){
+		mapas=null;
+		unJuego=new Juego(mapas);
+		puntaje=100;
+		punto=new Punto(puntaje);
+	}
+	
 	
 	public void testPuntoCreado(){
-		Map[] mapas=null;
-		Juego unJuego=new Juego(mapas);
-		int puntaje=100;
-		Punto punto=new Punto(unJuego, puntaje);
+		
 		assertNotNull(punto);
 
 		}
 
 
 	public void testComido(){
-		Map[] mapas=null;
-		Juego unJuego=new Juego(mapas);
-		int puntaje=100;
-		Punto punto=new Punto(unJuego, puntaje);
-		punto.fueComido();
+		Posicion posicion=new Posicion(1, 1, null);
+		Posicion otraPosicion=new Posicion(2, 1, null);
+		Casillero celda =unJuego.getTablero().getCasillero(posicion);
+		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
+		Pacman pacman=new Pacman(unJuego, celda);
+		otraCelda.setItem(punto);  //no se si esta bien poner asi, habria que poner instertarPunto de Mapa(todavia no implementado)
+		pacman.mover(otraCelda);
+		
 		assertTrue(unJuego.getPuntaje()>0);		
 		
 }
@@ -28,12 +41,14 @@ public class PuntoTest extends TestCase {
 
 
 	public void testGetPuntaje(){
-		Map[] mapas=null;
-		Juego juego= new Juego(mapas);
-
-		int puntaje=100;
-		Punto punto=new Punto(juego, puntaje);
-		punto.fueComido();
+		Posicion posicion=new Posicion(1, 1, null);
+		Posicion otraPosicion=new Posicion(2, 1, null);
+		Casillero celda =unJuego.getTablero().getCasillero(posicion);
+		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
+		Pacman pacman=new Pacman(unJuego, celda);
+		otraCelda.setItem(punto);  //no se si esta bien poner asi, habria que poner instertarPunto de Mapa(todavia no implementado)
+		pacman.mover(otraCelda);
+		
 		assertEquals(100, punto.getPuntaje());
 }
 
@@ -42,42 +57,27 @@ public class PuntoTest extends TestCase {
 
 	public void testNoComidoPorFantasma(){
 		
-		Map[] mapas=null;
-		Juego juego= new Juego(mapas);
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
 		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =juego.getTablero().getCasillero(posicion);
-		Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
-		int puntaje=100;
-		Punto punto=new Punto(juego, puntaje);
+		Casillero celda =unJuego.getTablero().getCasillero(posicion);
+		Casillero otracelda =unJuego.getTablero().getCasillero(otraPosicion);
+		Posicion posicionPacman=new Posicion(3, 3, null);
+		Casillero celdaPacman =unJuego.getTablero().getCasillero(posicionPacman);
+		Pacman pacman=new Pacman(unJuego, celdaPacman);
 		
-		int velocidad=1;
-		Blinky fan1 = new Blinky(juego,posicion, velocidad);
+		Blinky fan1 = new Blinky(unJuego,celda,pacman);
 		celda.agregarFantasma(fan1);
-		celda.setItem(punto);
 		otracelda.setItem(punto);
 		
-		fan1.mover(posicion.getDerecha());
+		fan1.mover(otracelda);
 	
 		assertFalse(otracelda.getItem()==null);
-		assertEquals(0, juego.getPuntaje());
+		assertEquals(0, unJuego.getPuntaje());
 
 				
 		
 
 }
-
-public void testFueComido() {
-	Map[] mapas=null;
-	Juego juego= new Juego(mapas);
-	int puntaje=100;
-	
-	Punto punto=new Punto(juego, puntaje);
-	punto.fueComido();
-	assertEquals(juego.getPuntaje(),100);
-}
-
-
 
 }

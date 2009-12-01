@@ -1,35 +1,49 @@
+package modelo;
 
 import junit.framework.TestCase;
 
 
 public class FrutaTest extends TestCase {
 		
+	
+	Mapa mapas;
+	Juego juego;
+	MatrizPosiciones matriz;
+	Posicion posicion;
+	Posicion otraPosicion;
+	Casillero celda;
+	Casillero otracelda;
+	int puntaje;
+	Fruta fruta;
+	
+	public void setUp(){
+		mapas=null;
+		juego= new Juego(mapas);
+		matriz=new MatrizPosiciones(4,4);
+		posicion=new Posicion(1,1,matriz);
+		otraPosicion=new Posicion(2,1,matriz);
+		celda =juego.getTablero().getCasillero(posicion);
+		otracelda =juego.getTablero().getCasillero(otraPosicion);
+		puntaje=100;
+		fruta=new Fruta(puntaje);
+		
+	}
+	
 		public void testFrutaCreada(){
-			Map[] mapas=null;
-			Juego unJuego=new Juego(mapas);
-			int puntaje=100;
-			Fruta fruta=new Fruta(unJuego, puntaje);
+			setUp();
 			assertNotNull(fruta);
 
 			}
 
 
 		public void testComido(){
-			
-			Map[] mapas=null;
-			Juego juego= new Juego(mapas);
-			MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-			Posicion posicion=new Posicion(1,1,matriz);
-			Posicion otraPosicion=new Posicion(2,1,matriz);
-			Casillero celda =juego.getTablero().getCasillero(posicion);
-			Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
-			int puntaje=100;
-			Fruta fruta=new Fruta(juego, puntaje);
+			setUp();
 			otracelda.setItem(fruta);
 			
-			int velocidad=1;
-			Pacman pacman=new Pacman(juego, posicion, velocidad);
-			pacman.mover(posicion.getDerecha());
+			Pacman pacman=new Pacman(juego, celda);
+			
+			celda.agregarPacman(pacman);
+			pacman.mover(celda.getDerecha());
 			
 			
 			assertTrue(juego.getPuntaje()>0);
@@ -37,12 +51,13 @@ public class FrutaTest extends TestCase {
 	}
 
 		public void testGetPuntaje(){
-			Map[] mapas=null;
-			Juego juego= new Juego(mapas);
-
-			int puntaje=100;
-			Fruta fruta=new Fruta(juego, puntaje);
-			fruta.fueComido();
+			setUp();
+			otracelda.setItem(fruta);
+			
+			Pacman pacman=new Pacman(juego, celda);
+			celda.agregarPacman(pacman);
+			pacman.mover(celda.getDerecha());
+			
 			assertEquals(100, fruta.getPuntaje());
 	}
 
@@ -50,24 +65,21 @@ public class FrutaTest extends TestCase {
 
 
 		public void testNoComidoPorFantasma(){
+
+			setUp();
+			Posicion posicionPacman=new Posicion(3, 3, null);
+			Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
 			
-			Map[] mapas=null;
-			Juego juego= new Juego(mapas);
-			MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-			Posicion posicion=new Posicion(1,1,matriz);
-			Posicion otraPosicion=new Posicion(2,1,matriz);
-			Casillero celda =juego.getTablero().getCasillero(posicion);
-			Casillero otracelda =juego.getTablero().getCasillero(otraPosicion);
-			int puntaje=100;
-			Fruta fruta=new Fruta(juego, puntaje);
+			Pacman pacman=new Pacman(juego,celdaPacman);
+			celdaPacman.agregarPacman(pacman);	
 			
-			int velocidad=1;
-			Blinky fan1 = new Blinky(juego,posicion, velocidad);
+			
+			Blinky fan1 = new Blinky(juego,celda,pacman);
 			celda.agregarFantasma(fan1);
 			celda.setItem(fruta);
 			otracelda.setItem(fruta);
 			
-			fan1.mover(posicion.getDerecha());
+			fan1.mover(celda.getDerecha());
 		
 			assertFalse(otracelda.getItem()==null);
 			assertEquals(0, juego.getPuntaje());
@@ -77,15 +89,6 @@ public class FrutaTest extends TestCase {
 
 	}
 
-	public void testFueComido() {
-		Map[] mapas=null;
-		Juego juego= new Juego(mapas);
-		int puntaje=100;
-		
-		Fruta fruta=new Fruta(juego, puntaje);
-		fruta.fueComido();
-		assertEquals(juego.getPuntaje(),100);
-	}
-
+	
 
 }

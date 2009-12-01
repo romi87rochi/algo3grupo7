@@ -1,7 +1,9 @@
+package modelo;
 
 
 import junit.framework.TestCase;
 import java.util.ArrayList;
+
 
 public class TestMatrizPosiciones extends TestCase {
 	public static void main(String[] args) {

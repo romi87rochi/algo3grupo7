@@ -1,129 +1,82 @@
+package modelo;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import junit.framework.TestCase;
 
 
 public class JuegoTest extends TestCase {
 
+	
+	Mapa mapas;
+
+	Juego juego; 
+	
+	public void setUp(){
+		mapas=null;
+
+		juego = new Juego( mapas); 
+	}
+
 
 	public void testConstructor(){
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas); 
+		setUp();
 		assertNotNull(juego);
 }
 
 	public void testPrimerNivel(){
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas); 
-
+		setUp();
 		assertEquals(0, juego.getNivel());
 }
 	
-	public void testcambiaEstadoDeLosFantasmas(){
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas); 
-		int puntaje=100;
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-
-		Fantasma fan1=new Blinky(juego, posicion, velocidad);
-		Fantasma fan2=new Blinky(juego, posicion, velocidad);
-		Fantasma fan3=new Blinky(juego, posicion, velocidad);
-		Casillero celda =juego.getTablero().getCasillero(posicion);
-	
-		celda.agregarFantasma(fan1);
-		celda.agregarFantasma(fan2);
-		celda.agregarFantasma(fan3);
-		ArrayList<Fantasma> fantasmas=new ArrayList<Fantasma>();
-		fantasmas=celda.getFantasmas();
-		Iterator<Fantasma> it= fantasmas.iterator();
-		juego.cambiarEstadoDeLosFantasmas();
-		
-		while(it.hasNext()){
-			assertTrue(it.next().puedeSerComido()); //si comio punto de poder pueden ser comidos los fantasmas
-}}
 
 	public void testTerminaJuegoFalso(){
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas); 
-		assertFalse(juego.isFinJuego());
+		setUp();
+		assertFalse(juego.esFinJuego());
 		
 }
 
 
 	public void testComeItems(){
-
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas); 
+		setUp();
 		int puntaje=100;
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
+		
+		Posicion posicionPacman=new Posicion(3, 3, null);
+		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
+		Pacman pacman=new Pacman(juego,celdaPacman);
+		
+		Posicion posicion=new Posicion(3, 4, null);
 		Casillero celda =juego.getTablero().getCasillero(posicion);
-		Punto punto=new Punto(juego, puntaje);
+		Punto punto=new Punto(puntaje);
 		celda.setItem(punto);
+		celdaPacman.agregarPacman(pacman);
 		int itemsIniciales=juego.getCantPastillasDelNivel();
-		celda.getItem().fueComido();
+		pacman.mover(celda);
 		
 		
-		assertTrue(itemsIniciales>juego.getCantPastillasDelNivel());
-}
-
-
-	public void testBajaVidaPacman(){
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas); 
-
-		int vidasIniciales= juego.getVidasPackman();
-		juego.decrementarVidaPackman();
-		assertTrue(vidasIniciales > juego.getVidasPackman());
-
+		assertTrue(itemsIniciales>juego.getCantPastillasDelNivel());  //VER COMO HACERLO!!!!
 }
 
 
 
 	public void testIsFinJuego() {
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas);
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-		Pacman pacman=new Pacman(juego,posicion, velocidad);
-		juego.conocerPacman(pacman);
-		juego.decrementarVidaPackman();
-		juego.decrementarVidaPackman();
-		juego.decrementarVidaPackman();
-		assertTrue(juego.isFinJuego());
-	}
-
-	public void testDecrementarVidaPackman() {
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas);
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-		Pacman pacman=new Pacman(juego,posicion, velocidad);
-		juego.conocerPacman(pacman);
-		juego.decrementarVidaPackman();
+		setUp();
+		Posicion posicionPacman=new Posicion(3, 3, null);
+		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
 		
-		assertTrue(juego.getVidasPackman()<3);
+		Pacman pacman=new Pacman(juego,celdaPacman);
+		pacman.morir();
+		pacman.morir();
+		pacman.morir();
+		assertTrue(juego.esFinJuego());
 	}
+
 
 
 	public void testFinalizarJuego() {
-		Map[] mapas=null;
-
-		Juego juego = new Juego( mapas);
+		setUp();
 		juego.finalizarJuego();
-		assertTrue(juego.isFinJuego());
+		assertTrue(juego.esFinJuego());
 	}
 
 
