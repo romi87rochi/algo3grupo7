@@ -5,6 +5,7 @@ public class Blinky extends Fantasma{
 
 	public Blinky(Juego nuevoJuego, Casillero casilleroOriginal,Personaje pacman ){
 		super( nuevoJuego,casilleroOriginal,pacman);
+		casilleroOriginal.agregarFantasma(this);
 		this.velocidad=1;
 		int tipoEstrategia=1;
 		this.estrategia= new Estrategia(pacman, tipoEstrategia,this);

@@ -6,22 +6,32 @@ public class PacmanTest extends TestCase {
 	
 	Mapa mapas;
 	Juego juego;
+	MatrizPosiciones matriz;
 	Posicion posicion;
 	Posicion otraPosicion;
-	Pacman pacman;
-	Casillero celda ;
+	Posicion posicionPacman;
+	Casillero celda;
 	Casillero otraCelda;
+	Casillero celdaPacman;
+	Pacman pacman;
+	
+
 	
 	public void setUp(){
 		mapas=null;
-		juego = new Juego( mapas);
-		posicion=new Posicion(1, 1, null);
-		otraPosicion=new Posicion(2, 1, null);
+		juego= new Juego(mapas);
+		matriz=new MatrizPosiciones(4,4);
+		posicion=new Posicion(1,1,matriz);
+		otraPosicion=new Posicion(2,1,matriz);
+		posicionPacman=new Posicion(3,1,matriz);
 		celda =juego.getTablero().getCasillero(posicion);
 		otraCelda =juego.getTablero().getCasillero(otraPosicion);
-		pacman=new Pacman(juego,celda);
-		celda.agregarPacman(pacman);
+		celdaPacman=juego.getTablero().getCasillero(posicionPacman);
+		pacman=new Pacman(juego,celdaPacman);
+		
 	}
+	
+	
 
 	public void testComer() {
 		
@@ -45,7 +55,7 @@ public class PacmanTest extends TestCase {
 		setUp();
 		pacman.mover(otraCelda);
 		pacman.reubicar();
-		assertEquals(pacman.getCasilleroActual(), celda);
+		assertEquals(pacman.getCasilleroActual(), celdaPacman);
 	}
 
 	public void testPacman() {

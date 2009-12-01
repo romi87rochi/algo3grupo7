@@ -1,4 +1,5 @@
 
+
 import junit.framework.TestCase;
 
 
@@ -28,7 +29,6 @@ public class CasilleroTest extends TestCase {
 		celdaPacman=juego.getTablero().getCasillero(posicionPacman);
 		
 	}
-
 	
 	
 	public void testCeldaConDosFantasmas(){
@@ -40,15 +40,11 @@ public class CasilleroTest extends TestCase {
 		Blinky fan2 = new Blinky(juego, otracelda,pacman);
 	
 		
-		celda.agregarFantasma(fan1);	
-		
-		otracelda.agregarFantasma(fan2);
-		
-		fan1.vivir(); // tendria que moverse a la otraCelda
+		fan1.mover(otracelda); // tendria que moverse a la otraCelda
 		assertTrue(celda.getFantasmas().isEmpty());
 		assertTrue(celda.getPacman()==null); // la celda queda vacia, sin pacman y sin fantasmas
 							
-		assertTrue((fan1.getCasilleroActual()).equals(fan2.getCasilleroActual())) ;
+		assertTrue((fan1.getCasilleroActual().getPosicion()).equals(fan2.getCasilleroActual().getPosicion())) ;
 	// ambos fantasmas estan en el mismo casillero
 		
 		
@@ -64,13 +60,8 @@ public class CasilleroTest extends TestCase {
 		
 		Blinky fan1 = new Blinky(juego,celda,pacman);
 		
-	
 		
-		celda.agregarFantasma(fan1);
-		otracelda.agregarPacman(pacman);
-		
-		
-			fan1.vivir(); // tendria que moverse a la otraCelda
+			fan1.mover(otracelda); // tendria que moverse a la otraCelda
 		
 	
 		
@@ -89,11 +80,7 @@ public class CasilleroTest extends TestCase {
 		
 		Pacman pacman = new Pacman(juego, otracelda);
 		Blinky fan1 = new Blinky(juego,celda, pacman);
-		
-		
-
-		celda.agregarFantasma(fan1);
-		otracelda.agregarPacman(pacman);
+	
 		
 		pacman.setPuedeSerComido(false);
 		
@@ -110,7 +97,6 @@ public class CasilleroTest extends TestCase {
 		
 		Pacman pacman=new Pacman(juego,otracelda);
 		Blinky fan1 = new Blinky(juego,celda, pacman);
-		celda.agregarFantasma(fan1);
 		
 		assertTrue(celda.getFantasmas().get(0)== fan1);
 	}
@@ -124,7 +110,6 @@ public class CasilleroTest extends TestCase {
 		Casillero celda =juego.getTablero().getCasillero(posicion);
 	
 		Pacman pacman = new Pacman(juego,celda);
-		celda.agregarPacman(pacman);
 		
 		assertTrue(celda.getPacman()== pacman);
 	}
@@ -161,7 +146,6 @@ public class CasilleroTest extends TestCase {
 		
 	
 		Blinky fan1 = new Blinky(juego,celda, pacman);
-		celda.agregarFantasma(fan1);
 		celda.removerFantasma(fan1);
 		
 		assertTrue(celda.getFantasmas().isEmpty());
@@ -179,5 +163,5 @@ public class CasilleroTest extends TestCase {
 		
 	}
 
-	
-	}
+
+}
