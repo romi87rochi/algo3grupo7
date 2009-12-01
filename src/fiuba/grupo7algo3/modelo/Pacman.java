@@ -13,6 +13,7 @@ public class Pacman extends Personaje {
 
 	public Pacman(Juego nuevoJuego, Casillero casilleroOriginal) {
 		super(nuevoJuego, casilleroOriginal, true);
+		casilleroOriginal.agregarPacman(this);
 		this.vidas = CANTVIDAS;
 		this.vivo = true;
 		this.tiempoDeEfecto = 0;

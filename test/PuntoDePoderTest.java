@@ -10,6 +10,7 @@ public class PuntoDePoderTest extends TestCase {
 	int puntaje;
 	int tiempoDePoder;
 	ItemComible punto;
+	MatrizPosiciones matriz;
 	
 	public void setUp(){
 		mapas=new Mapa();
@@ -17,6 +18,7 @@ public class PuntoDePoderTest extends TestCase {
 		puntaje=100;
 		tiempoDePoder=4;
 		punto=new PuntoDePoder(puntaje,tiempoDePoder);
+		matriz=new MatrizPosiciones(4,4);
 	}
 
 	
@@ -28,9 +30,8 @@ public class PuntoDePoderTest extends TestCase {
 
 
 	public void testComido(){
-		
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Pacman pacman=new Pacman(unJuego, celda);
@@ -45,8 +46,8 @@ public class PuntoDePoderTest extends TestCase {
 
 	public void testGetPuntaje(){
 		
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Pacman pacman=new Pacman(unJuego, celda);
@@ -60,8 +61,8 @@ public class PuntoDePoderTest extends TestCase {
 
 	public void testCambiaEstadoPacman(){
 
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Pacman pacman=new Pacman(unJuego, celda);
@@ -77,14 +78,12 @@ public class PuntoDePoderTest extends TestCase {
 // probar que los fantasmas tambien cambian de estado
 
 	public void testCambiaEstadoFantasmas(){
-
-		
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2,1,null);
-		Posicion posicionFantasmas=new Posicion(2,2,null);
+		Posicion posicionFantasma=new Posicion(2,2,matriz);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Casillero celdaFantasmas =unJuego.getTablero().getCasillero(posicionFantasmas);
+		Casillero celdaFantasmas =unJuego.getTablero().getCasillero(posicionFantasma);
 		Pacman pacman=new Pacman(unJuego, celda);
 		Blinky fan1=new Blinky(unJuego, celdaFantasmas, pacman);
 		Blinky fan2=new Blinky(unJuego, celdaFantasmas, pacman);
@@ -120,19 +119,16 @@ public class PuntoDePoderTest extends TestCase {
 // probar que los fantasmas no comen los puntos de poder
 	public void testFantasmasNoComenPuntoDePoder(){
 
-		
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2,1,null);
-		Posicion posicionPacman=new Posicion(3,3,null);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
+		Posicion posicionPacman=new Posicion(3,3,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Casillero celdaPacman =unJuego.getTablero().getCasillero(posicionPacman);
 		Pacman pacman=new Pacman(unJuego, celdaPacman);
 		Blinky fan1=new Blinky(unJuego, celda, pacman);
 		
-		celda.agregarFantasma(fan1);
-		celdaPacman.agregarPacman(pacman);
-		
+	
 
 		mapas.insertarPastillaDePoder(otraCelda, punto);
 		fan1.mover(otraCelda);
@@ -148,19 +144,16 @@ public class PuntoDePoderTest extends TestCase {
  //probar que despues de un tiempo todos vuelven a su estado natural 
  
 	public void testTiempoDePoderSeAcaba(){
-
-
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2,1,null);
-		Posicion posicionPacman=new Posicion(3,3,null);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
+		Posicion posicionFantasma=new Posicion(3,3,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Casillero celdaFantasma =unJuego.getTablero().getCasillero(posicionPacman);
+		Casillero celdaFantasma =unJuego.getTablero().getCasillero(posicionFantasma);
 		Pacman pacman=new Pacman(unJuego, celda);// fantasmas se va a mover de una celda a la otra todo el tiempo
 		Blinky fan1=new Blinky(unJuego, celdaFantasma, pacman);  // el fantasma se va a quedar quieto en esta prueba
 		
-		celda.agregarPacman(pacman);
-		celdaFantasma.agregarFantasma(fan1);
+	
 		
 		int tiempoDePoder=2;
 		ItemComible punto=new PuntoDePoder(puntaje, tiempoDePoder);

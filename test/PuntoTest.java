@@ -25,8 +25,9 @@ public class PuntoTest extends TestCase {
 
 
 	public void testComido(){
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Pacman pacman=new Pacman(unJuego, celda);
@@ -40,8 +41,9 @@ public class PuntoTest extends TestCase {
 
 
 	public void testGetPuntaje(){
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
+		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
+		Posicion posicion=new Posicion(1,1,matriz);
+		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
 		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Pacman pacman=new Pacman(unJuego, celda);
@@ -55,23 +57,21 @@ public class PuntoTest extends TestCase {
 
 
 	public void testNoComidoPorFantasma(){
-		
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
 		Posicion otraPosicion=new Posicion(2,1,matriz);
 		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otracelda =unJuego.getTablero().getCasillero(otraPosicion);
+		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
 		Posicion posicionPacman=new Posicion(3, 3, null);
 		Casillero celdaPacman =unJuego.getTablero().getCasillero(posicionPacman);
 		Pacman pacman=new Pacman(unJuego, celdaPacman);
 		
 		Blinky fan1 = new Blinky(unJuego,celda,pacman);
-		celda.agregarFantasma(fan1);
-		otracelda.setItem(punto);
+		otraCelda.setItem(punto);
 		
-		fan1.mover(otracelda);
+		fan1.mover(otraCelda);
 	
-		assertFalse(otracelda.getItem()==null);
+		assertFalse(otraCelda.getItem()==null);
 		assertEquals(0, unJuego.getPuntaje());
 
 				

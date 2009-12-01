@@ -4,19 +4,19 @@ import junit.framework.TestCase;
 
 public class PersonajeTest extends TestCase {
 	Juego juego;
-	int velocidad;
+	Pacman pacman;
+	MatrizPosiciones matriz;
+	Fantasma fantasma;
 	Posicion posicion;
 	Posicion otraPosicion;
-	Pacman pacman;
-	Fantasma fantasma;
 	Casillero celda;
 	Casillero otraCelda;
 	
 	public void setUp(){
 		juego = new Juego( null);
-		velocidad=1;
-		posicion=new Posicion(1, 1, null);
-		otraPosicion=new Posicion(3, 3, null);
+		matriz=new MatrizPosiciones(4,4);
+		posicion=new Posicion(1,1,matriz);
+		otraPosicion=new Posicion(3,3,matriz);
 		celda=juego.getTablero().getCasillero(posicion);
 		otraCelda=juego.getTablero().getCasillero(otraPosicion);
 		pacman=new Pacman(juego,celda);

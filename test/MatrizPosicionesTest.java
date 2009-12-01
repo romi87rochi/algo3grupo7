@@ -32,7 +32,7 @@ public class MatrizPosicionesTest extends TestCase {
 		if (arriba1 == arriba2){
 			assertTrue(true);
 		} else {
-			assertTrue(true);
+			assertTrue(false);
 		}
 		
 		System.out.println("Adyacente1 " + arriba1);
@@ -57,7 +57,7 @@ public class MatrizPosicionesTest extends TestCase {
 		if (abajo1 == abajo2){
 			assertTrue(true);
 		} else {
-			assertTrue(true);
+			assertTrue(false);
 		}
 		
 		System.out.println("Adyacente1 " + abajo1);
@@ -76,13 +76,13 @@ public class MatrizPosicionesTest extends TestCase {
 		
 		posicion   = matriz.obtenerPosicion(2,2);
 		adyacentes = matriz.getAdyacente(posicion);
-		izquierda1     = (Posicion)adyacentes.get(1);
+		izquierda1     = (Posicion)adyacentes.get(2);
 		izquierda2     = posicion.getIzquierda();
 		
 		if (izquierda1 == izquierda2){
 			assertTrue(true);
 		} else {
-			assertTrue(true);
+			assertTrue(false);
 		}
 		
 		System.out.println("Adyacente1 " + izquierda1);
@@ -101,13 +101,13 @@ public class MatrizPosicionesTest extends TestCase {
 		
 		posicion   = matriz.obtenerPosicion(2,2);
 		adyacentes = matriz.getAdyacente(posicion);
-		derecha1     = (Posicion)adyacentes.get(1);
-		derecha2     = posicion.getIzquierda();
+		derecha1     = (Posicion)adyacentes.get(3);
+		derecha2     = posicion.getDerecha();
 		
 		if (derecha1 == derecha2){
 			assertTrue(true);
 		} else {
-			assertTrue(true);
+			assertTrue(false);
 		}
 		
 		System.out.println("Adyacente1 " + derecha1);
