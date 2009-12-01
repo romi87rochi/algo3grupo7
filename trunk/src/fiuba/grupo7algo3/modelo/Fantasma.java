@@ -1,4 +1,4 @@
-package modelo;
+
 public abstract class Fantasma extends Personaje {
 
 	protected Estrategia estrategia;
