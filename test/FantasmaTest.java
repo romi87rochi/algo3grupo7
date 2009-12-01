@@ -1,66 +1,81 @@
+package modelo;
 
 import junit.framework.TestCase;
 
 
 public class FantasmaTest extends TestCase {
 
-	public void testComer() {
-		Map[] mapas=null;
+	Mapa mapas;
 
-		Juego juego = new Juego( mapas);
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
-		Pacman pacman=new Pacman(juego,posicion, velocidad);
-		Fantasma fantasma=new Blinky(juego, otraPosicion, velocidad);
+	Juego juego;
+	Posicion posicion;
+	Posicion otraPosicion;
+	Casillero celda;
+	Casillero otraCelda;
+
+	
+	
+	public void setUp(){
+		mapas=null;
+
+		juego = new Juego( mapas);
+		posicion=new Posicion(1, 1, null);
+		otraPosicion=new Posicion(2, 1, null);
+		celda =juego.getTablero().getCasillero(posicion);
+		otraCelda =juego.getTablero().getCasillero(otraPosicion);
+
+	}
+
+	public void testComer() {
+		setUp();				
+		Pacman pacman=new Pacman(juego,celda);
+		Fantasma fantasma=new Blinky(juego, otraCelda,pacman);
 		
-		Casillero celda =juego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =juego.getTablero().getCasillero(otraPosicion);
 		celda.agregarPacman(pacman);
 		otraCelda.agregarFantasma(fantasma);
 		
-		pacman.mover(otraPosicion);
+		fantasma.mover(celda);
 		
-		assertNull(otraCelda.getPacman());
-		assertTrue(juego.getVidasPackman()==2);
+		assertNull(celda.getPacman());
+		assertTrue(pacman.getVidas()==2);
 	}
 
 	public void testMover() {
-		Juego juego = new Juego( null);
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(2, 1, null);
-		Fantasma fantasma=new Blinky(juego,posicion, velocidad);
-		Casillero celda =juego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =juego.getTablero().getCasillero(otraPosicion);
+		
+		setUp();
+		Posicion posicionPacman=new Posicion(3, 3, null);
+		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
+		
+		Pacman pacman=new Pacman(juego,celdaPacman);
+		Fantasma fantasma=new Blinky(juego,celda,pacman);
 		celda.agregarFantasma(fantasma);
 		
-		fantasma.mover(otraPosicion);
+		fantasma.mover(otraCelda);
 		
 		assertEquals(fantasma.getCasilleroActual(), otraCelda);
 	}
 
 	public void testReubicar() {
-		Juego juego = new Juego( null);
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(3, 3, null);
-		Fantasma fantasma=new Blinky(juego,posicion, velocidad);
-		Casillero celda =juego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =juego.getTablero().getCasillero(otraPosicion);
+		Posicion posicionPacman=new Posicion(3, 3, null);
+		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
+		
+		Pacman pacman=new Pacman(juego,celdaPacman);
+	
+		Fantasma fantasma=new Blinky(juego,celda, pacman);
 		celda.agregarFantasma(fantasma);
 		
-		fantasma.mover(otraPosicion);
+		fantasma.mover(otraCelda);
 		fantasma.reubicar();
 		assertEquals(fantasma.getCasilleroActual(), celda);
 	}
 
 	public void testFantasma() {
-		Juego juego = new Juego( null);
-		int velocidad=1;
-		Posicion posicion=new Posicion(1, 1, null);
-		Posicion otraPosicion=new Posicion(3, 3, null);
-		Fantasma fantasma=new Blinky(juego,posicion, velocidad);
+		Posicion posicionPacman=new Posicion(3, 3, null);
+		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
+		
+		Pacman pacman=new Pacman(juego,celdaPacman);
+	
+		Fantasma fantasma=new Blinky(juego,celda, pacman);
 		assertNotNull(fantasma);
 	}
 
