@@ -37,7 +37,7 @@ public class Juego {
 
 	public void nuevoNivel(Mapa mapa){
 		tablero.cargarTablero(mapa);
-		cantPastillasDelNivel=mapa.getCantItems();
+		//cantPastillasDelNivel=mapa.getCantItems();
 	}
 
 
