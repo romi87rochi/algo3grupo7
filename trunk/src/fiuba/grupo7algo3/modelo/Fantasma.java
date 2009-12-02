@@ -37,11 +37,11 @@ public abstract class Fantasma extends Personaje {
 			getCasilleroActual().removerFantasma(this);
 			this.setCasilleroActual(nuevoCasillero);
 			if (pacman.puedeSerComido()) {
-				this.setPuedeSerComido(false);
-				this.comer();
+				this.setPuedeSerComido(false);				
 			} else {
 				this.setPuedeSerComido(true);
 			}
+			this.comer();
 		} else {
 			this.reubicar();
 		}
