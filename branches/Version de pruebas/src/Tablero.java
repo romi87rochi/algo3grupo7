@@ -4,7 +4,9 @@ public class Tablero {
 	private Casillero casilleros[][];
 	private MatrizPosiciones posiciones;
     private Casillero origenPacman;
-    private Casillero OrigenBlynki;
+    
+   
+	private Casillero OrigenBlynki;
     private Casillero OrigenPinky;
 
 	private Casillero OrigenInky;
@@ -16,6 +18,12 @@ public class Tablero {
 public Tablero(Mapa mapa){
 	
    casilleros=mapa.get();
+   origenPacman=casilleros[1][1];
+   OrigenBlynki=casilleros[4][3];
+   OrigenPinky=casilleros[1][1];
+   OrigenInky=casilleros[0][1];
+   OrigenClyde=casilleros[5][1];
+   
 	
 }
 

@@ -2,7 +2,9 @@ public class Mapa {
 	private Casillero casilleros[][];
 	private MatrizPosiciones matPos;
 	int cantItems;
-
+   
+    
+	
 	public Mapa() {
 		casilleros = new Casillero[10][10];
 		matPos = new MatrizPosiciones(10, 10);
@@ -12,6 +14,8 @@ public class Mapa {
 	public Casillero[][] get() {
 		return casilleros;
 	}
+	
+	
 
 	public MatrizPosiciones getMatPos() {
 		return matPos;
@@ -27,12 +31,13 @@ public class Mapa {
 		}
 		
 		this.cargarMapaPrueba();
+		
 
 
 	}
 	
 	
-	
+
 	private void cargarMapaPrueba() {
 		Casillero cas1 = casilleros[0][0];
 		Casillero cas2 = casilleros[0][1];
@@ -94,6 +99,7 @@ public class Mapa {
 	    cas28.setHacerPared();
 		cas29.setHacerPared();
 		cas30.setHacerPared();
+		
 		
 	}
 
