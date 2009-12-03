@@ -93,6 +93,7 @@ public class Tablero {
 		// Se crea el camino por donde circularán los personajes.
 
 		construirCaminoDesdeHasta(9, 180, 9, 9);
+		construirCaminoDesdeHasta(9, 10, 9, 10);
 		construirCaminoDesdeHasta(180, 180, 9, 171);
 		construirCaminoDesdeHasta(9, 180, 90, 90);
 		construirCaminoDesdeHasta(9, 180, 180, 180);
