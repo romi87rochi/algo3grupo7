@@ -5,47 +5,38 @@ import junit.framework.TestCase;
 
 public class CasilleroTest extends TestCase {
 	
-	Mapa mapas;
+	Tablero tablero;
 	Juego juego;
-	MatrizPosiciones matriz;
-	Posicion posicion;
-	Posicion otraPosicion;
-	Posicion posicionPacman;
-	Casillero celda;
-	Casillero otracelda;
-	Casillero celdaPacman;
 	
 
 	
 	public void setUp(){
-		mapas=null;
-		juego= new Juego(mapas);
-		matriz=new MatrizPosiciones(4,4);
-		posicion=new Posicion(1,1,matriz);
-		otraPosicion=new Posicion(2,1,matriz);
-		posicionPacman=new Posicion(3,1,matriz);
-		celda =juego.getTablero().getCasillero(posicion);
-		otracelda =juego.getTablero().getCasillero(otraPosicion);
-		celdaPacman=juego.getTablero().getCasillero(posicionPacman);
+		tablero=new Tablero();
+		juego= new Juego(tablero);
+		
 		
 	}
 	
 	
-	public void testCeldaConDosFantasmas(){
-		setUp();	
+	public void testCeldaConDosFantasmas(){	
 		
-		Pacman pacman=new Pacman(juego, celdaPacman);
+		
+		Pacman pacman=new Pacman(juego);//en el 9-11
 		 
-		Blinky fan1 = new Blinky(juego,celda, pacman);
-		Blinky fan2 = new Blinky(juego, otracelda,pacman);
-	
+		Blinky fan1 = new Blinky(juego, pacman);
+		Blinky fan2 = new Blinky(juego, pacman);// en el 9-10
+		Casillero celda=fan1.getTablero().getCasilleroOrigenFantasma();
 		
-		fan1.mover(otracelda); // tendria que moverse a la otraCelda
+		assertTrue((fan1.getCasilleroActual()).equals(fan2.getCasilleroActual())) ;
+		// ambos fantasmas estan en el mismo casillero
+		fan1.mover(fan1.getCasilleroActual().getIzquierda()); // tendria que moverse a la otraCelda
+		assertFalse((fan1.getCasilleroActual()).equals(fan2.getCasilleroActual())) ;
+		// ambos fantasmas ya NO estan en el mismo casillero
+		fan2.mover(fan2.getCasilleroActual().getIzquierda());
 		assertTrue(celda.getFantasmas().isEmpty());
 		assertTrue(celda.getPacman()==null); // la celda queda vacia, sin pacman y sin fantasmas
 							
-		assertTrue((fan1.getCasilleroActual().getPosicion()).equals(fan2.getCasilleroActual().getPosicion())) ;
-	// ambos fantasmas estan en el mismo casillero
+		
 		
 		
 	
@@ -54,20 +45,17 @@ public class CasilleroTest extends TestCase {
 	
 	}
 	
-	public void testCeldaConPacman(){
-		setUp();
-		Pacman pacman = new Pacman(juego, otracelda);
+	public void testCeldaConPacmanYFantasma(){
 		
-		Blinky fan1 = new Blinky(juego,celda,pacman);
+		Pacman pacman = new Pacman(juego);
 		
+		Blinky fan1 = new Blinky(juego,pacman);
 		
-			fan1.mover(otracelda); // tendria que moverse a la otraCelda
-		
+		fan1.mover(fan1.getCasilleroActual().getDerecha());
 	
 		
-		assertTrue(otracelda.getPacman()==null);
-		assertTrue(pacman.getCasilleroActual()==pacman.getCasilleroOriginal());
-		assertTrue(fan1.getCasilleroActual()==fan1.getCasilleroOriginal()); // todos los personajes vuelven a su posicion original
+		assertTrue(pacman.getCasilleroActual()==tablero.getCasilleroOrigenPacman());
+		assertTrue(fan1.getCasilleroActual()==tablero.getCasilleroOrigenFantasma()); // todos los personajes vuelven a su posicion original
 		
 		assertTrue(pacman.getVidas()==2); // baja vidas de pacman
 		
@@ -78,13 +66,15 @@ public class CasilleroTest extends TestCase {
 		
 		
 		
-		Pacman pacman = new Pacman(juego, otracelda);
-		Blinky fan1 = new Blinky(juego,celda, pacman);
+		Pacman pacman = new Pacman(juego);
+		Blinky fan1 = new Blinky(juego, pacman);
 	
 		
 		pacman.setPuedeSerComido(false);
+		fan1.vivir();
 		
-		fan1.vivir();   //VER.... TENDRIA QUE HUIR!!!!
+		pacman.mover(pacman.getCasilleroActual().getArriba()); //pacman esta en el mismo casillero que fantasma
+		Casillero otracelda=pacman.getCasilleroActual();
 		
 		assertTrue(pacman.getVidas()==3); //pacman no pierde vidas
 		assertTrue(pacman.getCasilleroActual()==otracelda); // pacman sigue en su posicion
@@ -95,37 +85,32 @@ public class CasilleroTest extends TestCase {
 
 	public void testAgregarFantasma() {
 		
-		Pacman pacman=new Pacman(juego,otracelda);
-		Blinky fan1 = new Blinky(juego,celda, pacman);
+		Pacman pacman=new Pacman(juego);
+		Blinky fan1 = new Blinky(juego, pacman);
 		
-		assertTrue(celda.getFantasmas().get(0)== fan1);
+		assertTrue(fan1.getCasilleroActual().getFantasmas().get(0)== fan1);
+		assertFalse(fan1.getCasilleroActual().getPacman()== fan1);
 	}
 
 	public void testAgregarPacman() {
-		Mapa mapas=null;
-		Juego juego= new Juego(mapas);
-		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-		Posicion posicion=new Posicion(1,1,matriz);
 		
-		Casillero celda =juego.getTablero().getCasillero(posicion);
 	
-		Pacman pacman = new Pacman(juego,celda);
+		Pacman pacman = new Pacman(juego);
+		Casillero celda = pacman.getCasilleroActual();
 		
 		assertTrue(celda.getPacman()== pacman);
 	}
 
 	public void testSetItem() {
-		
+		Pacman pacman = new Pacman(juego);
 		int puntaje=100;
 		Punto pastilla = new Punto(puntaje);		
-
-		celda.setItem(pastilla);
-		assertTrue(celda.getItem()==pastilla);
+		pacman.getCasilleroActual().getDerecha().setItem(pastilla);
+		assertTrue(pacman.getCasilleroActual().getDerecha().getItem()==pastilla);
 	}
 
 	public void testRemoverItem() {
-		Mapa mapas=null;
-		Juego juego= new Juego(mapas);
+		
 		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
 		Posicion posicion=new Posicion(1,1,matriz);
 		
@@ -142,10 +127,11 @@ public class CasilleroTest extends TestCase {
 
 	public void testRemoverFantasma() {
 	
-		Pacman pacman=new Pacman(juego,celdaPacman);
+		Pacman pacman=new Pacman(juego);
 		
 	
-		Blinky fan1 = new Blinky(juego,celda, pacman);
+		Blinky fan1 = new Blinky(juego,pacman);
+		Casillero celda=fan1.getCasilleroActual();
 		celda.removerFantasma(fan1);
 		
 		assertTrue(celda.getFantasmas().isEmpty());
@@ -155,9 +141,9 @@ public class CasilleroTest extends TestCase {
 
 	public void testRemoverPacman() {
 	
-		Pacman pacman = new Pacman(juego, celda);
+		Pacman pacman = new Pacman(juego);
 		
-		celda.agregarPacman(pacman);
+		Casillero celda=pacman.getCasilleroActual();
 		celda.removerPacman(pacman);
 		assertTrue(celda.getPacman()==null);
 		

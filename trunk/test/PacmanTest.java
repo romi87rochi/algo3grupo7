@@ -6,38 +6,25 @@ public class PacmanTest extends TestCase {
 	
 	Mapa mapas;
 	Juego juego;
-	MatrizPosiciones matriz;
-	Posicion posicion;
-	Posicion otraPosicion;
-	Posicion posicionPacman;
-	Casillero celda;
-	Casillero otraCelda;
-	Casillero celdaPacman;
+	Tablero tablero;
 	Pacman pacman;
 	
 
 	
 	public void setUp(){
-		mapas=null;
-		juego= new Juego(mapas);
-		matriz=new MatrizPosiciones(4,4);
-		posicion=new Posicion(1,1,matriz);
-		otraPosicion=new Posicion(2,1,matriz);
-		posicionPacman=new Posicion(3,1,matriz);
-		celda =juego.getTablero().getCasillero(posicion);
-		otraCelda =juego.getTablero().getCasillero(otraPosicion);
-		celdaPacman=juego.getTablero().getCasillero(posicionPacman);
-		pacman=new Pacman(juego,celdaPacman);
+		tablero=new Tablero();
+		juego= new Juego(tablero);
+		
+		pacman=new Pacman(juego);
 		
 	}
 	
 	
 
 	public void testComer() {
-		
-		setUp();
 		int puntaje=100;
 		ItemComible punto=new Punto( puntaje);
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
 		otraCelda.setItem(punto);
 		pacman.mover(otraCelda);
 		
@@ -45,17 +32,17 @@ public class PacmanTest extends TestCase {
 	}
 
 	public void testMover() {
-		setUp();
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
 		pacman.mover(otraCelda);
 		
 		assertEquals(pacman.getCasilleroActual(), otraCelda);
 	}
 
 	public void testReubicar() {
-		setUp();
-		pacman.mover(otraCelda);
+		
+		pacman.mover(pacman.getCasilleroActual().getDerecha());
 		pacman.reubicar();
-		assertEquals(pacman.getCasilleroActual(), celdaPacman);
+		assertEquals(pacman.getCasilleroActual(), tablero.getCasilleroOrigenPacman());
 	}
 
 	public void testPacman() {

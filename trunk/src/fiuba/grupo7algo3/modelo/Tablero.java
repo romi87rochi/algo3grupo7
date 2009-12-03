@@ -29,26 +29,28 @@ public class Tablero {
 	 * todos los casilleros no contienen personajes ni items.
 	 */
 	public Tablero() {
-
-		// casilleros = mapa.get();
-		origenPacman = casilleros[1][1];
-		origenFantasmas = casilleros[4][3];
-		cantidadPuntos = 0;
-
 		filas = FILAS;
 		columnas = COLUMNAS;
-
+		casilleros= new Casillero[FILAS][COLUMNAS];
 		posiciones = new MatrizPosiciones(FILAS, COLUMNAS);
-
 		incializar();
+		// casilleros = mapa.get();
+		origenPacman = casilleros[9][11];
+		origenFantasmas = casilleros[9][10];
+		cantidadPuntos = 0;
+
+
+
+		
 	}
+	
 
 	private void incializar() {
 		Posicion posAux = null;
 		for (int x = 0; x < filas; x++) {
 			for (int y = 0; y < columnas; y++) {
 				posAux = posiciones.obtenerPosicion(x, y);
-				casilleros[x][y] = new Casillero(posAux);
+				casilleros[x][y] = new Casillero(posAux,this);
 			}
 		}
 	}
@@ -122,19 +124,8 @@ public class Tablero {
 		
 		casilleros[100][180].setItem(itemPuntoPoder2);
 		incrementarPunto();
-		
-		Pacman   pac    = new Pacman(juego);
-		Fantasma fan1   = new Blinky(juego,pac);
-		Fantasma fan2   = new Blinky(juego,pac); 
-		Fantasma fan3   = new Blinky(juego,pac); 
-		Fantasma fan4   = new Blinky(juego,pac); 
-		
-		origenFantasmas.agregarFantasma(fan1);
-		origenFantasmas.agregarFantasma(fan2);
-		origenFantasmas.agregarFantasma(fan3);
-		origenFantasmas.agregarFantasma(fan4);
-		
-		origenPacman.agregarPacman(pac);
+
+
 	}
 
 	

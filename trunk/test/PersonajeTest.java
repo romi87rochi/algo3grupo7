@@ -5,22 +5,16 @@ import junit.framework.TestCase;
 public class PersonajeTest extends TestCase {
 	Juego juego;
 	Pacman pacman;
-	MatrizPosiciones matriz;
+	Tablero tablero;
 	Fantasma fantasma;
-	Posicion posicion;
-	Posicion otraPosicion;
-	Casillero celda;
-	Casillero otraCelda;
+	
 	
 	public void setUp(){
-		juego = new Juego( null);
-		matriz=new MatrizPosiciones(4,4);
-		posicion=new Posicion(1,1,matriz);
-		otraPosicion=new Posicion(3,3,matriz);
-		celda=juego.getTablero().getCasillero(posicion);
-		otraCelda=juego.getTablero().getCasillero(otraPosicion);
-		pacman=new Pacman(juego,celda);
-		fantasma=new Blinky(juego, otraCelda,pacman);
+		tablero=new Tablero();
+		juego = new Juego( tablero);
+
+		pacman=new Pacman(juego);
+		fantasma=new Blinky(juego, pacman);
 		
 	}
 

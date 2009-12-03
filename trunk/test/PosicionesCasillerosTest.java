@@ -9,11 +9,13 @@ public class PosicionesCasillerosTest extends TestCase {
 	Juego juego;
 	Posicion posicion;
 	Casillero celda;
+	Pacman pacman;
+	Tablero tablero;
 	MatrizPosiciones matriz;
 	
 	public void setUp(){
-		mapas=null;
-		juego= new Juego(mapas);
+		tablero=new Tablero();
+		juego= new Juego(tablero);
 		matriz=new MatrizPosiciones(4,4);
 		posicion=new Posicion(2,2,matriz);
 		celda =juego.getTablero().getCasillero(posicion);

@@ -3,7 +3,7 @@
 public class Juego {
 
     private Tablero tablero;
-private Mapa mapa;
+    private Mapa mapa;
     private boolean finJuego;
     private int puntaje;
     private int cantPastillasDelNivel;
@@ -14,20 +14,21 @@ private Mapa mapa;
      * El juego recibe una lista de fantasmas y otra de packman para que este
      * conozca a sus personajes. Mapas es un array de mapas predefinidos
      */
-    public Juego() {
+    public Juego(Tablero tablero) {
 
-            tablero = new Tablero();
+            this.tablero = tablero;
             //this.mapa = mapas;
             puntaje = 0;
             cantPastillasDelNivel=100;
             finJuego = false;
             finNivel=true;
             nivel = 0;
+            this.iniciarJuego();
 
     }
 
     public void iniciarJuego() {
-
+    		Mapa mapa=new Mapa();
             this.nuevoNivel(mapa);
             finNivel=false;
     }
