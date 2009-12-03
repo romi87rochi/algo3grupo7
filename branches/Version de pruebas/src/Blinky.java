@@ -1,8 +1,7 @@
 
 public class Blinky extends Fantasma{
-	
-	private int velocidad;
-	
+    
+    private int velocidad;
 
 	public Blinky(Juego nuevoJuego, Personaje pacman ){
 		super( nuevoJuego,pacman);
@@ -10,8 +9,8 @@ public class Blinky extends Fantasma{
 		this.velocidad=1;
 		int tipoEstrategia=1;
 		this.estrategia= new Estrategia(this, pacman,tipoEstrategia);
-		this.setCasilleroActual(this.getTablero().getOrigenBlynki());
-		this.reubicar();
+		this.setCasilleroActual(this.getTablero().getCasilleroOrigenFantasma());
+		
 	}
 	
 	protected void reubicar() {
@@ -21,23 +20,23 @@ public class Blinky extends Fantasma{
 		 * mueve el fantasma al casillero original y lo borra del casillero en
 		 * que se encontraba
 		 */
-		this.setCasilleroActual(this.getTablero().getOrigenBlynki());
+		this.setCasilleroActual(this.getTablero().getCasilleroOrigenFantasma());
 		this.getCasilleroActual().agregarFantasma(this);
-		if(this.getCasilleroActual()!=this.getTablero().getOrigenBlynki())
+		if(this.getCasilleroActual()!=this.getTablero().getCasilleroOrigenFantasma())
 		casilleroAux.removerFantasma(this);
 	
 
 
 	}
-	public void vivir(){
-		int pasos=0;
-		
-		while(pasos<this.velocidad){  //ver cuando cambia de nivel
-			
-			this.mover(estrategia.proximoCasillero());   //VER!!!!
-			pasos++;
-		}
-		}
-		
+    public void vivir(){
+            int pasos=0;
+            
+            while(pasos<this.velocidad){  //ver cuando cambia de nivel
+                    
+                    this.mover(estrategia.proximoCasillero());   //VER!!!!
+                    pasos++;
+            }
+            }
+            
 
 }
