@@ -13,12 +13,15 @@ public class Pacman extends Personaje {
         private int tiempoDeEfecto;
 
         public Pacman(Juego nuevoJuego) {
-                super(nuevoJuego, true);
-                this.reubicar();
-                this.vidas = CANTVIDAS;
-                this.vivo = true;
-                this.tiempoDeEfecto = 0;
-        }
+    		super(nuevoJuego, true);
+    		
+    		this.vidas = CANTVIDAS;
+    		this.vivo = true;
+    		this.tiempoDeEfecto = 0;
+    		this.setCasilleroActual(this.getTablero().getCasilleroOrigenPacman());
+
+    		
+    	}
 
         public void mover(Casillero nuevoCasillero) {
                 /*
@@ -111,17 +114,19 @@ public class Pacman extends Personaje {
                 this.morir();
         }
 
-        protected void reubicar() {
-                /*
-                 * mueve a pacman al casillero original y lo borra del casillero en que
-                 * se encontraba
-                 */
+    	protected void reubicar() {
+    		Casillero casilleroAux=this.getCasilleroActual();
+    		/*
+    		 * mueve a pacman al casillero original y lo borra del casillero en que
+    		 * se encontraba
+    		 */
 
-                this.setCasilleroActual(this.getTablero().getCasilleroOrigenPacman());
-                this.getCasilleroActual().agregarPacman(this);
-                this.getCasilleroActual().removerPacman(this);
+    		this.setCasilleroActual(this.getTablero().getCasilleroOrigenPacman());
+    		this.getCasilleroActual().agregarPacman(this);
+    		if(this.getCasilleroActual()!=this.getTablero().getCasilleroOrigenPacman())
+    		casilleroAux.removerPacman(this);
 
-        }
+    	}
 
         /*
          * Decrementa una vida a packman cuando este es comido por un fantasma si el

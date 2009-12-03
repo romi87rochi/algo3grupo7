@@ -5,17 +5,23 @@ import junit.framework.TestCase;
 public class PuntoTest extends TestCase {
 	
 	Mapa mapas;
-	Juego unJuego;
+	Juego juego;
 	int puntaje;
 	Punto punto;
+	Pacman pacman;
+	Fantasma fantasma;
+	
 	
 	public void setUp(){
-		mapas=null;
-		unJuego=new Juego(mapas);
+		Tablero tablero=new Tablero();
+		juego= new Juego(tablero);
 		puntaje=100;
 		punto=new Punto(puntaje);
+		pacman=new Pacman(juego);
+		
+		fantasma=new Blinky(juego,pacman);
+		
 	}
-	
 	
 	public void testPuntoCreado(){
 		
@@ -25,31 +31,25 @@ public class PuntoTest extends TestCase {
 
 
 	public void testComido(){
-		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Pacman pacman=new Pacman(unJuego, celda);
-		otraCelda.setItem(punto);  //no se si esta bien poner asi, habria que poner instertarPunto de Mapa(todavia no implementado)
-		pacman.mover(otraCelda);
+		Casillero celda=pacman.getCasilleroActual().getDerecha();
+		celda.setItem(punto);
 		
-		assertTrue(unJuego.getPuntaje()>0);		
+		pacman.mover(celda);
 		
+		
+		assertTrue(juego.getPuntaje()>0);
+		assertTrue(pacman.getCasilleroActual().getItem()==null);
+			
 }
 
 
 
 	public void testGetPuntaje(){
-		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Pacman pacman=new Pacman(unJuego, celda);
-		otraCelda.setItem(punto);  //no se si esta bien poner asi, habria que poner instertarPunto de Mapa(todavia no implementado)
-		pacman.mover(otraCelda);
 		
+		Casillero celda=pacman.getCasilleroActual().getDerecha();
+		celda.setItem(punto);
+		
+		pacman.mover(celda);
 		assertEquals(100, punto.getPuntaje());
 }
 
@@ -57,26 +57,26 @@ public class PuntoTest extends TestCase {
 
 
 	public void testNoComidoPorFantasma(){
-		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Posicion posicionPacman=new Posicion(3, 3, null);
-		Casillero celdaPacman =unJuego.getTablero().getCasillero(posicionPacman);
-		Pacman pacman=new Pacman(unJuego, celdaPacman);
+		Mapa mapas=new Mapa();
+		ItemComible punto=new Punto(puntaje);
 		
-		Blinky fan1 = new Blinky(unJuego,celda,pacman);
-		otraCelda.setItem(punto);
+		  //setItem de casillero deberia ser privado??
+		pacman.mover(pacman.getCasilleroActual().getDerecha());
 		
-		fan1.mover(otraCelda);
 	
-		assertFalse(otraCelda.getItem()==null);
-		assertEquals(0, unJuego.getPuntaje());
-
-				
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
+		mapas.insertarPastillaDePoder(otraCelda, punto);
 		
-
-}
+		mapas.insertarPastillaDePoder(otraCelda, punto);
+		fantasma.mover(otraCelda);
+	
+		
+		assertTrue(otraCelda.getItem()!=null);  // no desaparece item
+		assertFalse(otraCelda.getFantasmas().get(0).puedeSerComido()); // no cambio estado de fantasma
+		
+	
+		
+	}
+	
 
 }

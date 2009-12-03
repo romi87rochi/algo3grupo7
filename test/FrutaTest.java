@@ -7,53 +7,47 @@ public class FrutaTest extends TestCase {
 	
 	Mapa mapas;
 	Juego juego;
-	Casillero celda;
-	Casillero otracelda;
 	int puntaje;
 	Fruta fruta;
-	Posicion posicion;
-	Posicion otraPosicion;
-	MatrizPosiciones matriz;
+	Pacman pacman;
+	
+	Fantasma fantasma;
+	
 	
 	public void setUp(){
-		mapas=null;
-		juego= new Juego(mapas);
-		posicion=new Posicion(1, 1, matriz);
-		otraPosicion=new Posicion(2, 1, matriz);
-		celda =juego.getTablero().getCasillero(posicion);
-		otracelda =juego.getTablero().getCasillero(otraPosicion);
+		Tablero tablero=new Tablero();
+		juego= new Juego(tablero);
 		puntaje=100;
 		fruta=new Fruta(puntaje);
+		pacman=new Pacman(juego);
+		
+		fantasma=new Blinky(juego,pacman);
 		
 	}
 	
 		public void testFrutaCreada(){
-			setUp();
+			
 			assertNotNull(fruta);
 
 			}
 
 
 		public void testComido(){
-			setUp();
-			otracelda.setItem(fruta);
+			Casillero celda=pacman.getCasilleroActual().getDerecha();
+			celda.setItem(fruta);
 			
-			Pacman pacman=new Pacman(juego, celda);
-			
-			pacman.mover(celda.getDerecha());
+			pacman.mover(celda);
 			
 			
 			assertTrue(juego.getPuntaje()>0);
-			assertTrue(otracelda.getItem()==null);
+			assertTrue(pacman.getCasilleroActual().getItem()==null);
 	}
 
 		public void testGetPuntaje(){
-			setUp();
-			otracelda.setItem(fruta);
+			Casillero celda=pacman.getCasilleroActual().getDerecha();
+			celda.setItem(fruta);
 			
-			Pacman pacman=new Pacman(juego, celda);
-			pacman.mover(celda.getDerecha());
-			
+			pacman.mover(celda);
 			assertEquals(100, fruta.getPuntaje());
 	}
 
@@ -61,21 +55,17 @@ public class FrutaTest extends TestCase {
 
 
 		public void testNoComidoPorFantasma(){
-
-			setUp();
-			Posicion posicionPacman=new Posicion(3, 3, matriz);
-			Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
 			
-			Pacman pacman=new Pacman(juego,celdaPacman);
+			Pacman pacman=new Pacman(juego);
 			
 			
-			Blinky fan1 = new Blinky(juego,celda,pacman);
+			Blinky fan1 = new Blinky(juego,pacman);
+			Casillero celda=fan1.getCasilleroActual().getDerecha();
 			celda.setItem(fruta);
-			otracelda.setItem(fruta);
 			
-			fan1.mover(celda.getDerecha());
+			fan1.mover(celda);
 		
-			assertFalse(otracelda.getItem()==null);
+			assertFalse(celda.getItem()==null);
 			assertEquals(0, juego.getPuntaje());
 
 					

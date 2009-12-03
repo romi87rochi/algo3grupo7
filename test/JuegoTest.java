@@ -8,15 +8,17 @@ public class JuegoTest extends TestCase {
 	
 	Mapa mapas;
 	Juego juego; 
+	Tablero tablero;
 	
 	public void setUp(){
 		mapas=null;
-		juego = new Juego( mapas); 
+		tablero= new Tablero();
+		
+		juego = new Juego(tablero); 
 	}
 
 
 	public void testConstructor(){
-		setUp();
 		assertNotNull(juego);
 }
 
@@ -36,30 +38,24 @@ public class JuegoTest extends TestCase {
 	public void testComeItems(){
 		setUp();
 		int puntaje=100;
-		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-		Posicion posicionPacman=new Posicion(3, 3, matriz);
-		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);
-		Pacman pacman=new Pacman(juego,celdaPacman);
+		
+		Pacman pacman=new Pacman(juego);
 
-		Posicion posicion=new Posicion(3, 3, matriz);
-		Casillero celda =juego.getTablero().getCasillero(posicion);
 		Punto punto=new Punto(puntaje);
+		Casillero celda=pacman.getCasilleroActual().getDerecha();
 		celda.setItem(punto);
 		//int itemsIniciales=juego.getCantPastillasDelNivel();
 		pacman.mover(celda);
 		
 		
-		//assertTrue(itemsIniciales>juego.getCantPastillasDelNivel());  //VER COMO HACERLO!!!!
+		assertTrue(pacman.getItemsComidos()==1);
 }
 
 
 
 	public void testIsFinJuego() {
-		setUp();
-		MatrizPosiciones matriz=new MatrizPosiciones(4,4);
-		Posicion posicionPacman=new Posicion(3, 3, matriz);
-		Casillero celdaPacman =juego.getTablero().getCasillero(posicionPacman);		
-		Pacman pacman=new Pacman(juego,celdaPacman);
+			
+		Pacman pacman=new Pacman(juego);
 		pacman.morir();
 		pacman.morir();
 		pacman.morir();

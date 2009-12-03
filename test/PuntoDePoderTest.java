@@ -6,21 +6,25 @@ import junit.framework.TestCase;
 public class PuntoDePoderTest extends TestCase {
 	
 	Mapa mapas;
-	Juego unJuego;
+	Juego juego;
 	int puntaje;
-	int tiempoDePoder;
-	ItemComible punto;
-	MatrizPosiciones matriz;
+	PuntoDePoder punto;
+	Pacman pacman;
+	int tiempo;
+	Fantasma fantasma;
+	
 	
 	public void setUp(){
-		mapas=new Mapa();
-		unJuego=new Juego(mapas);
+		Tablero tablero=new Tablero();
+		juego= new Juego(tablero);
 		puntaje=100;
-		tiempoDePoder=4;
-		punto=new PuntoDePoder(puntaje,tiempoDePoder);
-		matriz=new MatrizPosiciones(4,4);
+		tiempo=30;
+		punto=new PuntoDePoder(puntaje,tiempo);
+		pacman=new Pacman(juego);
+		
+		fantasma=new Blinky(juego,pacman);
+		
 	}
-
 	
 	public void testPuntoCreado(){
 		
@@ -30,44 +34,32 @@ public class PuntoDePoderTest extends TestCase {
 
 
 	public void testComido(){
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Pacman pacman=new Pacman(unJuego, celda);
-		int tiempoDePoder=4;
-		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
-		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
-		pacman.mover(otraCelda);
+		Casillero celda=pacman.getCasilleroActual().getDerecha();
+		celda.setItem(punto);
 		
-		assertTrue(unJuego.getPuntaje()>0);		
+		pacman.mover(celda);
+		
+		
+		assertTrue(juego.getPuntaje()>0);
+		assertTrue(pacman.getCasilleroActual().getItem()==null);
 			
 }
 
 	public void testGetPuntaje(){
 		
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Pacman pacman=new Pacman(unJuego, celda);
-		int tiempoDePoder=4;
-		ItemComible punto=new PuntoDePoder( puntaje,tiempoDePoder);
-		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
-		pacman.mover(otraCelda);
+		Casillero celda=pacman.getCasilleroActual().getDerecha();
+		celda.setItem(punto);
 		
+		pacman.mover(celda);
 		assertEquals(100, punto.getPuntaje());
 }
 
 	public void testCambiaEstadoPacman(){
 
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Pacman pacman=new Pacman(unJuego, celda);
+		Mapa mapas=new Mapa();
 		int tiempoDePoder=4;
 		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
 		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
 		pacman.mover(otraCelda);
 		assertFalse(pacman.puedeSerComido()); //si comio punto de poder no puede ser comido
@@ -78,60 +70,44 @@ public class PuntoDePoderTest extends TestCase {
 // probar que los fantasmas tambien cambian de estado
 
 	public void testCambiaEstadoFantasmas(){
-		Posicion posicionFantasma=new Posicion(2,2,matriz);
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Casillero celdaFantasmas =unJuego.getTablero().getCasillero(posicionFantasma);
-		Pacman pacman=new Pacman(unJuego, celda);
-		Blinky fan1=new Blinky(unJuego, celdaFantasmas, pacman);
-		Blinky fan2=new Blinky(unJuego, celdaFantasmas, pacman);
-		Blinky fan3=new Blinky(unJuego, celdaFantasmas, pacman);
 		
-		celda.agregarPacman(pacman);
-		celdaFantasmas.agregarFantasma(fan1);
-		celdaFantasmas.agregarFantasma(fan2);
-		celdaFantasmas.agregarFantasma(fan3);
+		Mapa mapas=new Mapa();
+		int tiempoDePoder=4;
+		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
+		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
+		pacman.mover(otraCelda);
 		
 		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
 		pacman.mover(otraCelda);
 		int i=0;
 		
 		while(i<3){
-		Blinky fantasmaEnCuestion=(Blinky)celdaFantasmas.getFantasmas().get(0);
+		Fantasma fantasmaEnCuestion=fantasma.getCasilleroActual().getFantasmas().get(0);
 		fantasmaEnCuestion.vivir();
 		assertTrue(fantasmaEnCuestion.puedeSerComido());
 		i++;}
-		/*ArrayList<Fantasma> fantasmas=new ArrayList<Fantasma>();
-		fantasmas=celdaFantasmas.getFantasmas();
-		Iterator<Fantasma> it= fantasmas.iterator();
 		
-	  while(it.hasNext()){
-		Blinky fantasma=(Blinky)it.next();
-		fantasma.vivir();
-		assertTrue(fantasma.puedeSerComido()); //si comio punto de poder pueden ser comidos los fantasmas
- } */
 }
 
 
 
 // probar que los fantasmas no comen los puntos de poder
 	public void testFantasmasNoComenPuntoDePoder(){
-
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Posicion posicionPacman=new Posicion(3,3,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Casillero celdaPacman =unJuego.getTablero().getCasillero(posicionPacman);
-		Pacman pacman=new Pacman(unJuego, celdaPacman);
-		Blinky fan1=new Blinky(unJuego, celda, pacman);
+		Mapa mapas=new Mapa();
+		int tiempoDePoder=4;
+		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
+		
+		  //setItem de casillero deberia ser privado??
+		pacman.mover(pacman.getCasilleroActual().getDerecha());
 		
 	
-
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
 		mapas.insertarPastillaDePoder(otraCelda, punto);
-		fan1.mover(otraCelda);
+		
+		mapas.insertarPastillaDePoder(otraCelda, punto);
+		fantasma.mover(otraCelda);
+	
 		
 		assertTrue(otraCelda.getItem()!=null);  // no desaparece item
 		assertFalse(otraCelda.getFantasmas().get(0).puedeSerComido()); // no cambio estado de fantasma
@@ -144,35 +120,33 @@ public class PuntoDePoderTest extends TestCase {
  //probar que despues de un tiempo todos vuelven a su estado natural 
  
 	public void testTiempoDePoderSeAcaba(){
-		Posicion posicion=new Posicion(1,1,matriz);
-		Posicion otraPosicion=new Posicion(2,1,matriz);
-		Posicion posicionFantasma=new Posicion(3,3,matriz);
-		Casillero celda =unJuego.getTablero().getCasillero(posicion);
-		Casillero otraCelda =unJuego.getTablero().getCasillero(otraPosicion);
-		Casillero celdaFantasma =unJuego.getTablero().getCasillero(posicionFantasma);
-		Pacman pacman=new Pacman(unJuego, celda);// fantasmas se va a mover de una celda a la otra todo el tiempo
-		Blinky fan1=new Blinky(unJuego, celdaFantasma, pacman);  // el fantasma se va a quedar quieto en esta prueba
 		
-	
-		
+		Mapa mapas=new Mapa();
 		int tiempoDePoder=2;
-		ItemComible punto=new PuntoDePoder(puntaje, tiempoDePoder);
+		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
+		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
+		mapas.insertarPastillaDePoder(otraCelda, punto); 
+		pacman.mover(otraCelda);
+		
+		mapas.insertarPastillaDePoder(otraCelda, punto); 
+		pacman.mover(otraCelda);
+	
 		mapas.insertarPastillaDePoder(otraCelda, punto);
-		pacman.mover(otraCelda); //cambia estado, tiempo=2
-		fan1.vivir(); //cambia estado
+		pacman.mover(otraCelda); 
+		fantasma.vivir(); //cambia estado
 		
-		assertFalse(pacman.puedeSerComido());
-		assertTrue(fan1.puedeSerComido());
+		assertFalse(pacman.puedeSerComido());//cambia estado, tiempo=2
+		assertTrue(fantasma.puedeSerComido());
 		
-		pacman.mover(celda); //tiempo=1
+		pacman.mover(pacman.getCasilleroActual().getDerecha()); //tiempo=1
 		assertFalse(pacman.puedeSerComido());
-		assertTrue(fan1.puedeSerComido());
+		assertTrue(fantasma.puedeSerComido());
 	
 		
-		pacman.mover(celda); //tiempo=0
-		fan1.vivir();
+		pacman.mover(otraCelda); //tiempo=0
+		fantasma.vivir();
 		assertTrue(pacman.puedeSerComido());
-		assertFalse(fan1.puedeSerComido());
+		assertFalse(fantasma.puedeSerComido());
 		
 		
 	}
