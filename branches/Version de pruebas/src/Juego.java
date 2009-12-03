@@ -18,7 +18,7 @@ public class Juego {
 	 */
 	public Juego(Mapa mapas) {
 
-		tablero = null;
+		tablero = new Tablero(mapas);
 		this.mapa = mapas;
 		puntaje = 0;
 		cantPastillasDelNivel=100;
@@ -37,7 +37,7 @@ public class Juego {
 
 	public void nuevoNivel(Mapa mapa){
 		tablero.cargarTablero(mapa);
-		//cantPastillasDelNivel=mapa.getCantItems();
+		cantPastillasDelNivel=mapa.getCantItems();
 	}
 
 

@@ -2,6 +2,11 @@
 public abstract class Fantasma extends Personaje {
 
 	protected Estrategia estrategia;
+	public Estrategia getEstrategia() {
+		return estrategia;
+	}
+
+
 	Pacman pacman;
 
 	public Fantasma(Juego nuevoJuego, Personaje pacman) {

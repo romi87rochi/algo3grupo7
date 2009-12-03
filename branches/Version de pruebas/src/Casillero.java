@@ -125,4 +125,8 @@ public class Casillero {
 	public boolean hayItem(){
 		return item!=null;
 	}
+
+	public void setHacerPared() {
+		this.puedeSerVisitado=false;
+	}
 }
