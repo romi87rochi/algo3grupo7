@@ -17,11 +17,27 @@ public class estrategiaTest extends TestCase {
 	*/
 	public void testFantasma(){
 		
-		Mapa mapa=new Mapa();
-		Juego juego=new Juego(mapa);
+		Tablero tablero=new Tablero();
+		Juego juego=new Juego(tablero);
 		Pacman pacman=new Pacman(juego);
 		Fantasma fan1=new Blinky(juego,pacman);
 	
+		fan1.mover(fan1.getEstrategia().proximoCasillero());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosX());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosY());
+		System.out.println();
+		fan1.mover(fan1.getEstrategia().proximoCasillero());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosX());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosY());
+		System.out.println();
+		fan1.mover(fan1.getEstrategia().proximoCasillero());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosX());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosY());
+		System.out.println();
+		fan1.mover(fan1.getEstrategia().proximoCasillero());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosX());
+		System.out.print(fan1.getCasilleroActual().getPosicion().getPosY());
+		System.out.println();
 		fan1.mover(fan1.getEstrategia().proximoCasillero());
 		System.out.print(fan1.getCasilleroActual().getPosicion().getPosX());
 		System.out.print(fan1.getCasilleroActual().getPosicion().getPosY());

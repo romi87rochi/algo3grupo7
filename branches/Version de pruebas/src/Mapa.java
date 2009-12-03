@@ -2,6 +2,7 @@ public class Mapa {
 	private Casillero casilleros[][];
 	private MatrizPosiciones matPos;
 	int cantItems;
+	
    
     
 	
@@ -9,6 +10,7 @@ public class Mapa {
 		casilleros = new Casillero[10][10];
 		matPos = new MatrizPosiciones(10, 10);
 		this.incializar(10, 10);
+	
 	}
 
 	public Casillero[][] get() {

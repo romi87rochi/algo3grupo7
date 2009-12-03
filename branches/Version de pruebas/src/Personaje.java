@@ -15,8 +15,7 @@ public abstract class Personaje {
 		this.casilleroActual =null;
 
 		this.puedeSerComido = puedeSerComido;
-		this.reubicar();
-
+	
 		/*
 		 * this.juego=nuevoJuego; this.puedeSerComido = false; this.velocidad =
 		 * velocidad; this.casilleroOriginal = new Casillero(cOriginal);

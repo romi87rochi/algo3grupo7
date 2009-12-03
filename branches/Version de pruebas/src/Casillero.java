@@ -15,12 +15,16 @@ public class Casillero {
 	}
 
 	/* El Casillero queda instanciado sin item ni personajes */
-	public Casillero(Posicion posicion) {
+	public Casillero(Posicion posicion,Tablero tablero) {
 		fantasmas = new ArrayList<Fantasma>();
 		item = null;
 		pacman = null;
 		puedeSerVisitado = true;
 		this.posicion = posicion;
+		this.tablero=tablero;
+	}
+	
+	public void conocerTablero(){
 		
 	}
 

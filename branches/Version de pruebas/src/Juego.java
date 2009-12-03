@@ -1,7 +1,3 @@
-
-
-
-
 public class Juego {
 
 	private Tablero tablero;
@@ -16,10 +12,9 @@ public class Juego {
 	 * El juego recibe una lista de fantasmas y otra de packman para que este
 	 * conozca a sus personajes. Mapas es un array de mapas predefinidos
 	 */
-	public Juego(Mapa mapas) {
-
-		tablero = new Tablero(mapas);
-		this.mapa = mapas;
+	public Juego(Tablero tablero) {
+		
+		this.tablero=tablero;
 		puntaje = 0;
 		cantPastillasDelNivel=100;
 		finJuego = false;

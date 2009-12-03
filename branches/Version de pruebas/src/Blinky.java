@@ -2,12 +2,16 @@
 public class Blinky extends Fantasma{
 	
 	private int velocidad;
+	
 
 	public Blinky(Juego nuevoJuego, Personaje pacman ){
 		super( nuevoJuego,pacman);
+		
 		this.velocidad=1;
 		int tipoEstrategia=1;
 		this.estrategia= new Estrategia(this, pacman,tipoEstrategia);
+		this.setCasilleroActual(this.getTablero().getOrigenBlynki());
+		this.reubicar();
 	}
 	
 	protected void reubicar() {
@@ -19,7 +23,10 @@ public class Blinky extends Fantasma{
 		 */
 		this.setCasilleroActual(this.getTablero().getOrigenBlynki());
 		this.getCasilleroActual().agregarFantasma(this);
+		if(this.getCasilleroActual()!=this.getTablero().getOrigenBlynki())
 		casilleroAux.removerFantasma(this);
+	
+
 
 	}
 	public void vivir(){
