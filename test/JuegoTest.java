@@ -6,15 +6,12 @@ import junit.framework.TestCase;
 public class JuegoTest extends TestCase {
 
 	
-	Mapa mapas;
 	Juego juego; 
-	Tablero tablero;
 	
 	public void setUp(){
-		mapas=null;
-		tablero= new Tablero();
+		MapaNivel1 mapa=new MapaNivel1();
 		
-		juego = new Juego(tablero); 
+		juego = new Juego(mapa); 
 	}
 
 

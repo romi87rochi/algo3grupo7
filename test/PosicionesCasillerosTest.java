@@ -5,17 +5,16 @@ import junit.framework.TestCase;
 public class PosicionesCasillerosTest extends TestCase {
 	
 
-	Mapa mapas;
 	Juego juego;
 	Posicion posicion;
 	Casillero celda;
 	Pacman pacman;
-	Tablero tablero;
 	MatrizPosiciones matriz;
 	
 	public void setUp(){
-		tablero=new Tablero();
-		juego= new Juego(tablero);
+	MapaNivel1 mapa=new MapaNivel1();
+		
+		juego = new Juego(mapa); 
 		matriz=new MatrizPosiciones(4,4);
 		posicion=new Posicion(2,2,matriz);
 		celda =juego.getTablero().getCasillero(posicion);

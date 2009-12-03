@@ -3,7 +3,6 @@
 public class Juego {
 
     private Tablero tablero;
-    private Mapa mapa;
     private boolean finJuego;
     private int puntaje;
     private int cantPastillasDelNivel;
@@ -35,7 +34,7 @@ public class Juego {
 
 
     public void nuevoNivel(Mapa mapa){
-            tablero.cargarTablero(this);
+            tablero.cargarTablero();
             cantPastillasDelNivel=mapa.getCantItems();
     }
 

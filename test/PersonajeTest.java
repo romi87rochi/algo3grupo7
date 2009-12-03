@@ -5,14 +5,13 @@ import junit.framework.TestCase;
 public class PersonajeTest extends TestCase {
 	Juego juego;
 	Pacman pacman;
-	Tablero tablero;
 	Fantasma fantasma;
 	
 	
 	public void setUp(){
-		tablero=new Tablero();
-		juego = new Juego( tablero);
-
+	MapaNivel1 mapa=new MapaNivel1();
+		
+		juego = new Juego(mapa); 
 		pacman=new Pacman(juego);
 		fantasma=new Blinky(juego, pacman);
 		

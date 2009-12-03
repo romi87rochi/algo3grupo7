@@ -4,16 +4,15 @@ import junit.framework.TestCase;
 
 public class PacmanTest extends TestCase {
 	
-	Mapa mapas;
 	Juego juego;
-	Tablero tablero;
 	Pacman pacman;
 	
 
 	
 	public void setUp(){
-		tablero=new Tablero();
-		juego= new Juego(tablero);
+	MapaNivel1 mapa=new MapaNivel1();
+		
+		juego = new Juego(mapa); 
 		
 		pacman=new Pacman(juego);
 		
@@ -42,7 +41,7 @@ public class PacmanTest extends TestCase {
 		
 		pacman.mover(pacman.getCasilleroActual().getDerecha());
 		pacman.reubicar();
-		assertEquals(pacman.getCasilleroActual(), tablero.getCasilleroOrigenPacman());
+		assertEquals(pacman.getCasilleroActual(), juego.getTablero().getCasilleroOrigenPacman());
 	}
 
 	public void testPacman() {
