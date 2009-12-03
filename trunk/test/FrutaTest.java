@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 public class FrutaTest extends TestCase {
 		
 	
-	Mapa mapas;
 	Juego juego;
 	int puntaje;
 	Fruta fruta;
@@ -15,8 +14,8 @@ public class FrutaTest extends TestCase {
 	
 	
 	public void setUp(){
-		Tablero tablero=new Tablero();
-		juego= new Juego(tablero);
+		MapaNivel1 mapa=new MapaNivel1();
+		juego= new Juego(mapa);
 		puntaje=100;
 		fruta=new Fruta(puntaje);
 		pacman=new Pacman(juego);

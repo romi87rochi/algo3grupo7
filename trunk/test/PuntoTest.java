@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 
 public class PuntoTest extends TestCase {
 	
-	Mapa mapas;
 	Juego juego;
 	int puntaje;
 	Punto punto;
@@ -13,8 +12,9 @@ public class PuntoTest extends TestCase {
 	
 	
 	public void setUp(){
-		Tablero tablero=new Tablero();
-		juego= new Juego(tablero);
+	MapaNivel1 mapa=new MapaNivel1();
+		
+		juego = new Juego(mapa); 
 		puntaje=100;
 		punto=new Punto(puntaje);
 		pacman=new Pacman(juego);

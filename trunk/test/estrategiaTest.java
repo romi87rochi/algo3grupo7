@@ -2,21 +2,24 @@ import junit.framework.TestCase;
 
 public class estrategiaTest extends TestCase {
 
-	Tablero tablero;
 	Juego juego;
 	Pacman pacman;
 	Fantasma fan1;
 
 	
-	  public void setUp(){
-		  tablero=new Tablero(); 
-		  juego=new Juego(tablero);
+	 public void setUp(){
+		  MapaNivel1 mapa=new MapaNivel1();
+		  juego= new Juego(mapa);
 		  pacman=new Pacman(juego);
 		  fan1=new Blinky(juego,pacman); }
-	 
 	
+
 	  public void testFantasmaPersigue(){
-	  
+		  MapaNivel1 mapa=new MapaNivel1();
+			juego= new Juego(mapa);
+		  pacman=new Pacman(juego);
+		  fan1=new Blinky(juego,pacman);
+		  
 	  fan1.mover(fan1.getCasilleroActual().getIzquierda());
 	  fan1.mover(fan1.getCasilleroActual().getAbajo());// pacman esta en uno para arriba y 
 	   													//dos para la derecha
@@ -29,11 +32,15 @@ public class estrategiaTest extends TestCase {
 	  fan1.getCasilleroActual());
 	  
 	  fan1.vivir();//come a pacman
-	  assertEquals(tablero.getCasilleroOrigenFantasma(),fan1.getCasilleroActual()); }
+	  assertEquals(juego.getTablero().getCasilleroOrigenFantasma(),fan1.getCasilleroActual()); }
 	 
 
 	public void testFantasmaEscapa() {
-
+		  MapaNivel1 mapa=new MapaNivel1();
+			juego= new Juego(mapa);
+		  pacman=new Pacman(juego);
+		  fan1=new Blinky(juego,pacman);
+		
 		pacman.setPuedeSerComido(false);
 		
 		Casillero CasilleroDeEstrategia = fan1.getCasilleroActual()

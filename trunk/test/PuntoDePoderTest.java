@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 
 public class PuntoDePoderTest extends TestCase {
 	
-	Mapa mapas;
 	Juego juego;
 	int puntaje;
 	PuntoDePoder punto;
@@ -15,8 +14,9 @@ public class PuntoDePoderTest extends TestCase {
 	
 	
 	public void setUp(){
-		Tablero tablero=new Tablero();
-		juego= new Juego(tablero);
+	MapaNivel1 mapa=new MapaNivel1();
+		
+		juego = new Juego(mapa); 
 		puntaje=100;
 		tiempo=30;
 		punto=new PuntoDePoder(puntaje,tiempo);
