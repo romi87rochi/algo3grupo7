@@ -1,3 +1,4 @@
+package algo3.grupo7.algoman.modelo;
 public class Posicion {
     private int posX;
     private int posY;

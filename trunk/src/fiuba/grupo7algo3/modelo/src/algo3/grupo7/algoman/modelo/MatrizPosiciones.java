@@ -1,4 +1,4 @@
-
+package algo3.grupo7.algoman.modelo;
 import java.util.ArrayList;
 
 public class MatrizPosiciones {
