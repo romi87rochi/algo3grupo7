@@ -1,4 +1,4 @@
-
+package algo3.grupo7.algoman.modelo;
 
 public class Juego {
 
@@ -9,10 +9,10 @@ public class Juego {
     private int nivel;
     private boolean finNivel;
 
-    /*
-     * El juego recibe una lista de fantasmas y otra de packman para que este
-     * conozca a sus personajes. Mapas es un array de mapas predefinidos
-     */
+    
+    /*  El juego recibe una lista de fantasmas y otra de packman para que este
+     * conozca a sus personajes. Mapas es un array de mapas predefinidos */
+     
     public Juego(Tablero tablero) {
 
             this.tablero = tablero;
@@ -27,19 +27,15 @@ public class Juego {
     }
 
     public void iniciarJuego() {
-    		Mapa mapa=new Mapa();
+    	/*	Mapa mapa=new Mapa();
             this.nuevoNivel(mapa);
-            finNivel=false;
+            finNivel=false; */
     }
 
-
-    public void nuevoNivel(Mapa mapa){
+   public void nuevoNivel(){
             tablero.cargarTablero();
-            cantPastillasDelNivel=mapa.getCantItems();
+     //       cantPastillasDelNivel=tablero.getCantItems();
     }
-
-
-
 
     public Tablero getTablero() {
             return tablero;

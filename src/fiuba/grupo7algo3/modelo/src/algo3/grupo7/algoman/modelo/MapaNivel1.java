@@ -1,4 +1,4 @@
-
+package algo3.grupo7.algoman.modelo;
 public class MapaNivel1 extends Tablero {
 
 	
@@ -33,7 +33,7 @@ public  Casillero getCasilleroOrigenFantasma(){
 }
 	
 	public Casillero getCasilleroOrigenPacman(){
-		return origenPacman;
+		return origenPacman;		
 	}
 
 }
