@@ -29,35 +29,38 @@ public abstract class Tablero {
 			}
 		}
 	}
-
+	
 	protected void construirCaminoDesdeHasta(int desdeX, int hastaX,
 			int desdeY, int hastaY, int puntajePunto) {
 
 		int espacios = 0;
-		for (int x = 0; x < filas; x++) {
-			for (int y = 0; y < columnas; y++) {
-				if (x >= desdeX && x <= hastaX && y >= desdeY && x <= hastaY) {
-					casilleros[x][y].setHacerCamino();
-					++espacios;
-				}
-				// cada 10 casilleros camino inserta un PUNTO (pastilla)
+		for (int x = desdeX; x < hastaX+1; x++) {
+			for (int y = desdeY; y < hastaY+1; y++) {
+				casilleros[x][y].setHacerCamino();
+				++espacios;
+				// cada 10 casilleros camino inserta un punto
 				if (espacios == 10) {
 					casilleros[x][y].setItem(new Punto(puntajePunto));
+					this.incrementarPunto();
 					espacios = 0;
 				}
 			}
 		}
 	}
 
+	private void incrementarPunto() {
+		this.cantidadPuntos++;
+	}
+	
+	protected int getCantidadPuntos(){
+		return cantidadPuntos;
+	}
+	
 	public abstract Casillero getCasilleroOrigenFantasma();
 
 	public abstract Casillero getCasilleroOrigenPacman();
 
 	public abstract void cargarTablero();
-
-	protected void incrementarPunto() {
-		this.cantidadPuntos++;
-	}
 
 	protected Casillero[][] getMatCasilleros() {
 		return casilleros;
