@@ -57,10 +57,20 @@ public abstract class Tablero {
 	}
 	
 	public abstract Casillero getCasilleroOrigenFantasma();
-
 	public abstract Casillero getCasilleroOrigenPacman();
-
-	public abstract void cargarTablero();
+	protected abstract void cargarContorno();
+	protected abstract void cargarCaminosHorizontales();
+	protected abstract void cargarCaminosVerticales();
+	protected abstract void cargarPuntosDePoder();
+	protected abstract void cargarFruta();
+	
+	public void cargarTablero() {
+		this.cargarContorno();
+		this.cargarCaminosHorizontales();
+		this.cargarCaminosVerticales();
+		this.cargarPuntosDePoder();
+		this.cargarFruta();
+	}
 
 	protected Casillero[][] getMatCasilleros() {
 		return casilleros;
