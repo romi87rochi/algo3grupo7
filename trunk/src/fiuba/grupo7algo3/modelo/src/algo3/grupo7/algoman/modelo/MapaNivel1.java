@@ -6,7 +6,7 @@ public class MapaNivel1 extends Tablero {
 	private static final int PUNTAJEPUNTOPODER = 60;
 	private static final int TIEMPODEPODER = 50;
 	private static final int PUNTAJEFRUTA = 100;
-    private Casillero origenPacman; 
+	private Casillero origenPacman; 
 	private Casillero origenFantasmas;
   
 	public MapaNivel1(){
@@ -45,9 +45,9 @@ public class MapaNivel1 extends Tablero {
 	}
 	
 	protected void cargarPuntosDePoder(){
-		getMatCasilleros()[10][25].setItem(new
+		getMatCasilleros()[100][75].setItem(new
 				PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));  
-        getMatCasilleros()[190][175].setItem(new
+        getMatCasilleros()[100][190].setItem(new
         		PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));
 	}
 	
