@@ -71,7 +71,8 @@ public class Juego {
       vistaPacman.setPosicionable(pacman);
       VistaBlinky vistaBlinky=new VistaBlinky();
       vistaBlinky.setPosicionable(blinky);
-      
+     
+     
         this.controlador.agregarObjetoVivo(pacman);
 		this.controlador.agregarObjetoVivo(blinky);
 		this.controlador.agregarDibujable(vistaPacman);

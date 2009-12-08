@@ -10,19 +10,19 @@ public class MapaNivel4 extends Tablero {
   
 	public MapaNivel4(){
 		super(500,500);
-		this.setOrigenPacman(getMatCasilleros()[450][250]) ;
+		this.setOrigenPacman(getMatCasilleros()[100][100]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[250][250]);
 	}
 
 	protected void cargarContorno(){
-		construirCaminoDesdeHasta(10, 490, 10, 10,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 10, 10, 490,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(190, 190, 10, 490,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 490, 490, 490,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 25, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(475, 475, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 25, 25, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 475, 475, PUNTAJEPUNTO);
 	}
 	
 	protected void cargarCaminosHorizontales(){
-		construirCaminoDesdeHasta(25, 25, 25, 475, PUNTAJEPUNTO);
+		//1
 		construirCaminoDesdeHasta(100, 100, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(175, 175, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 250, 25, 475, PUNTAJEPUNTO);
@@ -30,11 +30,11 @@ public class MapaNivel4 extends Tablero {
 		construirCaminoDesdeHasta(325, 325, 175, 325, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(325, 325, 400, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(400, 400, 25, 475, PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(475, 475, 25, 475, PUNTAJEPUNTO);
+		
 	}
 	
 	protected void cargarCaminosVerticales(){
-		construirCaminoDesdeHasta(25, 475, 25, 25, PUNTAJEPUNTO);
+		
 		construirCaminoDesdeHasta(25, 475, 100, 100, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(100, 175, 175, 175, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 400, 175, 175, PUNTAJEPUNTO);
@@ -44,7 +44,7 @@ public class MapaNivel4 extends Tablero {
 		construirCaminoDesdeHasta(100, 175, 325, 325, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 400, 325, 325, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(25, 475, 400, 400, PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(25, 475, 475, 475, PUNTAJEPUNTO);
+		
 	}
 	
 	protected void cargarFruta() {
