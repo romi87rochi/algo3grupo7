@@ -1,4 +1,3 @@
-package algo3.grupo7.algoman.modelo;
 
 public class MapaNivel2 extends Tablero {
 
@@ -6,53 +5,53 @@ public class MapaNivel2 extends Tablero {
 	private static final int PUNTAJEPUNTOPODER = 65;
 	private static final int TIEMPODEPODER = 45;
 	private static final int PUNTAJEFRUTA = 200;
-    private Casillero origenPacman; 
+	private Casillero origenPacman; 
 	private Casillero origenFantasmas;
 	
 	public MapaNivel2(){
-		super(200,200);
-		origenPacman = getMatCasilleros()[100][160];
-		origenFantasmas = getMatCasilleros()[100][100];
+		super(500,500);
+		origenPacman = getMatCasilleros()[100][2500];
+		origenFantasmas = getMatCasilleros()[250][250];
 	}
 	
 	protected void cargarContorno(){
-		construirCaminoDesdeHasta(10, 190, 10, 10,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 10, 10, 40,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 10, 160, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(190, 190, 10, 40,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(190, 190, 160, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 190, 190, 190,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 25, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 100, 25, 25, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(400, 475, 25, 25, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(475, 475, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 100, 475, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(400, 475, 475, 475, PUNTAJEPUNTO);
 	}
 	
 	protected void cargarCaminosHorizontales(){
-		construirCaminoDesdeHasta(10, 190, 40, 40,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(40, 160, 70, 70,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(40, 160, 100, 100,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(70, 130, 130, 130,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 190, 160, 160,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(100, 100, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(175, 175, 175, 325, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(250, 250, 100, 400, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(325, 325, 100, 400, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(400, 400, 25, 475, PUNTAJEPUNTO);
 	}
 	
 	protected void cargarCaminosVerticales(){
-		construirCaminoDesdeHasta(40, 40, 10, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(70, 70, 40, 70,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(70, 70, 100, 160,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(100, 100, 10, 40,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(100, 100, 70, 100,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(100, 100, 160, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(130, 130, 40, 70,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(130, 130, 100, 160,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(160, 160, 10, 190,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 100, 100, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(100, 250, 175, 175, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(325, 400, 175, 175, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 100, 250, 250, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(250, 325, 250, 250, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(400, 475, 250, 250, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(100, 250, 325, 325, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(325, 400, 325, 325, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 400, 400, PUNTAJEPUNTO);
 	}
 	
 	protected void cargarPuntosDePoder(){
-		getMatCasilleros()[10][175].setItem(new
+		getMatCasilleros()[100][55].setItem(new
 				PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));  
-        getMatCasilleros()[190][25].setItem(new
+        getMatCasilleros()[400][445].setItem(new
         		PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));
 	}
 	
 	protected void cargarFruta(){
-		getMatCasilleros()[100][40].setItem(new Fruta(PUNTAJEFRUTA));
+		getMatCasilleros()[400][250].setItem(new Fruta(PUNTAJEFRUTA));
 	}
 		
 	public Casillero getCasilleroOrigenFantasma() {
