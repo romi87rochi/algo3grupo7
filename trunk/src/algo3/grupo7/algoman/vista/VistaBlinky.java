@@ -3,10 +3,10 @@ import java.awt.Color;
 
 import algo3.grupo7.algoman.vista.Cuadrado;
 
-public class VistaBlinky extends Cuadrado{
+public class VistaBlinky extends Imagen{
     public VistaBlinky() {
-		super(10, 10);
-		setColor(Color.BLUE);
+		super();
+    	setNombreArchivoImagen("fan1.jpg");
 		
 	}
 }

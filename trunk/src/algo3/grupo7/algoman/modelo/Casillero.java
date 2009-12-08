@@ -136,12 +136,12 @@ public class Casillero implements Posicionable{
         
 		
 		public int getX() {			
-			return (this.getPosicion().getPosX())*3;
+			return (this.getPosicion().getPosX());
 		}
 
 		
 		public int getY() {
-			return (this.getPosicion().getPosY())*3;
+			return (this.getPosicion().getPosY());
 		}
 
 }
