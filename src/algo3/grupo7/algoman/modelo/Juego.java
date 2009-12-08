@@ -43,11 +43,11 @@ public class Juego {
 
     private void cargarMapas() {
 		MapaNivel4 mapaNivel4=new MapaNivel4();
-		//MapaNivel1 mapaNivel1=new MapaNivel1();
+		MapaNivel1 mapaNivel1=new MapaNivel1();
 		//MapaNivel2 mapaNivel2=new MapaNivel2();
 		//MapaNivel3 mapaNivel3=new MapaNivel3();
 		this.tablero.add(mapaNivel4);
-		//this.tablero.add(mapaNivel1);
+		this.tablero.add(mapaNivel1);
 		//this.tablero.add(mapaNivel2);
 		//this.tablero.add(mapaNivel3);
 	}
