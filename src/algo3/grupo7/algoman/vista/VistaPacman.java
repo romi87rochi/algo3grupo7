@@ -3,10 +3,10 @@ import java.awt.Color;
 
 import algo3.grupo7.algoman.vista.Circulo;
 
-public class VistaPacman extends Circulo {
+public class VistaPacman extends Imagen {
 	public VistaPacman(){
-		super(12);
-		this.setColor(Color.YELLOW);
+	 super();
+	 setNombreArchivoImagen("Pacman.jpg");
 	}
 
 }

@@ -46,6 +46,7 @@ public class Juego {
 		MapaNivel1 mapaNivel1=new MapaNivel1();
 		//MapaNivel2 mapaNivel2=new MapaNivel2();
 		//MapaNivel3 mapaNivel3=new MapaNivel3();
+		
 		this.tablero.add(mapaNivel4);
 		this.tablero.add(mapaNivel1);
 		//this.tablero.add(mapaNivel2);
@@ -77,13 +78,13 @@ public class Juego {
 		this.controlador.agregarObjetoVivo(blinky);
 		this.controlador.agregarDibujable(vistaPacman);
 		this.controlador.agregarDibujable(vistaBlinky);
-		this.controlador.setIntervaloSimulacion(10);
+		this.controlador.setIntervaloSimulacion(20);
 	}
    
 	public void nuevoNivel(int nivel){
 	   this.mapa=tablero.get(nivel);
-	      
-            tablero.get(nivel).cargarTablero();
+	      //cuando no se necesite motrar el camino quitar controlador de cargartablero
+            tablero.get(nivel).cargarTablero(controlador);
               	this.pacman.reubicar();
             	this.blinky.reubicar();
                	nivel++;

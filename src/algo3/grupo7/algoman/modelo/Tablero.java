@@ -87,12 +87,13 @@ public abstract class Tablero {
 
 	protected abstract void cargarFruta();
 
-	public void cargarTablero() {
+	public void cargarTablero(ControladorJuego control) {
 		this.cargarContorno();
 		this.cargarCaminosHorizontales();
 		this.cargarCaminosVerticales();
 		this.cargarPuntosDePoder();
 		this.cargarFruta();
+		this.agregarDibujables( control);
 
 	}
 
@@ -104,11 +105,12 @@ public abstract class Tablero {
 		return casilleros[posicion.getPosX()][posicion.getPosY()];
 	}
 
+   //cuando no se quiera mostrar camino quitar agregar dibujables 
 	public void agregarDibujables(ControladorJuego control) {
 		for (int x = 0; x < filas; x++) {
 			for (int y = 0; y < columnas; y++) {
 				if (casilleros[x][y].puedeSerVisitado()) {
-					System.out.print('l');
+					
 					VistaCasilleroCamino vistaCamino = new VistaCasilleroCamino();
 					vistaCamino.setPosicionable(casilleros[x][y]);
 					control.agregarDibujable(vistaCamino);

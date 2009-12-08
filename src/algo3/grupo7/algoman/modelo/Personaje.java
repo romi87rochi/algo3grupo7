@@ -66,13 +66,13 @@ public abstract class Personaje implements ObjetoVivo,Posicionable {
 	//Implementacion getX() de la interfaz posicionable 
 	public int getX() {
 		
-		return (this.getCasilleroActual().getPosicion().getPosX())*3;
+		return (this.getCasilleroActual().getPosicion().getPosX())*1;
 	}
 	
 	//Implementacion getY() de la interfaz posicionable
 	public int getY() {
 		
-		return (this.getCasilleroActual().getPosicion().getPosY())*3;
+		return (this.getCasilleroActual().getPosicion().getPosY())*1;
 	}
 
 }
