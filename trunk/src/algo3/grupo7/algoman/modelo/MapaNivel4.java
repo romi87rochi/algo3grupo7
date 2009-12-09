@@ -48,14 +48,14 @@ public class MapaNivel4 extends Tablero {
 	}
 	
 	protected void cargarFruta() {
-		getMatCasilleros()[100][100].setItem(new Fruta(PUNTAJEFRUTA));
+		//getMatCasilleros()[100][100].setItem(new Fruta(PUNTAJEFRUTA));
 	}
 
 	protected void cargarPuntosDePoder() {
-		getMatCasilleros()[100][400].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
+	/*	getMatCasilleros()[100][400].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
 				TIEMPODEPODER));
 		getMatCasilleros()[400][400].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
-				TIEMPODEPODER));
+				TIEMPODEPODER)); */
 	}
 	
 

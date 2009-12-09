@@ -23,13 +23,15 @@ public abstract class Fantasma extends Personaje {
 
 	public void vivir() {
 		int pasos = 0;
-
+		if (pacman.estaVivo()) {
 		while (pasos < this.getVelocidad()) { // ver cuando cambia de nivel
 
 			this.mover(getEstrategia().proximoCasillero());
 			pasos++;
 		}
-
+		} else {
+			this.reubicar();
+		}
 	}
 
 	/*
@@ -50,7 +52,7 @@ public abstract class Fantasma extends Personaje {
 		/*  Si el pacman no esta vivo es xq otro pj lo comio por lo tanto el
 		 * fantasma se reubica */
 		
-		if (pacman.estaVivo()) {
+		
 			nuevoCasillero.agregarFantasma(this);
 			getCasilleroActual().removerFantasma(this);
 			this.setCasilleroActual(nuevoCasillero);
@@ -60,9 +62,7 @@ public abstract class Fantasma extends Personaje {
 				this.setPuedeSerComido(true);
 			}
 			this.comer();
-		} else {
-			this.reubicar();
-		}
+
 
 	}
 

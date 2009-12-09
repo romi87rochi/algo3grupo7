@@ -3,6 +3,10 @@ import ar.uba.fi.algo3.titiritero.ControladorJuego;
 
 import algo3.grupo7.algoman.vista.VistaPacman;
 import algo3.grupo7.algoman.vista.VistaBlinky;
+import algo3.grupo7.algoman.vista.VistaPinky;
+import algo3.grupo7.algoman.vista.VistaInky;
+import algo3.grupo7.algoman.vista.VistaClyde;
+
 import java.util.ArrayList;
 
 public class Juego {
@@ -16,6 +20,9 @@ public class Juego {
     private boolean finNivel;
     private Pacman pacman;
     private Blinky blinky;
+    private Pinky pinky;
+    private Inky inky;
+    private Clyde clyde;
     private ControladorJuego controlador;
 
     
@@ -35,6 +42,10 @@ public class Juego {
             this.mapa=tablero.get(0);
             this.pacman=new Pacman(this);
             this.blinky=new Blinky(this, this.pacman);
+            this.pinky=new Pinky(this,this.pacman);
+            this.inky=new Inky(this,this.pacman);
+            this.clyde=new Clyde(this,this.pacman);
+            
             this.nuevoNivel(this.nivel);
             this.cargarControlador();
            // this.iniciar();
@@ -72,13 +83,27 @@ public class Juego {
       vistaPacman.setPosicionable(pacman);
       VistaBlinky vistaBlinky=new VistaBlinky();
       vistaBlinky.setPosicionable(blinky);
-     
+      VistaPinky vistaPinky=new VistaPinky();
+      vistaPinky.setPosicionable(pinky);
+      VistaInky vistaInky=new VistaInky();
+      vistaInky.setPosicionable(inky);
+      VistaClyde vistaClyde=new VistaClyde();
+      vistaClyde.setPosicionable(clyde);
+      
      
         this.controlador.agregarObjetoVivo(pacman);
 		this.controlador.agregarObjetoVivo(blinky);
+		this.controlador.agregarObjetoVivo(pinky);
+		this.controlador.agregarObjetoVivo(inky);
+		this.controlador.agregarObjetoVivo(clyde);
+		
 		this.controlador.agregarDibujable(vistaPacman);
 		this.controlador.agregarDibujable(vistaBlinky);
-		this.controlador.setIntervaloSimulacion(20);
+		this.controlador.agregarDibujable(vistaPinky);
+		this.controlador.agregarDibujable(vistaInky);
+		this.controlador.agregarDibujable(vistaClyde);
+		this.controlador.setIntervaloSimulacion(10);
+		
 	}
    
 	public void nuevoNivel(int nivel){

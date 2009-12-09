@@ -8,7 +8,11 @@ public class Programa {
 
 		 
 	Juego juego=new Juego();
-    Ventana ventana=new VentanaPrincipal(juego.getControlador());
+	Pacman pac=juego.getPacman();
+    Ventana ventana=new VentanaPrincipal(juego.getControlador(), pac);
+    
+
+
     ventana.setVisible(true);
     juego.getControlador().setSuperficieDeDibujo(ventana);
     juego.iniciar();

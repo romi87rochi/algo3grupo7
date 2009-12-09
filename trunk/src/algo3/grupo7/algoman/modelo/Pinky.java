@@ -1,12 +1,12 @@
 package algo3.grupo7.algoman.modelo;
 
-public class Blinky extends Fantasma {
+public class Pinky extends Fantasma {
 	
-	private static final int VELOCIDADDEFECTO = 3;
+	private static final int VELOCIDADDEFECTO = 4;
 
-	public Blinky(Juego nuevoJuego, Personaje pacman) {
+	public Pinky(Juego nuevoJuego, Personaje pacman) {
 		super(nuevoJuego, pacman, VELOCIDADDEFECTO);
-		int tipoEstrategia = 2;
+		int tipoEstrategia = 1;
 		this.setEstrategia(new Estrategia(this, pacman, tipoEstrategia));
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
 	}

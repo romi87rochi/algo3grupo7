@@ -1,7 +1,7 @@
 package algo3.grupo7.algoman.vista;
 
-public class VistaPinky extends Imagen{
-    public VistaPinky() {
+public class VistaClyde extends Imagen{
+    public VistaClyde() {
 		this.setNombreArchivoImagen("Pinky.jpg");
 		
 	}
