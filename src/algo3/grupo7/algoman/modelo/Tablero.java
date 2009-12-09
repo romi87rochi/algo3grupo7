@@ -118,7 +118,7 @@ public abstract class Tablero {
 				} else {
 					// control.agregarDibujable(vistaPared);
 				}
-				System.out.println();
+				
 			}
 		}
 	}

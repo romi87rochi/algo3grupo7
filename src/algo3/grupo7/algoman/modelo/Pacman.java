@@ -1,7 +1,6 @@
 package algo3.grupo7.algoman.modelo;
 
 import java.util.ArrayList;
-
 import java.util.Iterator;
 
 public class Pacman extends Personaje {
@@ -9,9 +8,15 @@ public class Pacman extends Personaje {
 	private int vidas;
 	private boolean vivo;
 	private static final int CANTVIDAS = 3;
-	private static final int VELOCIDAD = 8;
+	private static final int VELOCIDAD = 5;
 	private int itemsComidos;
 	private int tiempoDeEfecto;
+	private String proximaDireccion;
+	private String direccionActual;
+	private Casillero ultimoCasilleroPorTeclado; // recuerda cual fue el ultimo
+
+	// casillero q pidio el
+	// teclado
 
 	public Pacman(Juego nuevoJuego) {
 		super(nuevoJuego, true, VELOCIDAD);
@@ -19,27 +24,61 @@ public class Pacman extends Personaje {
 		this.vivo = true;
 		this.tiempoDeEfecto = 0;
 		this.setCasilleroActual(nuevoJuego.getMapa().getOrigenPacman());
-		
-
+		this.proximaDireccion = "izquierda";
+		direccionActual = "izquierda"; // la direccion por default es izquierda
+		//ultimoCasilleroPorTeclado = null;
 	}
 
 	protected void mover(Casillero nuevoCasillero) {
 		this.comprobarEstado();
-		if (nuevoCasillero.puedeSerVisitado()){
-		nuevoCasillero.agregarPacman(this);
-		this.getCasilleroActual().removerPacman(this);
-		this.setCasilleroActual(nuevoCasillero);
-		this.comer();
+		if (nuevoCasillero.puedeSerVisitado()) {
+			nuevoCasillero.agregarPacman(this);
+			this.getCasilleroActual().removerPacman(this);
+			this.setCasilleroActual(nuevoCasillero);
+			this.comer();
 		}
 	}
 
-	public void vivir() {
-		 if(!this.getJuego().esFinNivel())
-			 this.mover(this.getCasilleroActual().getIzquierda()); //nuevocasillero sera el control que
-		// presione el usuario
-		// else
-		// this.getJuego().nuevoNivel(mapa);
+	public void setProximaDireccion(String proximaDireccion){
+		this.proximaDireccion=proximaDireccion;
 	}
+	public void vivir() {
+
+		int pasos = 0;
+		if (!this.estaVivo()) {
+            this.inicializar();
+		} 
+		while (pasos < this.getVelocidad()) {
+			//se guarda un casillero auxiliar adyacente al actual segun la direccion actual
+			Casillero casilleroAux = getCasilleroProximaDireccion(this.direccionActual);
+
+			if (!this.getJuego().esFinNivel())
+				/* pregunta si en la direccion q indica el usuario hay un casillero camino, si lo es lo visita y
+				 * esta direccion se convertira en la actual 
+				 */
+				if (this.getCasilleroProximaDireccion(proximaDireccion).puedeSerVisitado()) {
+					casilleroAux = this.getCasilleroProximaDireccion(proximaDireccion);
+					this.direccionActual=proximaDireccion;
+				}
+			this.mover(casilleroAux);
+			pasos++;
+		}
+	}
+
+	private void inicializar(){
+		this.vivo=true;
+		this.reubicar();
+		direccionActual = "izquierda";
+		//ultimoCasilleroPorTeclado=null;
+		this.proximaDireccion= "izquierda";
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+	}
+	
 
 	/*
 	 * Intenta comer todos los fantasmas contenidos en el casillero si come
@@ -67,7 +106,8 @@ public class Pacman extends Personaje {
 		if (this.getCasilleroActual().hayItem()) {
 			Juego juegoAux;
 			ItemComible itemAux = this.getCasilleroActual().getItem();
-			// Si no fue comido se le pasa el item para que el juego determine su puntaje
+			// Si no fue comido se le pasa el item para que el juego determine
+			// su puntaje
 			juegoAux = this.getJuego();
 			juegoAux.adicionarPuntajeItem(itemAux);
 
@@ -98,6 +138,12 @@ public class Pacman extends Personaje {
 		this.vivo = false;
 		this.reubicar();
 		this.decrementarVida();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	public boolean estaVivo() {
@@ -153,4 +199,22 @@ public class Pacman extends Personaje {
 		return vidas;
 	}
 
+
+
+	private Casillero getCasilleroProximaDireccion(String direccion) {
+		Casillero casilleroAux = null;
+		if (direccion == "arriba") {
+			return getCasilleroActual().getArriba();
+		}
+		if (direccion == "abajo") {
+			return getCasilleroActual().getAbajo();
+		}
+		if (direccion == "derecha") {
+			casilleroAux = getCasilleroActual().getDerecha();
+		}
+		if (direccion == "izquierda") {
+			casilleroAux = getCasilleroActual().getIzquierda();
+		}
+		return casilleroAux;
+	}
 }
