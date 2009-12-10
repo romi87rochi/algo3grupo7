@@ -1,7 +1,12 @@
 package algo3.grupo7.algoman.modelo;
 
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
+import algo3.grupo7.algoman.vista.Circulo;
 import algo3.grupo7.algoman.vista.VistaCasilleroCamino;
+import algo3.grupo7.algoman.vista.VistaMapa;
+import algo3.grupo7.algoman.vista.VistaPastilla;
+import algo3.grupo7.algoman.vista.vistaPuntoDePoder;
+import algo3.grupo7.algoman.vista.VistaMapa;
 
 public abstract class Tablero {
 	private int filas;
@@ -11,6 +16,7 @@ public abstract class Tablero {
 	private int cantidadPuntos;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;
+	private ControladorJuego control;
 
 	public Casillero getOrigenPacman() {
 		return origenPacman;
@@ -60,8 +66,8 @@ public abstract class Tablero {
 				casilleros[x][y].setHacerCamino();
 				++espacios;
 				// cada 10 casilleros camino inserta un punto
-				if (espacios == 10) {
-					casilleros[x][y].setItem(new Punto(puntajePunto));
+				if (espacios == 20) {
+					casilleros[x][y].setItem(new Punto(puntajePunto,this.getMatCasilleros()[x][y]));
 					this.incrementarPunto();
 					espacios = 0;
 				}
@@ -93,7 +99,10 @@ public abstract class Tablero {
 		this.cargarCaminosVerticales();
 		this.cargarPuntosDePoder();
 		this.cargarFruta();
-		this.agregarDibujables( control);
+		this.agregarDibujablesMapa( control);
+		/*se agregan pastillas en otro metodo porque sino se pinta el camino sobre ellas*/
+		this.agregarDibujablesPastillas(control);
+		this.agregarDibujablesPastillasPoder(control);
 
 	}
 
@@ -106,20 +115,54 @@ public abstract class Tablero {
 	}
 
    //cuando no se quiera mostrar camino quitar agregar dibujables 
-	public void agregarDibujables(ControladorJuego control) {
+	public void agregarDibujablesPastillas(ControladorJuego control){
 		for (int x = 0; x < filas; x++) {
 			for (int y = 0; y < columnas; y++) {
-				if (casilleros[x][y].puedeSerVisitado()) {
-					
-					VistaCasilleroCamino vistaCamino = new VistaCasilleroCamino();
-					vistaCamino.setPosicionable(casilleros[x][y]);
-					control.agregarDibujable(vistaCamino);
-
-				} else {
-					// control.agregarDibujable(vistaPared);
-				}
-				
-			}
+		if(casilleros[x][y].getItem()!=null ){
+			if(casilleros[x][y].getItem().getClass() == Punto.class){
+			VistaPastilla vistaPastilla=new VistaPastilla();
+			this.getMatCasilleros()[x][y].getItem().setVistaPastilla(vistaPastilla);
+			vistaPastilla.setPosicionable(casilleros[x][y]);
+			control.agregarDibujable(vistaPastilla);}
 		}
+			}}	}
+
+	
+	public void agregarDibujablesPastillasPoder(ControladorJuego control){
+		for (int x = 0; x < filas; x++) {
+			for (int y = 0; y < columnas; y++) {
+				if(casilleros[x][y].getItem()!=null ){
+				if(casilleros[x][y].getItem().getClass() == PuntoDePoder.class){
+					vistaPuntoDePoder vistaPoder=new vistaPuntoDePoder();
+					this.getMatCasilleros()[x][y].getItem().setVistaPastilla(vistaPoder);
+					vistaPoder.setPosicionable(casilleros[x][y]);
+					control.agregarDibujable(vistaPoder);}
+					
+				}}
+		}
+			}	
+
+/*arreglar todo este quilombo*/
+	
+   //cuando no se quiera mostrar camino quitar agregar dibujables 
+	public void agregarDibujablesMapa(ControladorJuego control) {
+        this.control=control;
+						 
+		  VistaMapa vistaMapa=new VistaMapa();
+		control.agregarDibujable(vistaMapa);
+	}
+
+	/*cuando pacman come pastilla se llama a este metodo*/
+	public void removerDibujable(Casillero casillero) {
+		  
+			 Circulo vistaPastilla= casillero.getItem().getVistaPastilla();
+			 
+				 control.removerDibujable(vistaPastilla);
+		
 	}
 }
+
+
+
+
+

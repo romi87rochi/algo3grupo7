@@ -182,10 +182,10 @@ public class Estrategia {
 		int distanciaPacmanFantasma = rastrearPacman().getPosX()
 				- posActualFan.getPosX();
 		if ((distanciaPacmanFantasma > 0)) {
-			return casilleroActual.getArriba();
+			return casilleroActual.getIzquierda();
 		}
 		if (distanciaPacmanFantasma < 0) {
-			return casilleroActual.getAbajo();
+			return casilleroActual.getDerecha();
 		} else {
 			/* en caso de que las coordenadas sean cero tiene que resolver si o
 			 *si por esta razon
@@ -193,9 +193,9 @@ public class Estrategia {
 			 *quitar esta comprobacion
 			*/
 			if (puedeSerVisitado(casilleroActual.getAbajo()) && (casilleroActual.getAbajo() != ultimoCasilleroFan)) {
-				return casilleroActual.getAbajo();
+				return casilleroActual.getDerecha();
 			} else {
-				return casilleroActual.getArriba();
+				return casilleroActual.getIzquierda();
 			}
 		}
 
@@ -210,18 +210,18 @@ public class Estrategia {
 		int distanciaPacmanFantasma = rastrearPacman().getPosY()
 				- posActualFan.getPosY();
 		if ((distanciaPacmanFantasma > 0)) {
-			return casilleroActual.getIzquierda();
+			return casilleroActual.getArriba();
 		}
 		if (distanciaPacmanFantasma < 0) {
-			return casilleroActual.getDerecha();
+			return casilleroActual.getAbajo();
 		}
 		// en caso de que las coordenadas sean cero tiene que resolver si o si
 		// por esta
 		// se verifica que no se haya pisado antes el casillero
 		if (puedeSerVisitado(casilleroActual.getDerecha()) && (casilleroActual.getDerecha() != ultimoCasilleroFan) ) {
-			return casilleroActual.getDerecha();
+			return casilleroActual.getAbajo();
 		} else {
-			return casilleroActual.getIzquierda();
+			return casilleroActual.getArriba();
 		}
 	}
 
@@ -234,9 +234,9 @@ public class Estrategia {
 		int distanciaPacmanFantasma = rastrearPacman().getPosY()
 				- posActualFan.getPosY();
 		if ((distanciaPacmanFantasma >= 0)) {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getDerecha());
+			return pacman.getJuego().getMapa().getCasillero(posActualFan.getAbajo());
 		} else {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getIzquierda());
+			return pacman.getJuego().getMapa().getCasillero(posActualFan.getArriba());
 		}
 	}
 
@@ -249,9 +249,9 @@ public class Estrategia {
 		int distanciaPacmanFantasma = rastrearPacman().getPosX()
 				- posActualFan.getPosX();
 		if ((distanciaPacmanFantasma >= 0)) {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getAbajo());
+			return pacman.getJuego().getMapa().getCasillero(posActualFan.getDerecha());
 		} else {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getArriba());
+			return pacman.getJuego().getMapa().getCasillero(posActualFan.getIzquierda());
 		}
 	}
 

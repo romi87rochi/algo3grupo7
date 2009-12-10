@@ -4,13 +4,14 @@ public class PuntoDePoder extends ItemComible {
 
 	int tiempoDeEfecto;
 
-	public PuntoDePoder(int nuevoPuntaje, int tiempoDeEfecto) {
-		super(nuevoPuntaje, true);
+	public PuntoDePoder(int nuevoPuntaje, int tiempoDeEfecto, Casillero casilleroActual) {
+		super(nuevoPuntaje, true,casilleroActual);
 		this.tiempoDeEfecto = tiempoDeEfecto;
 	}
 
 	public int getTiempDeEfecto() {
 		return tiempoDeEfecto;
 	}
+
 
 }

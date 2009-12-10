@@ -42,8 +42,8 @@ public abstract class Fantasma extends Personaje {
 		Casillero casilleroAux = this.getCasilleroActual();
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
 		this.getCasilleroActual().agregarFantasma(this);
-		if (casilleroAux!= this.getJuego().getMapa().getOrigenFantasmas())
-			casilleroAux.removerFantasma(this);
+	//	if (casilleroAux!= this.getJuego().getMapa().getOrigenFantasmas())
+			casilleroAux.removerFantasma(this); 
 	}
 
 	
