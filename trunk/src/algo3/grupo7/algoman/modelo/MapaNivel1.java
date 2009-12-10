@@ -1,58 +1,64 @@
 package algo3.grupo7.algoman.modelo;
+//-Xmx512m -Xms512m, para heap
 
 public class MapaNivel1 extends Tablero {
 	
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 60;
-	private static final int TIEMPODEPODER = 50;
+	private static final int TIEMPODEPODER = 800;
 	private static final int PUNTAJEFRUTA = 100;
-
+ 
   
 	public MapaNivel1(){
-		super(200,200);
-		this.setOrigenPacman(getMatCasilleros()[100][40]) ;
-		this.setOrigenFantasmas(getMatCasilleros()[100][100]);
+		super(500,500);
+		this.setOrigenPacman(getMatCasilleros()[100][100]) ;
+		this.setOrigenFantasmas(getMatCasilleros()[250][250]);
 	}
 
 	protected void cargarContorno(){
-		construirCaminoDesdeHasta(10, 190, 10, 10,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 10, 10, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(190, 190, 10, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 190, 190, 190,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 25, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(475, 475, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 25, 25, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 475, 475, PUNTAJEPUNTO);
 	}
 	
 	protected void cargarCaminosHorizontales(){
-		construirCaminoDesdeHasta(40, 40, 10, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(70, 70, 10, 40,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(70, 70, 70, 130,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(70, 70, 160, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(100, 100, 10, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(130, 130, 10, 190,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(160, 160, 10, 190,PUNTAJEPUNTO);
+		//1
+		construirCaminoDesdeHasta(100, 100, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(175, 175, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(250, 250, 25, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(325, 325, 25, 100, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(325, 325, 175, 325, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(325, 325, 400, 475, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(400, 400, 25, 475, PUNTAJEPUNTO);
+		
 	}
 	
 	protected void cargarCaminosVerticales(){
-		construirCaminoDesdeHasta(10, 190, 40, 40,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(40, 100, 70, 70,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(130, 160, 70, 70,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 40, 100, 100,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(100, 130, 100, 100,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(160, 190, 100, 100,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(40, 100, 130, 130,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(130, 160, 130, 130,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(10, 190, 160, 160,PUNTAJEPUNTO);
+		
+		construirCaminoDesdeHasta(25, 475, 100, 100, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(100, 175, 175, 175, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(250, 400, 175, 175, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 100, 250, 250, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(175, 250, 250, 250, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(400, 475, 250, 250, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(100, 175, 325, 325, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(250, 400, 325, 325, PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(25, 475, 400, 400, PUNTAJEPUNTO);
+		
 	}
 	
-	protected void cargarPuntosDePoder(){
-		getMatCasilleros()[10][100].setItem(new
-				PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));  
-        getMatCasilleros()[130][100].setItem(new
-        		PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));
+	protected void cargarFruta() {
+		getMatCasilleros()[100][100].setItem(new Fruta(PUNTAJEFRUTA, this.getMatCasilleros()[100][100]));
+	}
+
+	protected void cargarPuntosDePoder() {
+		getMatCasilleros()[100][400].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
+				TIEMPODEPODER, this.getMatCasilleros()[100][400]));
+		getMatCasilleros()[400][400].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
+				TIEMPODEPODER,this.getMatCasilleros()[400][400]));
 	}
 	
-	protected void cargarFruta(){
-		getMatCasilleros()[70][100].setItem(new Fruta(PUNTAJEFRUTA));
-	}
-	
+
 
 }

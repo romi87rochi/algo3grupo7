@@ -1,3 +1,5 @@
+package algo3.grupo7.algoman.modelo;
+
 
 public class MapaNivel3 extends Tablero {
 
@@ -10,8 +12,9 @@ public class MapaNivel3 extends Tablero {
 	
 	public MapaNivel3(){
 		super(500,500);
-		origenPacman = getMatCasilleros()[250][250];
-		origenFantasmas = getMatCasilleros()[175][250];
+		this.setOrigenPacman(getMatCasilleros()[250][250]) ;
+		this.setOrigenFantasmas(getMatCasilleros()[175][250]);
+	
 	}
 	
 	protected void cargarContorno() {
@@ -48,14 +51,14 @@ public class MapaNivel3 extends Tablero {
 	}
 
 	protected void cargarFruta() {
-		getMatCasilleros()[100][250].setItem(new Fruta(PUNTAJEFRUTA));
+		getMatCasilleros()[100][250].setItem(new Fruta(PUNTAJEFRUTA,this.getMatCasilleros()[100][250]));
 	}
 
 	protected void cargarPuntosDePoder() {
 		getMatCasilleros()[25][55].setItem(new
-				PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));  
+				PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER,this.getMatCasilleros()[25][55]));  
         getMatCasilleros()[475][445].setItem(new
-        		PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER));
+        		PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER,this.getMatCasilleros()[475][445]));
 	}
 
 	public Casillero getCasilleroOrigenFantasma() {
