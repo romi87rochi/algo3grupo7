@@ -8,7 +8,7 @@ import ar.uba.fi.algo3.titiritero.ControladorJuego;
 public class VentanaPrincipal extends Ventana {
 
 	public VentanaPrincipal(ControladorJuego unControladorJuego, Pacman pacman) {
-		super(800,800, unControladorJuego);
+		super(700,700, unControladorJuego,"mapaNivel4.jpg");
 		this.setTitle("Ejemplo");
 	    this.setFocusable(true);
 	    this.addKeyListener(new Teclado(pacman));
