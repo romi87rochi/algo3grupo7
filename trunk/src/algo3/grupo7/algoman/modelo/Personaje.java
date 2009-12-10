@@ -6,7 +6,7 @@ import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 import ar.uba.fi.algo3.titiritero.Posicionable;
 
 public abstract class Personaje implements ObjetoVivo,Posicionable {
-
+	private static final int FACTORCORRECTIVO=10; //Utilizado para centrar las imagenes en los casilleros
 	private int velocidad;
 	private Juego juego;
 	private ArrayList<Tablero> tablero;
@@ -66,13 +66,13 @@ public abstract class Personaje implements ObjetoVivo,Posicionable {
 	//Implementacion getX() de la interfaz posicionable 
 	public int getX() {
 		
-		return (this.getCasilleroActual().getPosicion().getPosX())*1;
+		return (this.getCasilleroActual().getPosicion().getPosX())-FACTORCORRECTIVO;
 	}
 	
 	//Implementacion getY() de la interfaz posicionable
 	public int getY() {
 		
-		return (this.getCasilleroActual().getPosicion().getPosY())*1;
+		return (this.getCasilleroActual().getPosicion().getPosY()-FACTORCORRECTIVO);
 	}
 
 }

@@ -20,7 +20,7 @@ public class Posicion {
             return posY;
     }
     
-    public Posicion getArriba(){
+    public Posicion getIzquierda(){
             Posicion arriba = null;
             int posX = this.posX;
             int posY = this.posY;
@@ -30,7 +30,7 @@ public class Posicion {
             return arriba;
     }
     
-    public Posicion getAbajo(){
+    public Posicion getDerecha(){
             Posicion abajo = null;
             int posX = this.posX;
             int posY = this.posY;
@@ -39,7 +39,7 @@ public class Posicion {
             return abajo;
     }       
     
-    public Posicion getIzquierda(){
+    public Posicion getArriba(){
             Posicion izquierda = null;
             int posX = this.posX;
             int posY = this.posY;
@@ -48,7 +48,7 @@ public class Posicion {
             return izquierda;
     }       
 
-    public Posicion getDerecha(){
+    public Posicion getAbajo(){
             Posicion derecha = null;
             int posX = this.posX;
             int posY = this.posY;

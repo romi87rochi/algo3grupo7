@@ -11,22 +11,19 @@ public class Pacman extends Personaje {
 	private static final int VELOCIDAD = 5;
 	private int itemsComidos;
 	private int tiempoDeEfecto;
+	private int tiempoDeResurreccion;
 	private String proximaDireccion;
 	private String direccionActual;
-	private Casillero ultimoCasilleroPorTeclado; // recuerda cual fue el ultimo
 
-	// casillero q pidio el
-	// teclado
 
 	public Pacman(Juego nuevoJuego) {
 		super(nuevoJuego, true, VELOCIDAD);
 		this.vidas = CANTVIDAS;
-		this.vivo = true;
 		this.tiempoDeEfecto = 0;
+		this.tiempoDeResurreccion = 1;
+		this.vivo = false;
 		this.setCasilleroActual(nuevoJuego.getMapa().getOrigenPacman());
-		this.proximaDireccion = "izquierda";
-		direccionActual = "izquierda"; // la direccion por default es izquierda
-		//ultimoCasilleroPorTeclado = null;
+		this.inicializar();
 	}
 
 	protected void mover(Casillero nuevoCasillero) {
@@ -39,38 +36,56 @@ public class Pacman extends Personaje {
 		}
 	}
 
-	public void setProximaDireccion(String proximaDireccion){
-		this.proximaDireccion=proximaDireccion;
+	public void setProximaDireccion(String proximaDireccion) {
+		this.proximaDireccion = proximaDireccion;
 	}
+
 	public void vivir() {
 
 		int pasos = 0;
+		/*
+		 * Si aun no termino el tiempo de espera para revivir pasos se iguala a
+		 * la velocidad para que pacman no realize el movimiento y permita q
+		 * todos los fantasmas tengan su tiempo para acomodarse
+		 */
 		if (!this.estaVivo()) {
-            this.inicializar();
-		} 
+			if (this.tiempoDeResurreccion > 0) {
+				pasos = this.getVelocidad();
+				--this.tiempoDeResurreccion;
+			} else {
+				this.inicializar();
+			}
+		}
+
+
 		while (pasos < this.getVelocidad()) {
-			//se guarda un casillero auxiliar adyacente al actual segun la direccion actual
+			// se guarda un casillero auxiliar adyacente al actual segun la
+			// direccion actual
 			Casillero casilleroAux = getCasilleroProximaDireccion(this.direccionActual);
 
 			if (!this.getJuego().esFinNivel())
-				/* pregunta si en la direccion q indica el usuario hay un casillero camino, si lo es lo visita y
-				 * esta direccion se convertira en la actual 
+				/*
+				 * pregunta si en la direccion q indica el usuario hay un
+				 * casillero camino, si lo es lo visita y esta direccion se
+				 * convertira en la actual
 				 */
-				if (this.getCasilleroProximaDireccion(proximaDireccion).puedeSerVisitado()) {
-					casilleroAux = this.getCasilleroProximaDireccion(proximaDireccion);
-					this.direccionActual=proximaDireccion;
+				if (this.getCasilleroProximaDireccion(proximaDireccion)
+						.puedeSerVisitado()) {
+					casilleroAux = this
+							.getCasilleroProximaDireccion(proximaDireccion);
+					this.direccionActual = proximaDireccion;
 				}
 			this.mover(casilleroAux);
 			pasos++;
 		}
 	}
 
-	private void inicializar(){
-		this.vivo=true;
+	private void inicializar() {
+		this.vivo = true;
 		this.reubicar();
 		direccionActual = "izquierda";
-		//ultimoCasilleroPorTeclado=null;
-		this.proximaDireccion= "izquierda";
+		// ultimoCasilleroPorTeclado=null;
+		this.proximaDireccion = "izquierda";
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -78,7 +93,6 @@ public class Pacman extends Personaje {
 			e.printStackTrace();
 		}
 	}
-	
 
 	/*
 	 * Intenta comer todos los fantasmas contenidos en el casillero si come
@@ -88,10 +102,12 @@ public class Pacman extends Personaje {
 		ArrayList<Fantasma> listaFantasmas = this.getCasilleroActual()
 				.getFantasmas();
 
-		Iterator<Fantasma> itFantasmas = listaFantasmas.iterator();
-		while (itFantasmas.hasNext()) {
+		while (!listaFantasmas.isEmpty()) {
+			Iterator<Fantasma> itFantasmas = listaFantasmas.iterator();
 			Fantasma fantasmaAux = itFantasmas.next();
 			if (fantasmaAux.puedeSerComido()) {
+				itFantasmas = null;// cierra el uso del iterador para q pueda
+									// perdir uno el fantasma
 				fantasmaAux.encontrado();
 
 			} else {
@@ -138,6 +154,7 @@ public class Pacman extends Personaje {
 		this.vivo = false;
 		this.reubicar();
 		this.decrementarVida();
+		this.tiempoDeResurreccion = 1;
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -198,9 +215,7 @@ public class Pacman extends Personaje {
 	public int getVidas() {
 		return vidas;
 	}
-
-
-
+    /*Devuelve el casillero adyacente segun la direccion indicada*/
 	private Casillero getCasilleroProximaDireccion(String direccion) {
 		Casillero casilleroAux = null;
 		if (direccion == "arriba") {

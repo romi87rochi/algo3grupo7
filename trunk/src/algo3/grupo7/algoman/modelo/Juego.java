@@ -1,6 +1,7 @@
 package algo3.grupo7.algoman.modelo;
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
 
+
 import algo3.grupo7.algoman.vista.VistaPacman;
 import algo3.grupo7.algoman.vista.VistaBlinky;
 import algo3.grupo7.algoman.vista.VistaPinky;
@@ -39,7 +40,7 @@ public class Juego {
             finNivel=true;
             nivel = 0;
             this.controlador=new ControladorJuego();
-            this.mapa=tablero.get(0);
+            this.mapa=tablero.get(0);  
             this.pacman=new Pacman(this);
             this.blinky=new Blinky(this, this.pacman);
             this.pinky=new Pinky(this,this.pacman);
@@ -47,21 +48,16 @@ public class Juego {
             this.clyde=new Clyde(this,this.pacman);
             
             this.nuevoNivel(this.nivel);
-            this.cargarControlador();
-           // this.iniciar();
+
 
     }
 
     private void cargarMapas() {
-		MapaNivel4 mapaNivel4=new MapaNivel4();
-		MapaNivel1 mapaNivel1=new MapaNivel1();
-		//MapaNivel2 mapaNivel2=new MapaNivel2();
-		//MapaNivel3 mapaNivel3=new MapaNivel3();
+    	/*si  tira error de heap, ingresar como parametros: -Xmx512m -Xms512m en Run Configurations*/
 		
-		this.tablero.add(mapaNivel4);
-		this.tablero.add(mapaNivel1);
-		//this.tablero.add(mapaNivel2);
-		//this.tablero.add(mapaNivel3);
+		this.tablero.add(new MapaNivel1());
+		this.tablero.add(new MapaNivel2());
+		this.tablero.add(new MapaNivel3());
 	}
     
     public void cargarMapa(Tablero mapa, int nivel){
@@ -89,6 +85,7 @@ public class Juego {
       vistaInky.setPosicionable(inky);
       VistaClyde vistaClyde=new VistaClyde();
       vistaClyde.setPosicionable(clyde);
+    
       
      
         this.controlador.agregarObjetoVivo(pacman);
@@ -97,12 +94,13 @@ public class Juego {
 		this.controlador.agregarObjetoVivo(inky);
 		this.controlador.agregarObjetoVivo(clyde);
 		
+		
 		this.controlador.agregarDibujable(vistaPacman);
 		this.controlador.agregarDibujable(vistaBlinky);
 		this.controlador.agregarDibujable(vistaPinky);
 		this.controlador.agregarDibujable(vistaInky);
 		this.controlador.agregarDibujable(vistaClyde);
-		this.controlador.setIntervaloSimulacion(10);
+		this.controlador.setIntervaloSimulacion(25);
 		
 	}
    
@@ -110,8 +108,12 @@ public class Juego {
 	   this.mapa=tablero.get(nivel);
 	      //cuando no se necesite motrar el camino quitar controlador de cargartablero
             tablero.get(nivel).cargarTablero(controlador);
+            this.cargarControlador();
               	this.pacman.reubicar();
             	this.blinky.reubicar();
+            	this.inky.reubicar();
+            	this.clyde.reubicar();
+            	this.pinky.reubicar();
                	nivel++;
      //       cantPastillasDelNivel=tablero.getCantItems();
     }
@@ -130,6 +132,18 @@ public class Juego {
 
 	public Blinky getBlinky() {
 		return blinky;
+	}
+
+	public Pinky getPinky() {
+		return pinky;
+	}
+
+	public Inky getInky() {
+		return inky;
+	}
+
+	public Clyde getClyde() {
+		return clyde;
 	}
 
 	public boolean esFinJuego() {
@@ -181,7 +195,7 @@ public class Juego {
     }       
     
     public void adicionarPuntajeItem(ItemComible item){
-            this.puntaje =+ item.getPuntaje();
+            this.puntaje += item.getPuntaje();
     }
     
     public Juego getJuego(){
