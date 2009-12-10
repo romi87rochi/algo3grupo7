@@ -2,6 +2,8 @@ package algo3.grupo7.algoman.modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import algo3.grupo7.algoman.vista.Circulo;
+import algo3.grupo7.algoman.vista.VistaPastilla;
 import ar.uba.fi.algo3.titiritero.Posicionable;
 
 public class Casillero implements Posicionable{
@@ -12,6 +14,7 @@ public class Casillero implements Posicionable{
         private boolean puedeSerVisitado;
         private Posicion posicion;
         private Tablero tablero;
+		
         
         public boolean getPuedeSerVisitado() {
                 return puedeSerVisitado;
@@ -39,8 +42,11 @@ public class Casillero implements Posicionable{
         }
 
         public void setItem(ItemComible nuevoItem) {
+                /*si no hay item lo remueve de los dibujables para que en la proxima 
+                 * simulacion no se dibuje esa pastilla*/
+                if(nuevoItem==null)
+                	tablero.removerDibujable(this);
                 item = nuevoItem;
-
         }
 
         public Posicion getPosicion() {
@@ -49,7 +55,10 @@ public class Casillero implements Posicionable{
 
         /* quita el item del casillero cuando este es comido por pacman */
         public void removerItem() {
+                
+                tablero.removerDibujable(this);
                 item = null;
+                
         }
 
         public ItemComible getItem() {
@@ -63,7 +72,7 @@ public class Casillero implements Posicionable{
         public void removerFantasma(Personaje estePersonaje) {
                 Iterator<Fantasma> itFantasmas = this.fantasmas.iterator();
                 boolean encontrado = false;
-                while (itFantasmas.hasNext() && !encontrado) {
+                while (itFantasmas.hasNext()) {
                         if (itFantasmas.next() == estePersonaje) {
                                 itFantasmas.remove();
                                 encontrado = true;
@@ -143,5 +152,7 @@ public class Casillero implements Posicionable{
 		public int getY() {
 			return (this.getPosicion().getPosY());
 		}
+
+		
 
 }
