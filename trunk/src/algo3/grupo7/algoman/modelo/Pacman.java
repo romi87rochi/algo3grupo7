@@ -75,8 +75,9 @@ public class Pacman extends Personaje {
 							.getCasilleroProximaDireccion(proximaDireccion);
 					this.direccionActual = proximaDireccion;
 				}
-			this.mover(casilleroAux);
 			pasos++;
+			this.mover(casilleroAux);
+			
 		}
 	}
 
@@ -135,10 +136,12 @@ public class Pacman extends Personaje {
 			if (itemAux.esDePoder()) {
 				this.setPuedeSerComido(false);
 				tiempoDeEfecto = ((PuntoDePoder) itemAux).getTiempDeEfecto();
+				--itemsComidos;
 			}
 			this.getCasilleroActual().setItem(null);
 			++itemsComidos;
 		}
+		
 	}
 
 	/*
@@ -148,6 +151,11 @@ public class Pacman extends Personaje {
 	private void comer() {
 		this.comerItem();
 		this.comerFantasmas();
+		if(this.getJuego().getCantPastillasDelNivel()==this.getItemsComidos()){
+			this.itemsComidos=0;
+			this.getJuego().finalizarNivel();
+			
+		}
 	}
 
 	protected void morir() {

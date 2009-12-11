@@ -44,8 +44,7 @@ public class Casillero implements Posicionable{
         public void setItem(ItemComible nuevoItem) {
                 /*si no hay item lo remueve de los dibujables para que en la proxima 
                  * simulacion no se dibuje esa pastilla*/
-                if(nuevoItem==null)
-                	tablero.removerDibujable(this);
+                
                 item = nuevoItem;
         }
 
@@ -56,7 +55,7 @@ public class Casillero implements Posicionable{
         /* quita el item del casillero cuando este es comido por pacman */
         public void removerItem() {
                 
-                tablero.removerDibujable(this);
+       
                 item = null;
                 
         }
