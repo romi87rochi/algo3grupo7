@@ -8,7 +8,6 @@ public abstract class ItemComible implements Posicionable{
 	private int puntajePredeterminado;
 	private boolean esPowa;
 	Casillero casilleroActual;
-	private Circulo vistaPastilla;/*para poder usar el controlador en Tablero*/
 	
 
 	
@@ -40,11 +39,5 @@ public abstract class ItemComible implements Posicionable{
 		return this.casilleroActual.getPosicion().getPosY();
 	}
 	
-	public Circulo getVistaPastilla() {
-		return vistaPastilla;
-	}
-
-	public void setVistaPastilla(Circulo vistaPastilla) {
-		this.vistaPastilla = vistaPastilla;
-	}
+	
 }

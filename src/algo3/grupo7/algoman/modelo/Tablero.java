@@ -120,7 +120,6 @@ public abstract class Tablero {
 		if(casilleros[x][y].getItem()!=null ){
 			if(casilleros[x][y].getItem().getClass() == Punto.class){
 			VistaPastilla vistaPastilla=new VistaPastilla(casilleros[x][y]);
-			this.getMatCasilleros()[x][y].getItem().setVistaPastilla(vistaPastilla);
 			vistaPastilla.setPosicionable(casilleros[x][y]);
 			control.agregarDibujable(vistaPastilla);}
 		}
@@ -133,7 +132,6 @@ public abstract class Tablero {
 				if(casilleros[x][y].getItem()!=null ){
 				if(casilleros[x][y].getItem().getClass() == PuntoDePoder.class){
 					vistaPuntoDePoder vistaPoder=new vistaPuntoDePoder(casilleros[x][y]);
-					this.getMatCasilleros()[x][y].getItem().setVistaPastilla(vistaPoder);
 					vistaPoder.setPosicionable(casilleros[x][y]);
 					control.agregarDibujable(vistaPoder);}
 					
