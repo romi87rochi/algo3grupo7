@@ -16,7 +16,6 @@ public abstract class Tablero {
 	private int cantidadPuntos;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;
-	private ControladorJuego control;
 
 	public Casillero getOrigenPacman() {
 		return origenPacman;
@@ -99,7 +98,7 @@ public abstract class Tablero {
 		this.cargarCaminosVerticales();
 		this.cargarPuntosDePoder();
 		this.cargarFruta();
-		this.agregarDibujablesMapa( control);
+		//this.agregarDibujablesMapa( control);
 		/*se agregan pastillas en otro metodo porque sino se pinta el camino sobre ellas*/
 		this.agregarDibujablesPastillas(control);
 		this.agregarDibujablesPastillasPoder(control);
@@ -120,7 +119,7 @@ public abstract class Tablero {
 			for (int y = 0; y < columnas; y++) {
 		if(casilleros[x][y].getItem()!=null ){
 			if(casilleros[x][y].getItem().getClass() == Punto.class){
-			VistaPastilla vistaPastilla=new VistaPastilla();
+			VistaPastilla vistaPastilla=new VistaPastilla(casilleros[x][y]);
 			this.getMatCasilleros()[x][y].getItem().setVistaPastilla(vistaPastilla);
 			vistaPastilla.setPosicionable(casilleros[x][y]);
 			control.agregarDibujable(vistaPastilla);}
@@ -133,7 +132,7 @@ public abstract class Tablero {
 			for (int y = 0; y < columnas; y++) {
 				if(casilleros[x][y].getItem()!=null ){
 				if(casilleros[x][y].getItem().getClass() == PuntoDePoder.class){
-					vistaPuntoDePoder vistaPoder=new vistaPuntoDePoder();
+					vistaPuntoDePoder vistaPoder=new vistaPuntoDePoder(casilleros[x][y]);
 					this.getMatCasilleros()[x][y].getItem().setVistaPastilla(vistaPoder);
 					vistaPoder.setPosicionable(casilleros[x][y]);
 					control.agregarDibujable(vistaPoder);}
@@ -145,21 +144,8 @@ public abstract class Tablero {
 /*arreglar todo este quilombo*/
 	
    //cuando no se quiera mostrar camino quitar agregar dibujables 
-	public void agregarDibujablesMapa(ControladorJuego control) {
-        this.control=control;
-						 
-		  VistaMapa vistaMapa=new VistaMapa();
-		control.agregarDibujable(vistaMapa);
-	}
 
-	/*cuando pacman come pastilla se llama a este metodo*/
-	public void removerDibujable(Casillero casillero) {
-		  
-			 Circulo vistaPastilla= casillero.getItem().getVistaPastilla();
-			 
-				 control.removerDibujable(vistaPastilla);
-		
-	}
+
 }
 
 

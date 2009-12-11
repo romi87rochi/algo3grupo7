@@ -2,6 +2,7 @@ package algo3.grupo7.algoman.modelo;
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
 
 
+import algo3.grupo7.algoman.vista.VistaMapa;
 import algo3.grupo7.algoman.vista.VistaPacman;
 import algo3.grupo7.algoman.vista.VistaBlinky;
 import algo3.grupo7.algoman.vista.VistaPinky;
@@ -35,11 +36,11 @@ public class Juego {
             this.tablero = new ArrayList<Tablero>();
             this.cargarMapas();
             puntaje = 0;
-            cantPastillasDelNivel=100;
+            
             finJuego = false;
             finNivel=true;
-            nivel = 0;
-            this.controlador=new ControladorJuego();
+            nivel =0;
+            this.controlador=new ControladorJuego(this);
             this.mapa=tablero.get(0);  
             this.pacman=new Pacman(this);
             this.blinky=new Blinky(this, this.pacman);
@@ -75,32 +76,36 @@ public class Juego {
 	}
 	
 	private void cargarControlador(){
-      VistaPacman vistaPacman=new VistaPacman(pacman);
+      
       VistaBlinky vistaBlinky=new VistaBlinky(blinky);
       VistaPinky vistaPinky=new VistaPinky(pinky);
       VistaInky vistaInky=new VistaInky(inky);
       VistaClyde vistaClyde=new VistaClyde(clyde);
-
+      VistaPacman vistaPacman=new VistaPacman(pacman);
      
-        this.controlador.agregarObjetoVivo(pacman);
+        
 		this.controlador.agregarObjetoVivo(blinky);
 		this.controlador.agregarObjetoVivo(pinky);
 		this.controlador.agregarObjetoVivo(inky);
 		this.controlador.agregarObjetoVivo(clyde);
+		this.controlador.agregarObjetoVivo(pacman);
 		
 		
-		this.controlador.agregarDibujable(vistaPacman);
 		this.controlador.agregarDibujable(vistaBlinky);
 		this.controlador.agregarDibujable(vistaPinky);
 		this.controlador.agregarDibujable(vistaInky);
 		this.controlador.agregarDibujable(vistaClyde);
+		this.controlador.agregarDibujable(vistaPacman);
 		this.controlador.setIntervaloSimulacion(20);
 		
 	}
    
 	public void nuevoNivel(int nivel){
-	   this.mapa=tablero.get(nivel);
+	   if(this.nivel<3){
+		   this.mapa=tablero.get(nivel);
+	   
 	      //cuando no se necesite motrar el camino quitar controlador de cargartablero
+	   this.agregarDibujablesMapa();
             tablero.get(nivel).cargarTablero(controlador);
             this.cargarControlador();
               	this.pacman.reubicar();
@@ -108,7 +113,13 @@ public class Juego {
             	this.inky.reubicar();
             	this.clyde.reubicar();
             	this.pinky.reubicar();
-               	nivel++;
+            	this.cantPastillasDelNivel=this.getMapa().getCantidadPuntos();
+            	
+               	this.finNivel=false;
+               	if(this.nivel!=0)
+               		this.controlador.comenzar();
+	   }        	
+               	
      //       cantPastillasDelNivel=tablero.getCantItems();
     }
 
@@ -180,6 +191,7 @@ public class Juego {
     
     public void finalizarNivel(){
             finNivel=true;
+            
     }
     /*Finaliza el juego cuando la cantidad de vidas de packman
      * es cero.
@@ -201,4 +213,12 @@ public class Juego {
     public ControladorJuego getControlador(){
     	return controlador;
     }
+    
+	public void agregarDibujablesMapa() {
+	       // this.control=control;
+							 
+			  VistaMapa vistaMapa=new VistaMapa(this);
+			controlador.agregarDibujable(vistaMapa);
+		}
+
     }

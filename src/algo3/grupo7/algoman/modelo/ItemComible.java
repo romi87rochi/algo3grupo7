@@ -3,7 +3,7 @@ package algo3.grupo7.algoman.modelo;
 import algo3.grupo7.algoman.vista.Circulo;
 import ar.uba.fi.algo3.titiritero.Posicionable;
 
-abstract class ItemComible implements Posicionable{
+public abstract class ItemComible implements Posicionable{
 
 	private int puntajePredeterminado;
 	private boolean esPowa;
