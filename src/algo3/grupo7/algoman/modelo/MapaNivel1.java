@@ -5,13 +5,13 @@ public class MapaNivel1 extends Tablero {
 	
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 60;
-	private static final int TIEMPODEPODER = 800;
+	private static final int TIEMPODEPODER = 1000;
 	private static final int PUNTAJEFRUTA = 100;
  
   
 	public MapaNivel1(){
 		super(500,500);
-		this.setOrigenPacman(getMatCasilleros()[100][100]) ;
+		this.setOrigenPacman(getMatCasilleros()[250][400]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[250][250]);
 	}
 
@@ -23,7 +23,7 @@ public class MapaNivel1 extends Tablero {
 	}
 	
 	protected void cargarCaminosHorizontales(){
-		//1
+		
 		construirCaminoDesdeHasta(100, 100, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(175, 175, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 250, 25, 475, PUNTAJEPUNTO);
@@ -57,6 +57,10 @@ public class MapaNivel1 extends Tablero {
 				TIEMPODEPODER, this.getMatCasilleros()[100][400]));
 		getMatCasilleros()[400][400].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
 				TIEMPODEPODER,this.getMatCasilleros()[400][400]));
+		getMatCasilleros()[400][100].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
+				TIEMPODEPODER,this.getMatCasilleros()[400][100]));
+	/*	getMatCasilleros()[100][100].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
+				TIEMPODEPODER,this.getMatCasilleros()[100][100])); */
 	}
 	
 

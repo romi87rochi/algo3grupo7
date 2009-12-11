@@ -2,7 +2,7 @@ package algo3.grupo7.algoman.modelo;
 
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
 import algo3.grupo7.algoman.vista.Circulo;
-import algo3.grupo7.algoman.vista.VistaCasilleroCamino;
+
 import algo3.grupo7.algoman.vista.VistaMapa;
 import algo3.grupo7.algoman.vista.VistaPastilla;
 import algo3.grupo7.algoman.vista.vistaPuntoDePoder;

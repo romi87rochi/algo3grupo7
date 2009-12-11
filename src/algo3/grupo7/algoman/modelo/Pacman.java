@@ -155,6 +155,7 @@ public class Pacman extends Personaje {
 		this.reubicar();
 		this.decrementarVida();
 		this.tiempoDeResurreccion = 1;
+		this.direccionActual="izquierda";
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -231,5 +232,9 @@ public class Pacman extends Personaje {
 			casilleroAux = getCasilleroActual().getIzquierda();
 		}
 		return casilleroAux;
+	}
+	
+	public String getDireccionActual(){
+		return direccionActual;
 	}
 }

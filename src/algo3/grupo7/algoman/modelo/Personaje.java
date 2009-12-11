@@ -8,6 +8,7 @@ import ar.uba.fi.algo3.titiritero.Posicionable;
 public abstract class Personaje implements ObjetoVivo,Posicionable {
 	private static final int FACTORCORRECTIVO=10; //Utilizado para centrar las imagenes en los casilleros
 	private int velocidad;
+	private int velocidadOriginal;
 	private Juego juego;
 	private ArrayList<Tablero> tablero;
 	protected Casillero casilleroActual;
@@ -20,6 +21,7 @@ public abstract class Personaje implements ObjetoVivo,Posicionable {
 		// El casillero Actual sera instanciado por la clase derivada
 		
 		this.velocidad = velocidad;
+		this.velocidadOriginal=velocidad;
 		this.puedeSerComido = puedeSerComido;
 		
 	}
@@ -55,7 +57,10 @@ public abstract class Personaje implements ObjetoVivo,Posicionable {
 	protected int getVelocidad() {
 		return velocidad;
 	}
-
+   
+	protected int getVelocidadOriginal(){
+		return this.velocidadOriginal;
+	}
 	public boolean puedeSerComido() {
 		return this.puedeSerComido;
 	}

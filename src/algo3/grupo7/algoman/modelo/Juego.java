@@ -75,18 +75,12 @@ public class Juego {
 	}
 	
 	private void cargarControlador(){
-      VistaPacman vistaPacman=new VistaPacman();
-      vistaPacman.setPosicionable(pacman);
-      VistaBlinky vistaBlinky=new VistaBlinky();
-      vistaBlinky.setPosicionable(blinky);
-      VistaPinky vistaPinky=new VistaPinky();
-      vistaPinky.setPosicionable(pinky);
-      VistaInky vistaInky=new VistaInky();
-      vistaInky.setPosicionable(inky);
-      VistaClyde vistaClyde=new VistaClyde();
-      vistaClyde.setPosicionable(clyde);
-    
-      
+      VistaPacman vistaPacman=new VistaPacman(pacman);
+      VistaBlinky vistaBlinky=new VistaBlinky(blinky);
+      VistaPinky vistaPinky=new VistaPinky(pinky);
+      VistaInky vistaInky=new VistaInky(inky);
+      VistaClyde vistaClyde=new VistaClyde(clyde);
+
      
         this.controlador.agregarObjetoVivo(pacman);
 		this.controlador.agregarObjetoVivo(blinky);
@@ -100,7 +94,7 @@ public class Juego {
 		this.controlador.agregarDibujable(vistaPinky);
 		this.controlador.agregarDibujable(vistaInky);
 		this.controlador.agregarDibujable(vistaClyde);
-		this.controlador.setIntervaloSimulacion(25);
+		this.controlador.setIntervaloSimulacion(20);
 		
 	}
    
