@@ -1,12 +1,6 @@
 package algo3.grupo7.algoman.modelo;
 
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
-import algo3.grupo7.algoman.vista.Circulo;
-
-import algo3.grupo7.algoman.vista.VistaMapa;
-import algo3.grupo7.algoman.vista.VistaPastilla;
-import algo3.grupo7.algoman.vista.vistaPuntoDePoder;
-import algo3.grupo7.algoman.vista.VistaMapa;
 
 public abstract class Tablero {
 	private int filas;
@@ -16,22 +10,6 @@ public abstract class Tablero {
 	private int cantidadPuntos;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;
-
-	public Casillero getOrigenPacman() {
-		return origenPacman;
-	}
-
-	public void setOrigenPacman(Casillero origenPacman) {
-		this.origenPacman = origenPacman;
-	}
-
-	public Casillero getOrigenFantasmas() {
-		return origenFantasmas;
-	}
-
-	public void setOrigenFantasmas(Casillero origenFantasmas) {
-		this.origenFantasmas = origenFantasmas;
-	}
 
 	/*
 	 * El tablero es instancianciado con la cantidad de filas y columnas dadas,
@@ -66,7 +44,8 @@ public abstract class Tablero {
 				++espacios;
 				// cada 10 casilleros camino inserta un punto
 				if (espacios == 20) {
-					casilleros[x][y].setItem(new Punto(puntajePunto,this.getMatCasilleros()[x][y]));
+					casilleros[x][y].setItem(new Punto(puntajePunto, this
+							.getMatCasilleros()[x][y]));
 					this.incrementarPunto();
 					espacios = 0;
 				}
@@ -80,6 +59,22 @@ public abstract class Tablero {
 
 	protected int getCantidadPuntos() {
 		return cantidadPuntos;
+	}
+
+	public Casillero getOrigenPacman() {
+		return origenPacman;
+	}
+
+	public void setOrigenPacman(Casillero origenPacman) {
+		this.origenPacman = origenPacman;
+	}
+
+	public Casillero getOrigenFantasmas() {
+		return origenFantasmas;
+	}
+
+	public void setOrigenFantasmas(Casillero origenFantasmas) {
+		this.origenFantasmas = origenFantasmas;
 	}
 
 	protected abstract void cargarContorno();
@@ -98,11 +93,15 @@ public abstract class Tablero {
 		this.cargarCaminosVerticales();
 		this.cargarPuntosDePoder();
 		this.cargarFruta();
-		//this.agregarDibujablesMapa( control);
-		/*se agregan pastillas en otro metodo porque sino se pinta el camino sobre ellas*/
-		this.agregarDibujablesPastillas(control);
-		this.agregarDibujablesPastillasPoder(control);
 
+	}
+
+	public int getFilas() {
+		return filas;
+	}
+
+	public int getColumnas() {
+		return columnas;
 	}
 
 	protected Casillero[][] getMatCasilleros() {
@@ -113,40 +112,10 @@ public abstract class Tablero {
 		return casilleros[posicion.getPosX()][posicion.getPosY()];
 	}
 
-   //cuando no se quiera mostrar camino quitar agregar dibujables 
-	public void agregarDibujablesPastillas(ControladorJuego control){
-		for (int x = 0; x < filas; x++) {
-			for (int y = 0; y < columnas; y++) {
-		if(casilleros[x][y].getItem()!=null ){
-			if(casilleros[x][y].getItem().getClass() == Punto.class){
-			VistaPastilla vistaPastilla=new VistaPastilla(casilleros[x][y]);
-			vistaPastilla.setPosicionable(casilleros[x][y]);
-			control.agregarDibujable(vistaPastilla);}
-		}
-			}}	}
+	public Casillero[][] getCasilleros() {
+		return casilleros;
+	}
 
-	
-	public void agregarDibujablesPastillasPoder(ControladorJuego control){
-		for (int x = 0; x < filas; x++) {
-			for (int y = 0; y < columnas; y++) {
-				if(casilleros[x][y].getItem()!=null ){
-				if(casilleros[x][y].getItem().getClass() == PuntoDePoder.class){
-					vistaPuntoDePoder vistaPoder=new vistaPuntoDePoder(casilleros[x][y]);
-					vistaPoder.setPosicionable(casilleros[x][y]);
-					control.agregarDibujable(vistaPoder);}
-					
-				}}
-		}
-			}	
-
-/*arreglar todo este quilombo*/
-	
-   //cuando no se quiera mostrar camino quitar agregar dibujables 
-
+	// cuando no se quiera mostrar camino quitar agregar dibujables
 
 }
-
-
-
-
-
