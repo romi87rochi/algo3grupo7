@@ -1,7 +1,7 @@
 package algo3.grupo7.algoman.modelo;
 
 public class Pinky extends Fantasma {
-	
+
 	private static final int VELOCIDADDEFECTO = 4;
 
 	public Pinky(Juego nuevoJuego, Personaje pacman) {

@@ -3,26 +3,24 @@ package algo3.grupo7.algoman.vista;
 import java.awt.Color;
 
 import algo3.grupo7.algoman.modelo.Casillero;
-import algo3.grupo7.algoman.modelo.ItemComible;
-import algo3.grupo7.algoman.modelo.Juego;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
-public class VistaPastilla extends Circulo{
+public class VistaPastilla extends Circulo {
 	Casillero casilleros;
-	
-	public VistaPastilla(Casillero casillero){
+
+	public VistaPastilla(Casillero casillero) {
 		super(5);
-		this.casilleros=casillero;
+		this.casilleros = casillero;
 		this.setColor(Color.yellow);
-		}
-	
-	public void dibujar(SuperficieDeDibujo sup){
-		if(casilleros.getItem()==null){
+	}
+
+	public void dibujar(SuperficieDeDibujo sup) {
+		if (casilleros.getItem() == null) {
 			this.setColor(Color.black);
-		}else
+		} else
 			this.setColor(Color.yellow);
 		super.dibujar(sup);
-		
+
 	}
 
 }

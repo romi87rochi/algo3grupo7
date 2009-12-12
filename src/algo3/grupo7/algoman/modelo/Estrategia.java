@@ -1,4 +1,5 @@
 package algo3.grupo7.algoman.modelo;
+
 public class Estrategia {
 
 	private int tipoDeEstrategia;
@@ -77,7 +78,6 @@ public class Estrategia {
 		this.acercarsePorY();
 		this.alejarsePorY();
 		this.alejarsePorX();
-		
 
 	}
 
@@ -124,9 +124,8 @@ public class Estrategia {
 		}
 	}
 
-	
-	 /* Intenta acercarse un casillero al pacman por la coordenada X */
-	 	private void acercarsePorX() {
+	/* Intenta acercarse un casillero al pacman por la coordenada X */
+	private void acercarsePorX() {
 		if (continuar && distintoX()) {
 			Casillero casilleroAfavorX = getCasilleroIgualSentidoX();
 			if (puedeSerVisitado(casilleroAfavorX)) {
@@ -137,7 +136,7 @@ public class Estrategia {
 		}
 	}
 
-	 	/* Intenta acercarse un casillero al pacman por la coordenada Y  */
+	/* Intenta acercarse un casillero al pacman por la coordenada Y */
 	private void acercarsePorY() {
 		if (continuar && distintoY()) {
 			Casillero casilleroAfavorY = getCasilleroIgualSentidoY();
@@ -187,12 +186,14 @@ public class Estrategia {
 		if (distanciaPacmanFantasma < 0) {
 			return casilleroActual.getDerecha();
 		} else {
-			/* en caso de que las coordenadas sean cero tiene que resolver si o
-			 *si por esta razon
-			 *se verifica que no se haya pisado antes el casillero y si el casillero candidato es una pared (ojo no 
-			 *quitar esta comprobacion
-			*/
-			if (puedeSerVisitado(casilleroActual.getAbajo()) && (casilleroActual.getAbajo() != ultimoCasilleroFan)) {
+			/*
+			 * en caso de que las coordenadas sean cero tiene que resolver si o
+			 * si por esta razonse verifica que no se haya pisado antes el
+			 * casillero y si el casillero candidato es una pared (ojo noquitar
+			 * esta comprobacion
+			 */
+			if (puedeSerVisitado(casilleroActual.getAbajo())
+					&& (casilleroActual.getAbajo() != ultimoCasilleroFan)) {
 				return casilleroActual.getDerecha();
 			} else {
 				return casilleroActual.getIzquierda();
@@ -218,7 +219,8 @@ public class Estrategia {
 		// en caso de que las coordenadas sean cero tiene que resolver si o si
 		// por esta
 		// se verifica que no se haya pisado antes el casillero
-		if (puedeSerVisitado(casilleroActual.getDerecha()) && (casilleroActual.getDerecha() != ultimoCasilleroFan) ) {
+		if (puedeSerVisitado(casilleroActual.getDerecha())
+				&& (casilleroActual.getDerecha() != ultimoCasilleroFan)) {
 			return casilleroActual.getAbajo();
 		} else {
 			return casilleroActual.getArriba();
@@ -234,9 +236,11 @@ public class Estrategia {
 		int distanciaPacmanFantasma = rastrearPacman().getPosY()
 				- posActualFan.getPosY();
 		if ((distanciaPacmanFantasma >= 0)) {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getAbajo());
+			return pacman.getJuego().getMapa().getCasillero(
+					posActualFan.getAbajo());
 		} else {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getArriba());
+			return pacman.getJuego().getMapa().getCasillero(
+					posActualFan.getArriba());
 		}
 	}
 
@@ -249,9 +253,11 @@ public class Estrategia {
 		int distanciaPacmanFantasma = rastrearPacman().getPosX()
 				- posActualFan.getPosX();
 		if ((distanciaPacmanFantasma >= 0)) {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getDerecha());
+			return pacman.getJuego().getMapa().getCasillero(
+					posActualFan.getDerecha());
 		} else {
-			return pacman.getJuego().getMapa().getCasillero(posActualFan.getIzquierda());
+			return pacman.getJuego().getMapa().getCasillero(
+					posActualFan.getIzquierda());
 		}
 	}
 

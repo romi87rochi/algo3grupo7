@@ -15,7 +15,6 @@ public class Pacman extends Personaje {
 	private String proximaDireccion;
 	private String direccionActual;
 
-
 	public Pacman(Juego nuevoJuego) {
 		super(nuevoJuego, true, VELOCIDAD);
 		this.vidas = CANTVIDAS;
@@ -57,7 +56,6 @@ public class Pacman extends Personaje {
 			}
 		}
 
-
 		while (pasos < this.getVelocidad()) {
 			// se guarda un casillero auxiliar adyacente al actual segun la
 			// direccion actual
@@ -77,7 +75,7 @@ public class Pacman extends Personaje {
 				}
 			pasos++;
 			this.mover(casilleroAux);
-			
+
 		}
 	}
 
@@ -108,7 +106,7 @@ public class Pacman extends Personaje {
 			Fantasma fantasmaAux = itFantasmas.next();
 			if (fantasmaAux.puedeSerComido()) {
 				itFantasmas = null;// cierra el uso del iterador para q pueda
-									// perdir uno el fantasma
+				// perdir uno el fantasma
 				fantasmaAux.encontrado();
 
 			} else {
@@ -141,7 +139,7 @@ public class Pacman extends Personaje {
 			this.getCasilleroActual().setItem(null);
 			++itemsComidos;
 		}
-		
+
 	}
 
 	/*
@@ -151,10 +149,11 @@ public class Pacman extends Personaje {
 	private void comer() {
 		this.comerItem();
 		this.comerFantasmas();
-		if(this.getJuego().getCantPastillasDelNivel()==this.getItemsComidos()){
-			this.itemsComidos=0;
+		if (this.getJuego().getCantPastillasDelNivel() == this
+				.getItemsComidos()) {
+			this.itemsComidos = 0;
 			this.getJuego().finalizarNivel();
-			
+
 		}
 	}
 
@@ -163,7 +162,7 @@ public class Pacman extends Personaje {
 		this.reubicar();
 		this.decrementarVida();
 		this.tiempoDeResurreccion = 1;
-		this.direccionActual="izquierda";
+		this.direccionActual = "izquierda";
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -224,7 +223,8 @@ public class Pacman extends Personaje {
 	public int getVidas() {
 		return vidas;
 	}
-    /*Devuelve el casillero adyacente segun la direccion indicada*/
+
+	/* Devuelve el casillero adyacente segun la direccion indicada */
 	private Casillero getCasilleroProximaDireccion(String direccion) {
 		Casillero casilleroAux = null;
 		if (direccion == "arriba") {
@@ -241,8 +241,8 @@ public class Pacman extends Personaje {
 		}
 		return casilleroAux;
 	}
-	
-	public String getDireccionActual(){
+
+	public String getDireccionActual() {
 		return direccionActual;
 	}
 }

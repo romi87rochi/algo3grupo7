@@ -1,7 +1,7 @@
 package algo3.grupo7.algoman.modelo;
 
 public class Inky extends Fantasma {
-	
+
 	private static final int VELOCIDADDEFECTO = 5;
 
 	public Inky(Juego nuevoJuego, Personaje pacman) {
