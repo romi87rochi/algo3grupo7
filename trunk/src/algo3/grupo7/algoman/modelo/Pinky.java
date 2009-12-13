@@ -6,7 +6,7 @@ public class Pinky extends Fantasma {
 
 	public Pinky(Juego nuevoJuego, Personaje pacman) {
 		super(nuevoJuego, pacman, VELOCIDADDEFECTO);
-		int tipoEstrategia = 1;
+		int tipoEstrategia = 2;
 		this.setEstrategia(new Estrategia(this, pacman, tipoEstrategia));
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
 	}

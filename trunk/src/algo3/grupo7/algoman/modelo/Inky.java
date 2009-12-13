@@ -6,7 +6,7 @@ public class Inky extends Fantasma {
 
 	public Inky(Juego nuevoJuego, Personaje pacman) {
 		super(nuevoJuego, pacman, VELOCIDADDEFECTO);
-		int tipoEstrategia = 3;
+		int tipoEstrategia = 1;
 		this.setEstrategia(new Estrategia(this, pacman, tipoEstrategia));
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
 	}
