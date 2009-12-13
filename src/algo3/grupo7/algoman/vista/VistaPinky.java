@@ -11,6 +11,7 @@ public class VistaPinky extends Imagen {
 		this.setNombreArchivoImagen("Pinky.jpg");
         this.setPosicionable(pinky);
 	}
+   
 
 	private void determinarImagen() {
 		if (pinky.puedeSerComido()) {

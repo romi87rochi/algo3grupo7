@@ -8,7 +8,7 @@ public class VistaClyde extends Imagen {
 
 	public VistaClyde(Clyde clyde) {
 		this.clyde=clyde;
-		this.setNombreArchivoImagen("Blinky.jpg");
+		this.setNombreArchivoImagen("Clyde.jpg");
         this.setPosicionable(clyde);
 	}
 
@@ -18,7 +18,7 @@ public class VistaClyde extends Imagen {
 			this.setNombreArchivoImagen("FanPuedeSerComido.jpg");
 		} else {
 			if (this.getNombreArchivoImagen() == "FanPuedeSerComido.jpg")
-			this.setNombreArchivoImagen("Blinky.jpg");
+			this.setNombreArchivoImagen("Clyde.jpg");
 		}
 	}
 	

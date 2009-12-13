@@ -8,7 +8,7 @@ public class VistaInky extends Imagen {
 
 	public VistaInky(Inky inky) {
 		this.inky=inky;
-		this.setNombreArchivoImagen("Pinky.jpg");
+		this.setNombreArchivoImagen("Inky.jpg");
         this.setPosicionable(inky);
 	}
 
@@ -18,7 +18,7 @@ public class VistaInky extends Imagen {
 			this.setNombreArchivoImagen("FanPuedeSerComido.jpg");
 		} else {
 			if (this.getNombreArchivoImagen() == "FanPuedeSerComido.jpg")
-			this.setNombreArchivoImagen("Pinky.jpg");
+			this.setNombreArchivoImagen("Inky.jpg");
 		}
 	}
 	

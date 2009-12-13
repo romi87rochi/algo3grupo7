@@ -83,7 +83,6 @@ public class Pacman extends Personaje {
 		this.vivo = true;
 		this.reubicar();
 		direccionActual = "izquierda";
-		// ultimoCasilleroPorTeclado=null;
 		this.proximaDireccion = "izquierda";
 		try {
 			Thread.sleep(3000);
