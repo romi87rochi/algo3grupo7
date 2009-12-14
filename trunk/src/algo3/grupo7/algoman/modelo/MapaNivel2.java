@@ -4,7 +4,7 @@ public class MapaNivel2 extends Tablero {
 
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 65;
-	private static final int TIEMPODEPODER = 45;
+	private static final int TIEMPODEPODER = 750;
 	private static final int PUNTAJEFRUTA = 200;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;

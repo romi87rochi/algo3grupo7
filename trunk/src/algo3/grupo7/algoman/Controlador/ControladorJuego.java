@@ -31,12 +31,22 @@ public class ControladorJuego {
 				Thread.sleep(intervaloSimulacion);
 				if (juego.esFinNivel()) {
 					this.detener();
+					this.removerTodosLosDibujables();
 					juego.setNivel(juego.getNivel() + 1);
 					juego.nuevoNivel(juego.getNivel());
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void removerTodosLosDibujables() {
+		Iterator itDibujables=this.dibujables.iterator();
+		while(itDibujables.hasNext()){
+			
+			itDibujables.next();
+		itDibujables.remove();
 		}
 	}
 
