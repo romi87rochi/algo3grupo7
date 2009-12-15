@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import algo3.grupo7.algoman.modelo.Juego;
+
 /**
  * @author Nicolas
  * Esta clase es la encargada de manejar todo el gameloop. Básicamente tiene una lista
@@ -17,7 +19,14 @@ public class ControladorJuego {
 		this.mouseClickObservadores = new ArrayList();
 	}
 	
-	public void comenzar(){
+	public ControladorJuego(Juego juego) {
+		this.juego = juego;
+		this.objetosVivos = new ArrayList();
+		this.dibujables = new ArrayList();
+		this.mouseClickObservadores = new ArrayList();
+	}
+	
+	/*public void comenzar(){
 		estaEnEjecucion = true;
 		try{
 		while(estaEnEjecucion){
@@ -30,6 +39,28 @@ public class ControladorJuego {
 			e.printStackTrace();
 		}
 	}
+	*/
+	
+	public void comenzar() {
+		estaEnEjecucion = true;
+
+		try {
+			while (estaEnEjecucion) {
+				simular();
+				dibujar();
+				Thread.sleep(intervaloSimulacion);
+				if (juego.esFinNivel()) {
+					this.detener();
+					this.removerTodosLosDibujables();
+					juego.setNivel(juego.getNivel() + 1);
+					juego.nuevoNivel(juego.getNivel());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void detener(){
 		this.estaEnEjecucion = false;
 	}
@@ -48,6 +79,15 @@ public class ControladorJuego {
 	
 	public void removerDibujable(Dibujable unDibujable){
 		dibujables.remove(unDibujable);
+	}
+	
+	private void removerTodosLosDibujables() {
+		Iterator itDibujables=this.dibujables.iterator();
+		while(itDibujables.hasNext()){
+			
+			itDibujables.next();
+		itDibujables.remove();
+		}
 	}
 	
 	public long getIntervaloSimulacion() {
@@ -111,4 +151,5 @@ public class ControladorJuego {
 	private List dibujables;
 	private List mouseClickObservadores;
 	private SuperficieDeDibujo superficieDeDibujo;	
+	private Juego juego;
 }
