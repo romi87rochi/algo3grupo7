@@ -1,21 +1,15 @@
+//-Xmx512m -Xms512m, para heap
 package algo3.grupo7.algoman.modelo;
-
-import algo3.grupo7.algoman.modelo.Casillero;
-import algo3.grupo7.algoman.modelo.Fruta;
-import algo3.grupo7.algoman.modelo.PuntoDePoder;
-import algo3.grupo7.algoman.modelo.Tablero;
 
 public class MapaNivel3 extends Tablero {
 
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 70;
-	private static final int TIEMPODEPODER = 40;
-	private static final int PUNTAJEFRUTA = 300;
-	private Casillero origenPacman;
-	private Casillero origenFantasmas;
+	private static final int TIEMPODEPODER = 400;
+	private static final int PUNTAJEFRUTA = 500;
 
 	public MapaNivel3() {
-		super(500, 500,"nivel3.jpg");
+		super(500, 500, "nivel3.jpg");
 		this.setOrigenPacman(getMatCasilleros()[250][250]);
 		this.setOrigenFantasmas(getMatCasilleros()[175][250]);
 
@@ -60,18 +54,13 @@ public class MapaNivel3 extends Tablero {
 	}
 
 	protected void cargarPuntosDePoder() {
-		getMatCasilleros()[25][55].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
-				TIEMPODEPODER, this.getMatCasilleros()[25][55]));
-		getMatCasilleros()[475][445].setItem(new PuntoDePoder(
-				PUNTAJEPUNTOPODER, TIEMPODEPODER,
-				this.getMatCasilleros()[475][445]));
-	}
-
-	public Casillero getCasilleroOrigenFantasma() {
-		return origenFantasmas;
-	}
-
-	public Casillero getCasilleroOrigenPacman() {
-		return origenPacman;
+		posicionarPuntosDePoder(getMatCasilleros()[25][55],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
+		posicionarPuntosDePoder(getMatCasilleros()[25][445],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
+		posicionarPuntosDePoder(getMatCasilleros()[475][55],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
+		posicionarPuntosDePoder(getMatCasilleros()[475][445],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
 	}
 }

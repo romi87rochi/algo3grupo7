@@ -60,8 +60,7 @@ public class Juego {
 	
 
 	private void cargarMapas() {
-		/*
-		 * si tira error de heap, ingresar como parametros: -Xmx512m -Xms512m en
+		/* si tira error de heap, ingresar como parametros: -Xmx512m -Xms512m en
 		 * Run Configurations
 		 */
 		this.tablero.add(new MapaNivel1());
