@@ -1,8 +1,5 @@
-package algo3.grupo7.algoman.modelo;
-
-import algo3.grupo7.algoman.vista.vistaPuntoDePoder;
-
 //-Xmx512m -Xms512m, para heap
+package algo3.grupo7.algoman.modelo;
 
 public class MapaNivel1 extends Tablero {
 
@@ -12,20 +9,10 @@ public class MapaNivel1 extends Tablero {
 	private static final int PUNTAJEFRUTA = 100;
 
 	public MapaNivel1() {
-		super(500, 500,"mapaNivel1.jpg");
+		super(500, 500, "mapaNivel1.jpg");
 		this.setOrigenPacman(getMatCasilleros()[250][400]);
 		this.setOrigenFantasmas(getMatCasilleros()[250][250]);
 	}
-
-	public void cargarTablero() {
-		this.cargarContorno();
-		this.cargarCaminosHorizontales();
-		this.cargarCaminosVerticales();
-		this.cargarPuntosDePoder();
-		this.cargarFruta();
-
-	}
-
 	
 	protected void cargarContorno() {
 		construirCaminoDesdeHasta(25, 25, 25, 475, PUNTAJEPUNTO);
@@ -35,7 +22,6 @@ public class MapaNivel1 extends Tablero {
 	}
 
 	protected void cargarCaminosHorizontales() {
-
 		construirCaminoDesdeHasta(100, 100, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(175, 175, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 250, 25, 475, PUNTAJEPUNTO);
@@ -43,11 +29,9 @@ public class MapaNivel1 extends Tablero {
 		construirCaminoDesdeHasta(325, 325, 175, 325, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(325, 325, 400, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(400, 400, 25, 475, PUNTAJEPUNTO);
-
 	}
 
 	protected void cargarCaminosVerticales() {
-
 		construirCaminoDesdeHasta(25, 475, 100, 100, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(100, 175, 175, 175, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 400, 175, 175, PUNTAJEPUNTO);
@@ -57,34 +41,21 @@ public class MapaNivel1 extends Tablero {
 		construirCaminoDesdeHasta(100, 175, 325, 325, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(250, 400, 325, 325, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(25, 475, 400, 400, PUNTAJEPUNTO);
-
 	}
 
 	protected void cargarFruta() {
-		getMatCasilleros()[100][100].setItem(new Fruta(PUNTAJEFRUTA, this
-				.getMatCasilleros()[100][100]));
+		getMatCasilleros()[250][175].setItem(new Fruta(PUNTAJEFRUTA, this
+				.getMatCasilleros()[250][175]));
 	}
 
 	protected void cargarPuntosDePoder() {
-		
-		Casillero casilleroTemp=getMatCasilleros()[100][400];
-		PuntoDePoder puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
-		casilleroTemp.setItem(puntoPoderTemp);
-		this.getVistasItems().add(new vistaPuntoDePoder(puntoPoderTemp));
-		this.incrementarPunto();
-		
-		casilleroTemp=getMatCasilleros()[400][400];
-		puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
-		casilleroTemp.setItem(puntoPoderTemp);
-		this.getVistasItems().add(new vistaPuntoDePoder(puntoPoderTemp));
-		this.incrementarPunto();
-		
-		casilleroTemp=getMatCasilleros()[400][100];
-		puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
-		casilleroTemp.setItem(puntoPoderTemp);
-		this.getVistasItems().add(new vistaPuntoDePoder(puntoPoderTemp));
-		this.incrementarPunto();
-
+		posicionarPuntosDePoder(getMatCasilleros()[100][400],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
+		posicionarPuntosDePoder(getMatCasilleros()[400][400],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
+		posicionarPuntosDePoder(getMatCasilleros()[400][100],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
+		posicionarPuntosDePoder(getMatCasilleros()[100][100],
+				PUNTAJEPUNTOPODER, TIEMPODEPODER);
 	}
-
 }
