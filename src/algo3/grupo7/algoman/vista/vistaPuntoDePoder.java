@@ -2,20 +2,21 @@ package algo3.grupo7.algoman.vista;
 
 import java.awt.Color;
 
-import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.PuntoDePoder;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 public class vistaPuntoDePoder extends Circulo{
-	Casillero casilleros;
+	PuntoDePoder puntoPoder;
 	
-	public vistaPuntoDePoder(Casillero casilleros){
+	public vistaPuntoDePoder(PuntoDePoder puntoPoder){
 		super(12);
-		this.casilleros=casilleros;
+		this.puntoPoder=puntoPoder;
 		this.setColor(Color.green);
+		this.setPosicionable(puntoPoder);
 		}
 
 	public void dibujar(SuperficieDeDibujo sup){
-		if(casilleros.getItem()==null){
+		if(this.puntoPoder.getCasilleroActual().getItem()==null){
 			this.setColor(Color.black);
 		}else
 			this.setColor(Color.green);

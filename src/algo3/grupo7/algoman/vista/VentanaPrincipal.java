@@ -1,20 +1,26 @@
 package algo3.grupo7.algoman.vista;
 
-import algo3.grupo7.algoman.modelo.Pacman;
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Label;
+import java.awt.Rectangle;
+
 import algo3.grupo7.algoman.modelo.Teclado;
 
 import algo3.grupo7.algoman.vista.VentanaPrincipal;
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
 
 public class VentanaPrincipal extends Ventana {
-
-	public VentanaPrincipal(ControladorJuego unControladorJuego, Pacman pacman) {
-		super(700, 700, unControladorJuego, "mapaNivel4.jpg");
+	private Label label = null;
+	public VentanaPrincipal(ControladorJuego unControladorJuego, Teclado controladorPacman) {
+		super(700, 700, unControladorJuego);
 		this.setTitle("Ejemplo");
 		this.setFocusable(true);
-		this.addKeyListener(new Teclado(pacman));
+		this.addKeyListener(controladorPacman);
 	}
 
 	private static final long serialVersionUID = 1L;
+	
 
 }
