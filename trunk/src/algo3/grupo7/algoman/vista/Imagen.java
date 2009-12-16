@@ -3,7 +3,7 @@ package algo3.grupo7.algoman.vista;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
-
+import java.util.ArrayList;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
 
@@ -18,7 +18,8 @@ import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 public class Imagen implements Dibujable{
 	
 	public Imagen(){
-		
+		listaImagenes=new ArrayList<BufferedImage>();
+		listaNombresImagenes=new ArrayList<String>();
 	}
 
 	public void dibujar(SuperficieDeDibujo superficeDeDibujo) {
@@ -42,6 +43,8 @@ public class Imagen implements Dibujable{
 		}			
 	}
 	
+
+	
 	public Posicionable getPosicionable() {
 		return posicionable;
 	}
@@ -54,6 +57,31 @@ public class Imagen implements Dibujable{
 		return imagen;
 	}
 	
+	////////////////////////
+	
+	protected void agregarImagenes(int posImg, String rutaImg){
+	try {
+		
+			InputStream in = getClass().getResourceAsStream(rutaImg);
+			JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
+			this.listaImagenes.add(posImg,decoder.decodeAsBufferedImage());
+			this.listaNombresImagenes.add(posImg, rutaImg);
+			
+	} catch (Exception e) {
+	
+		e.printStackTrace();
+	}
+	}
+	
+	public void setImagenAgregada(int posImg) {
+		this.imagen = this.listaImagenes.get(posImg);
+		this.nombreArchivoImagen = this.listaNombresImagenes.get(posImg);
+}
+	
+	private ArrayList<BufferedImage> listaImagenes;
+	private ArrayList<String> listaNombresImagenes;
+
+///////////////////////////////////////////////////	
 	private String nombreArchivoImagen;
     private BufferedImage imagen;
     private Posicionable posicionable;
