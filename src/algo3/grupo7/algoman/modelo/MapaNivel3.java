@@ -1,16 +1,21 @@
 package algo3.grupo7.algoman.modelo;
 
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Fruta;
+import algo3.grupo7.algoman.modelo.PuntoDePoder;
+import algo3.grupo7.algoman.modelo.Tablero;
+
 public class MapaNivel3 extends Tablero {
 
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 70;
-	private static final int TIEMPODEPODER = 500;
+	private static final int TIEMPODEPODER = 40;
 	private static final int PUNTAJEFRUTA = 300;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;
 
 	public MapaNivel3() {
-		super(500, 500);
+		super(500, 500,"nivel3.jpg");
 		this.setOrigenPacman(getMatCasilleros()[250][250]);
 		this.setOrigenFantasmas(getMatCasilleros()[175][250]);
 
