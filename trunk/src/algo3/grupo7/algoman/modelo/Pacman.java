@@ -11,6 +11,7 @@ public class Pacman extends Personaje {
 	private static final int VELOCIDAD = 5;
 	private int itemsComidos;
 	private int tiempoDeEfecto;
+	private int idEfectoGroso;
 	private int tiempoDeResurreccion;
 	private String proximaDireccion;
 	private String direccionActual;
@@ -19,8 +20,10 @@ public class Pacman extends Personaje {
 		super(nuevoJuego, true, VELOCIDAD);
 		this.vidas = CANTVIDAS;
 		this.tiempoDeEfecto = 0;
-		this.tiempoDeResurreccion = 1;
+		this.tiempoDeResurreccion = 2;
 		this.vivo = false;
+		this.itemsComidos=0;
+		this.idEfectoGroso=0;
 		this.setCasilleroActual(nuevoJuego.getMapa().getOrigenPacman());
 		this.inicializar();
 	}
@@ -40,28 +43,13 @@ public class Pacman extends Personaje {
 	}
 
 	public void vivir() {
-
-		int pasos = 0;
-		/*
-		 * Si aun no termino el tiempo de espera para revivir pasos se iguala a
-		 * la velocidad para que pacman no realize el movimiento y permita q
-		 * todos los fantasmas tengan su tiempo para acomodarse
-		 */
-		if (!this.estaVivo()) {
-			if (this.tiempoDeResurreccion > 0) {
-				pasos = this.getVelocidad();
-				--this.tiempoDeResurreccion;
-			} else {
-				this.inicializar();
-			}
-		}
-
-		while (pasos < this.getVelocidad()) {
-			// se guarda un casillero auxiliar adyacente al actual segun la
-			// direccion actual
-			Casillero casilleroAux = getCasilleroProximaDireccion(this.direccionActual);
-
-			if (!this.getJuego().esFinNivel())
+		
+			int pasos = 0;
+			this.comprobarIntegridadYresurreccion();
+			while (pasos < this.getVelocidad() && this.estaVivo()) {
+				// se guarda un casillero auxiliar adyacente al actual segun la
+				// direccion actual
+				Casillero casilleroAux = getCasilleroProximaDireccion(this.direccionActual);
 				/*
 				 * pregunta si en la direccion q indica el usuario hay un
 				 * casillero camino, si lo es lo visita y esta direccion se
@@ -73,12 +61,26 @@ public class Pacman extends Personaje {
 							.getCasilleroProximaDireccion(proximaDireccion);
 					this.direccionActual = proximaDireccion;
 				}
-			pasos++;
-			this.mover(casilleroAux);
-
+				pasos++;
+				this.mover(casilleroAux);
+			}
 		}
+	
+ /*Verifica si pacman esta muerto y en este caso por cuestiones de implementacion de titiritero
+  * el personaje continuara muerto hasta q se hagote su tiempo de resurrecion para asegurar que todos los fantasmas
+  *supieron que pacman estubo sin vida. De esta manera ellos se reubicaran y pacman volvera a la vida reubicandose tambien.
+  */
+	private void comprobarIntegridadYresurreccion(){
+		if (!this.estaVivo()) {
+			if (this.tiempoDeResurreccion > 0) {
+				--this.tiempoDeResurreccion;
+			} else {
+				this.inicializar();
+			}
+		}
+         
 	}
-
+	
 	private void inicializar() {
 		this.vivo = true;
 		this.reubicar();
@@ -118,12 +120,11 @@ public class Pacman extends Personaje {
 	/* Intenta comer algun item que exista en el casillero */
 	private void comerItem() {
 		if (this.getCasilleroActual().hayItem()) {
-			Juego juegoAux;
+			
 			ItemComible itemAux = this.getCasilleroActual().getItem();
 			// Si no fue comido se le pasa el item para que el juego determine
 			// su puntaje
-			juegoAux = this.getJuego();
-			juegoAux.adicionarPuntajeItem(itemAux);
+			this.getJuego().adicionarPuntajeItem(itemAux);
 
 			/*
 			 * Pregunta si es una pastilla de poder y cambia su estado y el
@@ -133,10 +134,11 @@ public class Pacman extends Personaje {
 			if (itemAux.esDePoder()) {
 				this.setPuedeSerComido(false);
 				tiempoDeEfecto = ((PuntoDePoder) itemAux).getTiempDeEfecto();
-				--itemsComidos;
+				++this.idEfectoGroso; //Es un nuevo efecto 
 			}
 			this.getCasilleroActual().setItem(null);
 			++itemsComidos;
+			this.comprobarSiDebeSerFinNivel();
 		}
 
 	}
@@ -148,11 +150,16 @@ public class Pacman extends Personaje {
 	private void comer() {
 		this.comerItem();
 		this.comerFantasmas();
+	}
+
+	private void comprobarSiDebeSerFinNivel(){
 		if (this.getJuego().getCantPastillasDelNivel() == this
 				.getItemsComidos()) {
 			this.itemsComidos = 0;
+			this.vivo=false;
+			this.tiempoDeResurreccion=2;
+			this.setPuedeSerComido(true);
 			this.getJuego().finalizarNivel();
-
 		}
 	}
 
@@ -160,7 +167,7 @@ public class Pacman extends Personaje {
 		this.vivo = false;
 		this.reubicar();
 		this.decrementarVida();
-		this.tiempoDeResurreccion = 1;
+		this.tiempoDeResurreccion = 2;
 		this.direccionActual = "izquierda";
 		try {
 			Thread.sleep(2000);
@@ -186,6 +193,7 @@ public class Pacman extends Personaje {
 		Casillero casilleroAux = this.getCasilleroActual();
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenPacman());
 		this.getCasilleroActual().agregarPacman(this);
+		this.idEfectoGroso=0; 
 		if (casilleroAux != this.getJuego().getMapa().getOrigenPacman())
 			casilleroAux.removerPacman(this);
 	}
@@ -243,5 +251,11 @@ public class Pacman extends Personaje {
 
 	public String getDireccionActual() {
 		return direccionActual;
+	}
+	public int getTiempoDeEfecto(){
+		return this.tiempoDeEfecto;
+	}
+	public int getIdEfectoGroso(){
+	   return this.idEfectoGroso;
 	}
 }

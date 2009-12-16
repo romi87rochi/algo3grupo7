@@ -5,5 +5,6 @@ public class Punto extends ItemComible {
 	public Punto(int nuevoPuntaje, Casillero casilleroActual) {
 		super(nuevoPuntaje, false, casilleroActual);
 	}
+	
 
 }
