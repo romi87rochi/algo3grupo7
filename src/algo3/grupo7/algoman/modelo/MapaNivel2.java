@@ -1,16 +1,21 @@
 package algo3.grupo7.algoman.modelo;
 
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Fruta;
+import algo3.grupo7.algoman.modelo.PuntoDePoder;
+import algo3.grupo7.algoman.modelo.Tablero;
+
 public class MapaNivel2 extends Tablero {
 
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 65;
-	private static final int TIEMPODEPODER = 750;
+	private static final int TIEMPODEPODER = 700;
 	private static final int PUNTAJEFRUTA = 200;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;
 
 	public MapaNivel2() {
-		super(500, 500);
+		super(500, 500,"nivel2.jpg");
 		this.setOrigenPacman(getMatCasilleros()[100][250]);
 		this.setOrigenFantasmas(getMatCasilleros()[250][250]);
 
@@ -48,9 +53,9 @@ public class MapaNivel2 extends Tablero {
 	protected void cargarPuntosDePoder() {
 		getMatCasilleros()[100][55].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,
 				TIEMPODEPODER, this.getMatCasilleros()[100][55]));
-		getMatCasilleros()[400][445].setItem(new PuntoDePoder(
+		getMatCasilleros()[400][444].setItem(new PuntoDePoder(
 				PUNTAJEPUNTOPODER, TIEMPODEPODER,
-				this.getMatCasilleros()[400][445]));
+				this.getMatCasilleros()[400][444]));
 	}
 
 	protected void cargarFruta() {
