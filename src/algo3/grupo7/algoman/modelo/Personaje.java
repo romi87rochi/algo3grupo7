@@ -1,7 +1,5 @@
 package algo3.grupo7.algoman.modelo;
 
-import java.util.ArrayList;
-
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 import ar.uba.fi.algo3.titiritero.Posicionable;
 

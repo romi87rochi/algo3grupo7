@@ -1,6 +1,9 @@
 package algo3.grupo7.algoman.modelo;
 
-import ar.uba.fi.algo3.titiritero.ControladorJuego;
+import java.util.ArrayList;
+
+import algo3.grupo7.algoman.vista.VistaPastilla;
+import ar.uba.fi.algo3.titiritero.Dibujable;
 
 public abstract class Tablero {
 	private int filas;
@@ -10,17 +13,21 @@ public abstract class Tablero {
 	private int cantidadPuntos;
 	private Casillero origenPacman;
 	private Casillero origenFantasmas;
+	private String directorioMapa;
+	private ArrayList<Dibujable> vistasItemsComibles; 
 
 	/*
 	 * El tablero es instancianciado con la cantidad de filas y columnas dadas,
 	 * todos los casilleros no contienen personajes ni items.
 	 */
-	public Tablero(int filas, int columnas) {
+	public Tablero(int filas, int columnas, String directorioMapa) {
 		this.filas = filas;
 		this.columnas = columnas;
+		this.directorioMapa=directorioMapa;
 		casilleros = new Casillero[filas][columnas];
 		posiciones = new MatrizPosiciones(filas, columnas);
 		incializar();
+		vistasItemsComibles=new ArrayList<Dibujable>();
 		cantidadPuntos = 0;
 	}
 
@@ -44,8 +51,9 @@ public abstract class Tablero {
 				++espacios;
 				// cada 10 casilleros camino inserta un punto
 				if (espacios == 20) {
-					casilleros[x][y].setItem(new Punto(puntajePunto, this
-							.getMatCasilleros()[x][y]));
+					Punto puntoTemp=new Punto(puntajePunto,this.getMatCasilleros()[x][y]);
+					casilleros[x][y].setItem(new Punto(puntajePunto, this.getMatCasilleros()[x][y]));
+					this.vistasItemsComibles.add(new VistaPastilla(puntoTemp));
 					this.incrementarPunto();
 					espacios = 0;
 				}
@@ -53,7 +61,7 @@ public abstract class Tablero {
 		}
 	}
 
-	private void incrementarPunto() {
+	protected void incrementarPunto() {
 		this.cantidadPuntos++;
 	}
 
@@ -77,6 +85,15 @@ public abstract class Tablero {
 		this.origenFantasmas = origenFantasmas;
 	}
 
+	public void cargarTablero() {
+		this.cargarContorno();
+		this.cargarCaminosHorizontales();
+		this.cargarCaminosVerticales();
+		this.cargarPuntosDePoder();
+		this.cargarFruta();
+
+	}
+	
 	protected abstract void cargarContorno();
 
 	protected abstract void cargarCaminosHorizontales();
@@ -87,14 +104,6 @@ public abstract class Tablero {
 
 	protected abstract void cargarFruta();
 
-	public void cargarTablero(ControladorJuego control) {
-		this.cargarContorno();
-		this.cargarCaminosHorizontales();
-		this.cargarCaminosVerticales();
-		this.cargarPuntosDePoder();
-		this.cargarFruta();
-
-	}
 
 	public int getFilas() {
 		return filas;
@@ -115,7 +124,14 @@ public abstract class Tablero {
 	public Casillero[][] getCasilleros() {
 		return casilleros;
 	}
+	
+	public String getDirectorioMapa(){
+		return this.directorioMapa;
+	}
 
+	public ArrayList<Dibujable> getVistasItems(){
+		return this.vistasItemsComibles;
+	}
 	// cuando no se quiera mostrar camino quitar agregar dibujables
 
 }

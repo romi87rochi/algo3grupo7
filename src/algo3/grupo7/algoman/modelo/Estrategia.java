@@ -19,7 +19,7 @@ public class Estrategia {
 		this.tipoDeEstrategia = tipoDeEstrategia;
 		this.pacman = pacman;
 		this.fantasma = fantasma;
-		this.casilleroActual = fantasma.getCasilleroActual();
+		this.casilleroActual =fantasma.getCasilleroActual();
 		this.casilleroAmoverse = null;
 		this.ultimoCasilleroFan = fantasma.getCasilleroActual();
 		this.continuar = true;

@@ -19,7 +19,10 @@ public abstract class ItemComible implements Posicionable {
 		this.esPowa = esPowa;
 		this.casilleroActual = casilleroActual;
 	}
-
+    public Casillero getCasilleroActual(){
+    	return casilleroActual;
+    }
+	
 	public int getPuntaje() {
 		return this.puntajePredeterminado;
 	}

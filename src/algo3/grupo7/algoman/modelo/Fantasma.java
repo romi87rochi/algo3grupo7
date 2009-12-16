@@ -4,13 +4,17 @@ public abstract class Fantasma extends Personaje {
 
 	private Estrategia estrategia;
 	private Pacman pacman;
+	private int tiempoDeEspera;
+	private int tiempoDebilidad;
+	private int idDebilidad; 
 
 	public Fantasma(Juego nuevoJuego, Personaje pacman, int velocidad) {
 		super(nuevoJuego, false, velocidad);
 		this.pacman = (Pacman) pacman;
 		this.estrategia = null; // es seteada al finalizar el constructor de las
-								// derivadas
-
+		this.tiempoDeEspera = 0; // derivadas
+		this.tiempoDebilidad=0;
+		this.idDebilidad = 0;
 	}
 
 	protected void comer() {
@@ -18,8 +22,15 @@ public abstract class Fantasma extends Personaje {
 		if (this.getCasilleroActual().hayPacman() && pacman.puedeSerComido()) {
 			pacman.encontrado();
 			this.reubicar();
+		}
+		if (this.getCasilleroActual().hayPacman() && !pacman.puedeSerComido()
+				&& !this.puedeSerComido()) {
+			pacman.encontrado();
+			this.reubicar();
 		} else if (this.getCasilleroActual().hayPacman()) {
 			this.reubicar();
+			tiempoDeEspera = 70 - (this.getJuego().getNivel() * 30);
+			this.idDebilidad=pacman.getIdEfectoGroso();	
 		}
 	}
 
@@ -29,6 +40,10 @@ public abstract class Fantasma extends Personaje {
 		 * fantasma se reubica
 		 */
 		int pasos = 0;
+		if (tiempoDeEspera > 0) {
+			pasos = this.getVelocidad();
+			--tiempoDeEspera;
+		}
 		if (pacman.estaVivo()) {
 			while (pasos < this.getVelocidad()) { // ver cuando cambia de nivel
 
@@ -40,6 +55,7 @@ public abstract class Fantasma extends Personaje {
 		}
 	}
 
+
 	/*
 	 * mueve el fantasma al casillero original y lo borra del casillero en que
 	 * se encontraba
@@ -48,8 +64,9 @@ public abstract class Fantasma extends Personaje {
 		Casillero casilleroAux = this.getCasilleroActual();
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
 		this.getCasilleroActual().agregarFantasma(this);
-		// if (casilleroAux!= this.getJuego().getMapa().getOrigenFantasmas())
 		casilleroAux.removerFantasma(this);
+		this.setPuedeSerComido(false);
+		this.idDebilidad=pacman.getIdEfectoGroso();	
 	}
 
 	protected void mover(Casillero nuevoCasillero) {
@@ -65,25 +82,35 @@ public abstract class Fantasma extends Personaje {
 		if (pacman.puedeSerComido()) {
 			this.cambiarVelocidad(getVelocidadOriginal());
 			this.setPuedeSerComido(false);
-
-		} else {
-			this.setPuedeSerComido(true);
-			if ((this.getVelocidad() - 2) > 0) {
-				this.cambiarVelocidad(getVelocidad() - 1);
-			}
 		}
+		if (!pacman.puedeSerComido()
+				&& this.idDebilidad == pacman.getIdEfectoGroso()) {
+			this.cambiarVelocidad(getVelocidadOriginal());
+			this.setPuedeSerComido(false);
+			this.tiempoDebilidad=pacman.getTiempoDeEfecto();
+		}
+		if (!pacman.puedeSerComido()&& this.idDebilidad != pacman.getIdEfectoGroso()) {// pacman no
+															// estado
+			    this.setPuedeSerComido(true);
+				if ((this.getVelocidad() - 2) > 0)
+				this.cambiarVelocidad(getVelocidad() - 1);
+				this.tiempoDebilidad=pacman.getTiempoDeEfecto();
+		}
+		// Sea cual sea la situacion el fantasma intentara comer
 		this.comer();
 
 	}
 
 	// metodo que sera utilizado cuando pacman se cruse con un fantasma
 	protected void encontrado() {
-		this.reubicar();
+        morir();
 	}
 
 	/* El fantasma muere y es trasladado a su posicion de origen */
 	protected void morir() {
 		this.reubicar();
+		this.tiempoDeEspera = 70 - (this.getJuego().getNivel() * 30);
+		this.idDebilidad=pacman.getIdEfectoGroso();
 	}
 
 	protected void setEstrategia(Estrategia unaEstrategia) {
@@ -92,5 +119,8 @@ public abstract class Fantasma extends Personaje {
 
 	protected Estrategia getEstrategia() {
 		return this.estrategia;
+	}
+	public int getTiempoDebilidad(){
+		return this.tiempoDebilidad;
 	}
 }

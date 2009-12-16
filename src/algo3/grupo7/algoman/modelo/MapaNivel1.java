@@ -1,5 +1,7 @@
 package algo3.grupo7.algoman.modelo;
 
+import algo3.grupo7.algoman.vista.vistaPuntoDePoder;
+
 //-Xmx512m -Xms512m, para heap
 
 public class MapaNivel1 extends Tablero {
@@ -10,11 +12,21 @@ public class MapaNivel1 extends Tablero {
 	private static final int PUNTAJEFRUTA = 100;
 
 	public MapaNivel1() {
-		super(500, 500);
+		super(500, 500,"mapaNivel1.jpg");
 		this.setOrigenPacman(getMatCasilleros()[250][400]);
 		this.setOrigenFantasmas(getMatCasilleros()[250][250]);
 	}
 
+	public void cargarTablero() {
+		this.cargarContorno();
+		this.cargarCaminosHorizontales();
+		this.cargarCaminosVerticales();
+		this.cargarPuntosDePoder();
+		this.cargarFruta();
+
+	}
+
+	
 	protected void cargarContorno() {
 		construirCaminoDesdeHasta(25, 25, 25, 475, PUNTAJEPUNTO);
 		construirCaminoDesdeHasta(475, 475, 25, 475, PUNTAJEPUNTO);
@@ -54,20 +66,25 @@ public class MapaNivel1 extends Tablero {
 	}
 
 	protected void cargarPuntosDePoder() {
-		getMatCasilleros()[100][400].setItem(new PuntoDePoder(
-				PUNTAJEPUNTOPODER, TIEMPODEPODER,
-				this.getMatCasilleros()[100][400]));
-		getMatCasilleros()[400][400].setItem(new PuntoDePoder(
-				PUNTAJEPUNTOPODER, TIEMPODEPODER,
-				this.getMatCasilleros()[400][400]));
-		getMatCasilleros()[400][100].setItem(new PuntoDePoder(
-				PUNTAJEPUNTOPODER, TIEMPODEPODER,
-				this.getMatCasilleros()[400][100]));
-		/*
-		 * getMatCasilleros()[100][100].setItem(new
-		 * PuntoDePoder(PUNTAJEPUNTOPODER,
-		 * TIEMPODEPODER,this.getMatCasilleros()[100][100]));
-		 */
+		
+		Casillero casilleroTemp=getMatCasilleros()[100][400];
+		PuntoDePoder puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
+		casilleroTemp.setItem(puntoPoderTemp);
+		this.getVistasItems().add(new vistaPuntoDePoder(puntoPoderTemp));
+		this.incrementarPunto();
+		
+		casilleroTemp=getMatCasilleros()[400][400];
+		puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
+		casilleroTemp.setItem(puntoPoderTemp);
+		this.getVistasItems().add(new vistaPuntoDePoder(puntoPoderTemp));
+		this.incrementarPunto();
+		
+		casilleroTemp=getMatCasilleros()[400][100];
+		puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
+		casilleroTemp.setItem(puntoPoderTemp);
+		this.getVistasItems().add(new vistaPuntoDePoder(puntoPoderTemp));
+		this.incrementarPunto();
+
 	}
 
 }
