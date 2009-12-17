@@ -66,6 +66,7 @@ public class Juego {
 		this.tablero.add(new MapaNivel1());
 		this.tablero.add(new MapaNivel2());
 		this.tablero.add(new MapaNivel3());
+		this.tablero.add(new MapaNivel4());
 	}
 
 	public void cargarMapa(Tablero mapa, int nivel) {
