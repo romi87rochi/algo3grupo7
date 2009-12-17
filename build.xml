@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Pacman" default="src" basedir=".">
+ 
+ <target name="compilar">
+  <javac srcdir="./src" destdir="." target="1.4" source="1.4">
+   <classpath path="./lib/junit.jar" />
+  </javac>
+ </target>
+ 
+ <target name="test" depends="compilar">
+  <javac srcdir="./test" destdir=".">
+  <junit>
+   <classpath>
+    <path location="./lib/junit.jar" /> 
+	
+	<path location="."/>
+   </classpath>
+   <test name="test" /> 
+   <formatter type="brief" usefile="false" />
+  </junit>
+ </target>
+ 
+</project>
