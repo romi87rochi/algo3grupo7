@@ -51,6 +51,7 @@ public class Estrategia {
 			combinacionEvasiva();
 		}
 
+
 		return casilleroAmoverse;
 	}
 
@@ -182,9 +183,11 @@ public class Estrategia {
 				- posActualFan.getPosX();
 		if ((distanciaPacmanFantasma > 0)) {
 			return casilleroActual.getIzquierda();
+			
 		}
 		if (distanciaPacmanFantasma < 0) {
 			return casilleroActual.getDerecha();
+			
 		} else {
 			/*
 			 * en caso de que las coordenadas sean cero tiene que resolver si o
@@ -192,11 +195,13 @@ public class Estrategia {
 			 * casillero y si el casillero candidato es una pared (ojo noquitar
 			 * esta comprobacion
 			 */
-			if (puedeSerVisitado(casilleroActual.getAbajo())
-					&& (casilleroActual.getAbajo() != ultimoCasilleroFan)) {
+			if (puedeSerVisitado(casilleroActual.getDerecha())
+					&& (casilleroActual.getDerecha() != ultimoCasilleroFan)) {
 				return casilleroActual.getDerecha();
+				
 			} else {
 				return casilleroActual.getIzquierda();
+				
 			}
 		}
 
@@ -212,18 +217,22 @@ public class Estrategia {
 				- posActualFan.getPosY();
 		if ((distanciaPacmanFantasma > 0)) {
 			return casilleroActual.getArriba();
+			
 		}
 		if (distanciaPacmanFantasma < 0) {
 			return casilleroActual.getAbajo();
+			
 		}
 		// en caso de que las coordenadas sean cero tiene que resolver si o si
 		// por esta
 		// se verifica que no se haya pisado antes el casillero
-		if (puedeSerVisitado(casilleroActual.getDerecha())
-				&& (casilleroActual.getDerecha() != ultimoCasilleroFan)) {
-			return casilleroActual.getAbajo();
-		} else {
+		if (puedeSerVisitado(casilleroActual.getArriba())
+				&& (casilleroActual.getArriba() != ultimoCasilleroFan)) {
+			
 			return casilleroActual.getArriba();
+		} else {
+			return casilleroActual.getAbajo();
+			
 		}
 	}
 
