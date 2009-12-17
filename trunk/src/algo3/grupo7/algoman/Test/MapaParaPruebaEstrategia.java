@@ -8,9 +8,9 @@ public class MapaParaPruebaEstrategia extends Tablero{
 	private static final int PUNTAJEPUNTOPODER = 60;
 	private static final int TIEMPODEPODER = 50;
 	public MapaParaPruebaEstrategia(){
-		super(100,100);
-		this.setOrigenPacman(getMatCasilleros()[10][9]) ;
-		this.setOrigenFantasmas(getMatCasilleros()[66][9]);
+		super(100,100,"mapaNivel1.jpg");
+		this.setOrigenPacman(getMatCasilleros()[1][9]) ;
+		this.setOrigenFantasmas(getMatCasilleros()[99][9]);
 	}
 
 	protected void cargarContorno(){
@@ -18,7 +18,7 @@ public class MapaParaPruebaEstrategia extends Tablero{
 	}
 	
 	protected void cargarCaminosHorizontales(){
-		construirCaminoDesdeHasta(1, 96, 9, 9,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(1, 99, 9, 9,PUNTAJEPUNTO);
 	}
 	
 	protected void cargarCaminosVerticales(){

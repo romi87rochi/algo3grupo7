@@ -137,6 +137,11 @@ public abstract class Tablero {
 	public String getDirectorioMapa(){
 		return this.directorioMapa;
 	}
+	
+	protected void incrementarPunto() {
+		this.cantidadPuntos++;
+		
+	}
 
 	public ArrayList<Dibujable> getVistasItems(){
 		return this.vistasItemsComibles;

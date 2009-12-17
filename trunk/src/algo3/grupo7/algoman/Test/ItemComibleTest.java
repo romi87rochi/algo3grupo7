@@ -1,10 +1,8 @@
 package algo3.grupo7.algoman.Test;
 
 import algo3.grupo7.algoman.modelo.Blinky;
-import algo3.grupo7.algoman.modelo.Fantasma;
 import algo3.grupo7.algoman.modelo.Juego;
 import algo3.grupo7.algoman.modelo.Pacman;
-import algo3.grupo7.algoman.modelo.ItemComible;
 import junit.framework.TestCase;
 
 public class ItemComibleTest extends TestCase {
@@ -16,23 +14,29 @@ public class ItemComibleTest extends TestCase {
 
 	
 	 public void setUp(){
-		  MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
+		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 1);
+		  juego.cargarMapa(mapa, 0);
 		  pacman=juego.getPacman();
 		  blinky=juego.getBlinky();
+		  
+		  
+		  blinky.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		  }
 	
 
 	public void testItemComible() {
-		blinky.vivir(); // blinky esta parado sobre un item
-		assertNotNull(blinky.getCasilleroActual().getItem());
+		
+		pacman.vivir(); // blinky pasa sobre un item
+		assertNull(pacman.getCasilleroActual().getItem());
 	}
 
 	public void testGetPuntaje() {
-		int puntajePoder=60;
+		int puntajePoder=100;
 		blinky.vivir();
-		assertNotNull(blinky.getCasilleroActual().getItem().getPuntaje()>0);
+		assertTrue(blinky.getCasilleroActual().getDerecha().getItem().getPuntaje()==puntajePoder);
 	}
 
 

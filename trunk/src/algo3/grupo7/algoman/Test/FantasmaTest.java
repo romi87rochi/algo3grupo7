@@ -18,21 +18,24 @@ public class FantasmaTest extends TestCase {
 	Clyde clyde;
 	
 	public void setUp(){
+		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+		   
 		
-		juego = new Juego();
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
-		pacman=juego.getPacman();
-		clyde=juego.getClyde();
-
-
 	}
 
 	public void testComer() {	
 	
 		Casillero casilleroEnComun=pacman.getCasilleroActual();
-		clyde.vivir();
-		clyde.vivir();
+		
 		clyde.vivir();
 		clyde.vivir(); //ambos estan en el mismo casillero, fantasma intenta comer pacman
 		
@@ -43,7 +46,7 @@ public class FantasmaTest extends TestCase {
 
 	public void testMover() {
 		MatrizPosiciones matriz=new MatrizPosiciones(20,20);
-		Posicion posicionDondeSeMovera=new Posicion(11,9,matriz);
+		Posicion posicionDondeSeMovera=new Posicion(12,9,matriz);
 		Casillero casilleroDondeSeMovera=juego.getMapa().getCasillero(posicionDondeSeMovera);
 		
 		

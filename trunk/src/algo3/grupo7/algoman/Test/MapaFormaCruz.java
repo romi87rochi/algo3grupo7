@@ -10,7 +10,7 @@ public class MapaFormaCruz extends Tablero{
    
   
 	public MapaFormaCruz(){
-		super(20,20);
+		super(20,20,"mapaNivel1.jpg");
 		this.setOrigenPacman(getMatCasilleros()[14][9]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[9][14]);
 	}

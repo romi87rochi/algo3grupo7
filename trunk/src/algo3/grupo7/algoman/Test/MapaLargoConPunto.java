@@ -1,19 +1,12 @@
 package algo3.grupo7.algoman.Test;
 
-import algo3.grupo7.algoman.modelo.Fruta;
-import algo3.grupo7.algoman.modelo.PuntoDePoder;
 import algo3.grupo7.algoman.modelo.Tablero;
 
 
 public class MapaLargoConPunto extends Tablero{
 	private static final int PUNTAJEPUNTO = 20;
-	private static final int PUNTAJEPUNTOPODER = 60;
-	private static final int TIEMPODEPODER = 50;
-	private static final int PUNTAJEFRUTA = 100;
-   
-  
 	public MapaLargoConPunto(){
-		super(25,25);
+		super(25,25,"mapaNivel1.jpg");
 		this.setOrigenPacman(getMatCasilleros()[10][20]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[10][3]);
 	}

@@ -15,9 +15,16 @@ public class ClydeTest extends TestCase {
 	 public void setUp(){
 		  MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 1);
+		  juego.cargarMapa(mapa, 0);
 		  pacman=juego.getPacman();
-		  fan1=juego.getClyde(); }
+		  fan1=juego.getBlinky();
+		  
+		  
+		  fan1.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+		   
+		 }
 	
 	 
 	public void testClyde() {

@@ -1,6 +1,5 @@
 package algo3.grupo7.algoman.Test;
 
-import algo3.grupo7.algoman.modelo.Blinky;
 import algo3.grupo7.algoman.modelo.Clyde;
 import algo3.grupo7.algoman.modelo.Juego;
 import algo3.grupo7.algoman.modelo.Pacman;
@@ -14,12 +13,17 @@ public class JuegoTest extends TestCase {
 	Clyde clyde;
 	
 	public void setUp(){
-		
-		juego = new Juego();
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
-		pacman=juego.getPacman();
-		clyde=juego.getClyde();
+		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+	
 
 
 	}
@@ -43,29 +47,25 @@ public class JuegoTest extends TestCase {
 
 	public void testComeItems(){
 		
-		
 		pacman.vivir();
-	
-		assertTrue(pacman.getItemsComidos()==2); //come pastilla de poder y fruta
+		assertTrue(pacman.getItemsComidos()==1); //come fruta
 }
 
 
 
 	public void testIsFinJuego() {
 			
-		Blinky blinky=juego.getBlinky();
 		int pasos=0;
 		while(pasos<4){
-			blinky.vivir();
-			blinky.vivir();
-			blinky.vivir();
-			blinky.vivir();
-			blinky.vivir();
-			pacman.vivir();//para que vuelva a vivir, sino queda como muerto y fantasma no lo come
+			clyde.vivir();
+			clyde.vivir();
+			clyde.vivir();
+			 while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+			       pacman.vivir();//para que vuelva a vivir, sino queda como muerto y fantasma no lo come
 			pasos++;
 		}//llega hasta donde esta pacman 3 veces y lo come las 3 veces
 		
-		assertTrue(juego.esFinNivel());
+		assertTrue(juego.esFinJuego());
 	}
 
 

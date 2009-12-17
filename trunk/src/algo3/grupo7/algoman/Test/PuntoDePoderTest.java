@@ -1,7 +1,6 @@
 package algo3.grupo7.algoman.Test;
 
 
-import algo3.grupo7.algoman.modelo.Blinky;
 import algo3.grupo7.algoman.modelo.Casillero;
 import algo3.grupo7.algoman.modelo.Clyde;
 import algo3.grupo7.algoman.modelo.Juego;
@@ -19,12 +18,16 @@ public class PuntoDePoderTest extends TestCase {
 	
 	public void setUp(){
 		
-		juego = new Juego();
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
-		pacman=juego.getPacman();
-		clyde=juego.getClyde();
-
+		MapaLargoConPuntoDePoder mapa=new MapaLargoConPuntoDePoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 
 	}
 	
@@ -47,19 +50,18 @@ public class PuntoDePoderTest extends TestCase {
 			int puntajeFruta=100;
 			
 			pacman.vivir();
-			assertTrue(juego.getPuntaje()>puntajeFruta );//come fruta y punto de poder
+			assertTrue(juego.getPuntaje()>=puntajeFruta );//come fruta y punto de poder
 	}
 
 	// probar que desaparece cuando es comido por pacman y no desaparece cuando pasa un fantasma
 
 
 		public void testNoComidoPorFantasma(){
-			Blinky blinky=juego.getBlinky();
-			blinky.vivir(); //blinky esta en el misma casillero que la fruta
-			Casillero casilleroPoder=blinky.getCasilleroActual();
+		
+			clyde.vivir(); //clyde esta al lado de la fruta
+			Casillero casilleroPoder=clyde.getCasilleroActual();
 		
 			assertFalse(casilleroPoder.getItem()==null); //la fruta sigue estando, el fantasma no la come
-			assertEquals(0, juego.getPuntaje());
 
 					
 			

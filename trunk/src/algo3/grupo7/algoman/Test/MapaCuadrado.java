@@ -13,7 +13,7 @@ public class MapaCuadrado extends Tablero{
    
   
 	public MapaCuadrado(){
-		super(20,20);
+		super(20,20,"mapaNivel1.jpg");
 		this.setOrigenPacman(getMatCasilleros()[19][15]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[9][9]);
 	}
@@ -28,8 +28,8 @@ public class MapaCuadrado extends Tablero{
 	}
 	
 	protected void cargarCaminosVerticales(){
-		construirCaminoDesdeHasta(9, 9, 9, 19,PUNTAJEPUNTO);
-		construirCaminoDesdeHasta(15, 15, 9, 19,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(9, 9, 9, 15,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(19, 19, 9, 15,PUNTAJEPUNTO);
 	
 	}
 	

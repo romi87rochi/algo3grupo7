@@ -10,8 +10,8 @@ public class MapaCaminoHorizontalSinPoder extends Tablero{
    
   
 	public MapaCaminoHorizontalSinPoder(){
-		super(20,20);
-		this.setOrigenPacman(getMatCasilleros()[17][9]) ;
+		super(30,30,"mapaNivel1.jpg");
+		this.setOrigenPacman(getMatCasilleros()[20][9]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[9][9]);
 	}
 
@@ -20,7 +20,7 @@ public class MapaCaminoHorizontalSinPoder extends Tablero{
 	}
 	
 	protected void cargarCaminosHorizontales(){
-		construirCaminoDesdeHasta(9, 17, 9, 9,PUNTAJEPUNTO);
+		construirCaminoDesdeHasta(9, 20, 9, 9,PUNTAJEPUNTO);
 	}
 	
 	protected void cargarCaminosVerticales(){

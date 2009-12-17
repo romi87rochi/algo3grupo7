@@ -21,9 +21,14 @@ public class PosicionesCasillerosTest extends TestCase {
 	
 	public void setUp(){
 		
-		juego = new Juego();
-		mapa=new MapaFormaCruz();
-		juego.cargarMapa(mapa, 0);
+		MapaFormaCruz mapa=new MapaFormaCruz();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  
+		  
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		matriz=new MatrizPosiciones(4,4);
 		posicion=new Posicion(12,12,matriz);
 		celda =juego.getMapa().getCasillero(posicion);

@@ -5,7 +5,6 @@ import algo3.grupo7.algoman.modelo.Casillero;
 import algo3.grupo7.algoman.modelo.Clyde;
 import algo3.grupo7.algoman.modelo.Juego;
 import algo3.grupo7.algoman.modelo.Pacman;
-import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 
