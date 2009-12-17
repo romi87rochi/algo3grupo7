@@ -31,10 +31,10 @@ public class MapaLargoConPuntoDePoder extends Tablero{
 	
 	protected void cargarPuntosDePoder(){
 		 getMatCasilleros()[13][10].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER,this.getMatCasilleros()[13][10]));
-		 this.incrementarPunto();
+		 this.incrementarCantidadDePuntos();
 			
 		 getMatCasilleros()[6][10].setItem(new PuntoDePoder(PUNTAJEPUNTOPODER,TIEMPODEPODER,this.getMatCasilleros()[6][10]));
-		 this.incrementarPunto();
+		 this.incrementarCantidadDePuntos();
 			
 		 
         
@@ -42,7 +42,7 @@ public class MapaLargoConPuntoDePoder extends Tablero{
 	
 	protected void cargarFruta(){
 		getMatCasilleros()[18][10].setItem(new Fruta(PUNTAJEFRUTA,this.getMatCasilleros()[18][10]));
-		this.incrementarPunto();
+		this.incrementarCantidadDePuntos();
 		
 	}
 	
