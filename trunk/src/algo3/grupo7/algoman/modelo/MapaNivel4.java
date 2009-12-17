@@ -84,6 +84,7 @@ public class MapaNivel4 extends Tablero {
 	protected void cargarFruta() { // TODO Auto-generated method stub
 		getMatCasilleros()[228][295].setItem(new Fruta(PUNTAJEFRUTA, this.
 				getMatCasilleros()[228][295]));
+		posicionarFruta(getMatCasilleros()[228][295],PUNTAJEFRUTA);
 	}
 
 	@Override

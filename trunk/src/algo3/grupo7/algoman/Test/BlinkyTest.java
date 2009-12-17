@@ -103,6 +103,7 @@ public void testPacmanComeFantasma(){  //suponiendo que pacman se mueve hacia la
 	fan1.vivir(); // pacman se encuentra con fan1
 	assertTrue(pacman.getVidas()==3); //pacman no pierde vidas
 	assertTrue(pacman.getCasilleroActual()==otracelda); // pacman sigue en su posicion
+	
 	juego=null;
 
 }

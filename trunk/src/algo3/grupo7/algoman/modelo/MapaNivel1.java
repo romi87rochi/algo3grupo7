@@ -46,6 +46,7 @@ public class MapaNivel1 extends Tablero {
 	protected void cargarFruta() {
 		getMatCasilleros()[250][175].setItem(new Fruta(PUNTAJEFRUTA, this
 				.getMatCasilleros()[250][175]));
+		posicionarFruta(getMatCasilleros()[250][175],PUNTAJEFRUTA);
 	}
 
 	protected void cargarPuntosDePoder() {
