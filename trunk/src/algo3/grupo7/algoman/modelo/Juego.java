@@ -157,7 +157,7 @@ public class Juego {
 		return nivel;
 	}
 
-	 void setNivel(int nivel) {
+	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
 
