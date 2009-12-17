@@ -129,6 +129,7 @@ public class CasilleroTest extends TestCase {
     
 		Casillero celda = pacman.getCasilleroActual();
 		assertTrue(celda.getPacman()== pacman);
+		assertTrue(celda.hayPacman());
 		pacman.vivir();
 		assertTrue(pacman.getCasilleroActual().getPacman()== pacman); //cuando se mueve se agrega al nuevo casillero
 		juego=null;
@@ -142,6 +143,7 @@ public class CasilleroTest extends TestCase {
 		casilleroPastilla.setItem(pastilla);
 		
 		assertTrue(fan1.getCasilleroActual().getItem()==pastilla);
+		assertTrue(casilleroPastilla.hayItem());
 		juego=null;
 	}
 
@@ -154,6 +156,7 @@ public class CasilleroTest extends TestCase {
 		casilleroPastilla.setItem(pastilla);
 		casilleroPastilla.removerItem();
 		assertTrue(casilleroPastilla.getItem()==null);
+		assertFalse(casilleroPastilla.hayItem());
 		juego=null;
 	}
 
@@ -178,6 +181,7 @@ public class CasilleroTest extends TestCase {
 		Casillero celda=pacman.getCasilleroActual();
 		celda.removerPacman(pacman);
 		assertTrue(celda.getPacman()==null);
+		assertFalse(celda.hayPacman());
 		juego=null;
 		
 	}

@@ -4,7 +4,9 @@ package algo3.grupo7.algoman.Test;
 import algo3.grupo7.algoman.modelo.Casillero;
 import algo3.grupo7.algoman.modelo.Clyde;
 import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.MatrizPosiciones;
 import algo3.grupo7.algoman.modelo.Pacman;
+import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 
@@ -31,6 +33,9 @@ public class PacmanTest extends TestCase {
 
 	}
 	
+	public void testEstaVivo(){
+		assertTrue(pacman.estaVivo());
+	}
 	
 
 	public void testComer() {
@@ -43,10 +48,11 @@ public class PacmanTest extends TestCase {
 	}
 
 	public void testMover() {
-	
-		pacman.vivir();
+		MatrizPosiciones matriz=new MatrizPosiciones(30,30);
+		Posicion posicionAMoverse= new Posicion(18,9,matriz);
+		Casillero casilleroAMoverse=juego.getMapa().getCasillero(posicionAMoverse);
 		
-		assertFalse(pacman.getCasilleroActual() == juego.getMapa().getOrigenPacman());
+		assertFalse(pacman.getCasilleroActual() == casilleroAMoverse);
 	}
 
 	public void testReubicar() {

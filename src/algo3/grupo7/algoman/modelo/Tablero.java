@@ -2,6 +2,7 @@ package algo3.grupo7.algoman.modelo;
 
 import java.util.ArrayList;
 
+import algo3.grupo7.algoman.vista.VistaFruta;
 import algo3.grupo7.algoman.vista.VistaPastilla;
 import algo3.grupo7.algoman.vista.vistaPuntoDePoder;
 import ar.uba.fi.algo3.titiritero.Dibujable;
@@ -29,7 +30,7 @@ public abstract class Tablero {
 		posiciones = new MatrizPosiciones(filas, columnas);
 		incializar();
 		vistasItemsComibles=new ArrayList<Dibujable>();
-		cantidadPuntos = 1;
+		cantidadPuntos = 0;
 	}
 
 	private void incializar() {
@@ -111,6 +112,15 @@ public abstract class Tablero {
 				tiempo, unCasillero);
 		unCasillero.setItem(unPuntoPoder);
 		this.getVistasItems().add(new vistaPuntoDePoder(unPuntoPoder));
+		this.incrementarCantidadDePuntos();
+	}
+	
+
+	protected void posicionarFruta(Casillero unCasillero,
+			int puntaje) {
+		Fruta fruta = new Fruta(puntaje, unCasillero);
+		unCasillero.setItem(fruta);
+		this.getVistasItems().add(new VistaFruta(fruta));
 		this.incrementarCantidadDePuntos();
 	}
 	
