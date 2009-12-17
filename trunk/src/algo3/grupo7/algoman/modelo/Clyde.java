@@ -2,7 +2,7 @@ package algo3.grupo7.algoman.modelo;
 
 public class Clyde extends Fantasma {
 
-	private static final int VELOCIDADDEFECTO = 3;
+	private static final int VELOCIDADDEFECTO = 4;
 
 	public Clyde(Juego nuevoJuego, Personaje pacman) {
 		super(nuevoJuego, pacman, VELOCIDADDEFECTO);
