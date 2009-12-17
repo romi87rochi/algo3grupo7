@@ -9,7 +9,7 @@ public class MapaNivel3 extends Tablero {
 	private static final int PUNTAJEFRUTA = 500;
 
 	public MapaNivel3() {
-		super(500, 500, "nivel3.jpg");
+		super(500, 500, "mapaNivel3.jpg");
 		this.setOrigenPacman(getMatCasilleros()[250][250]);
 		this.setOrigenFantasmas(getMatCasilleros()[175][250]);
 

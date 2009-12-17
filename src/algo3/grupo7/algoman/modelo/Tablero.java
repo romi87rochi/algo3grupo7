@@ -29,7 +29,7 @@ public abstract class Tablero {
 		posiciones = new MatrizPosiciones(filas, columnas);
 		incializar();
 		vistasItemsComibles=new ArrayList<Dibujable>();
-		cantidadPuntos = 0;
+		cantidadPuntos = 1;
 	}
 
 	private void incializar() {
