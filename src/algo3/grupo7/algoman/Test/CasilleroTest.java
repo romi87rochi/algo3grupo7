@@ -16,23 +16,33 @@ import junit.framework.TestCase;
 public class CasilleroTest extends TestCase {
 	
 	private Juego juego;
+	private Blinky fan1;
+	private Clyde fan2;
+	private Pacman pacman;
 	
 
 	
 	public void setUp(){
 		
 		juego= new Juego();
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
+		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
 		juego.cargarMapa(mapa, 0);
+		fan1=juego.getBlinky();
+		fan2=juego.getClyde();
+		pacman=juego.getPacman();
+		
+		  
+		  fan1.vivir();
+		  fan2.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 	
 	}
 	
 	
 	public void testCeldaConDosFantasmas(){	
 		
-		Blinky fan1=juego.getBlinky();
-		Clyde fan2=juego.getClyde();
-		Pacman pacman=juego.getPacman();
+		
 		Casillero casilleroOrigenFantasma=juego.getMapa().getOrigenFantasmas();
 		
 		assertTrue((fan1.getCasilleroActual()).equals(fan2.getCasilleroActual())) ;
@@ -44,9 +54,8 @@ public class CasilleroTest extends TestCase {
 		assertFalse((fan1.getCasilleroActual()).equals(fan2.getCasilleroActual())) ;
 		
 		fan1.vivir();
-		assertFalse(casilleroOrigenFantasma.getFantasmas().isEmpty()); // estan los demas fantasmas en este casillero
+		assertTrue(casilleroOrigenFantasma.getFantasmas().isEmpty()); 
 		assertTrue(pacman.getCasilleroActual().getPacman()==pacman);
-		assertTrue(fan1.getCasilleroActual().getFantasmas().get(0)==fan1);
 		assertTrue(fan2.getCasilleroActual().getFantasmas().get(0)==fan2);					
 		
 		fan1.vivir(); 
@@ -65,16 +74,11 @@ public class CasilleroTest extends TestCase {
 	}
 	
 	public void testCeldaFantasmaComePacman(){
+		//pacman en 12-9
+		//fantasmas en 9-9
 		
-		Clyde fan1=juego.getClyde();//se mueve cada 2 casilleros
-		
-		Pacman pacman=juego.getPacman();
-		
-		
-		fan1.vivir();  //fantasma se acerca a pacman, que esta quieto
-		fan1.vivir(); 
-		fan1.vivir(); 
-		fan1.vivir(); //fantasma esta en el mismo casillero que pacman
+		fan2.vivir();
+		fan2.vivir(); //fantasma esta en el mismo casillero que pacman
 	
 		
 		assertTrue(pacman.getCasilleroActual()==juego.getMapa().getOrigenPacman());
@@ -88,8 +92,18 @@ public class CasilleroTest extends TestCase {
 
 	public void testPacmanComeFantasma(){  //suponiendo que pacman se mueve hacia la izquierda al principio del juego
 		//pacman con velocidad 5
-		Pacman pacman = juego.getPacman(); 
-		Blinky fan1=juego.getBlinky();
+		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
+		juego.cargarMapa(mapa, 0);
+		fan1=juego.getBlinky();
+		fan2=juego.getClyde();
+		pacman=juego.getPacman();
+		
+		  
+		  fan1.vivir();
+		  fan2.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+	
 		Casillero otracelda=pacman.getCasilleroActual();
 		pacman.vivir(); //pacman come punto de poder
 		fan1.vivir(); // pacman se encuentra con fan1
@@ -102,7 +116,7 @@ public class CasilleroTest extends TestCase {
 
 
 	public void testAgregarFantasma() {
-     	Blinky fan1 = juego.getBlinky();
+     
 		
 		assertTrue(fan1.getCasilleroActual().getFantasmas().get(0)== fan1);
 		fan1.vivir();
@@ -112,7 +126,7 @@ public class CasilleroTest extends TestCase {
 	}
 
 	public void testAgregarPacman() {
-    	Pacman pacman = juego.getPacman();
+    
 		Casillero celda = pacman.getCasilleroActual();
 		assertTrue(celda.getPacman()== pacman);
 		pacman.vivir();
@@ -121,7 +135,7 @@ public class CasilleroTest extends TestCase {
 	}
 
 	public void testSetItem() {
-		Clyde fan1=juego.getClyde();
+
 		int puntaje=100;
 		Casillero casilleroPastilla=fan1.getCasilleroActual();
 		Punto pastilla = new Punto(puntaje,casilleroPastilla);
@@ -133,7 +147,7 @@ public class CasilleroTest extends TestCase {
 
 	public void testRemoverItem() {
 		
-		Clyde fan1=juego.getClyde();
+		
 		int puntaje=100;
 		Casillero casilleroPastilla=fan1.getCasilleroActual();
 		Punto pastilla = new Punto(puntaje,casilleroPastilla);
@@ -160,7 +174,7 @@ public class CasilleroTest extends TestCase {
 
 
 	public void testRemoverPacman() {
-		Pacman pacman = juego.getPacman();
+		
 		Casillero celda=pacman.getCasilleroActual();
 		celda.removerPacman(pacman);
 		assertTrue(celda.getPacman()==null);

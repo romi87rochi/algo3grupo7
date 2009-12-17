@@ -25,7 +25,7 @@ public class Pacman extends Personaje {
 		this.itemsComidos=0;
 		this.idEfectoGroso=0;
 		this.setCasilleroActual(nuevoJuego.getMapa().getOrigenPacman());
-		this.inicializar();
+		//this.inicializar();
 	}
 
 	protected void mover(Casillero nuevoCasillero) {

@@ -13,7 +13,7 @@ public class MapaCaminoHorizontal extends Tablero{
    
   
 	public MapaCaminoHorizontal(){
-		super(20,20);
+		super(20,20,"mapaNivel1.jpg");
 		this.setOrigenPacman(getMatCasilleros()[17][9]) ;
 		this.setOrigenFantasmas(getMatCasilleros()[9][9]);
 	}

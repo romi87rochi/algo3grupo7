@@ -4,7 +4,6 @@ import algo3.grupo7.algoman.modelo.Casillero;
 import algo3.grupo7.algoman.modelo.Fantasma;
 import algo3.grupo7.algoman.modelo.Juego;
 import algo3.grupo7.algoman.modelo.Pacman;
-import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 public class PinkyTest extends TestCase {
@@ -14,11 +13,16 @@ public class PinkyTest extends TestCase {
 
 	
 	 public void setUp(){
-		  MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
+		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 1);
+		  juego.cargarMapa(mapa, 0);
 		  pacman=juego.getPacman();
-		  fan1=juego.getPinky(); }
+		 fan1=juego.getPinky();
+		  
+		  
+		  fan1.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();}
 	
 	 
 	public void testPinky() {

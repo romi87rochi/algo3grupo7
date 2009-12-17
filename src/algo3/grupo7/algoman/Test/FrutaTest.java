@@ -18,12 +18,17 @@ public class FrutaTest extends TestCase {
 	
 	public void setUp(){
 		
-		juego = new Juego();
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
-		pacman=juego.getPacman();
-		clyde=juego.getClyde();
-
+		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+		
 
 	}
 	
@@ -46,7 +51,8 @@ public class FrutaTest extends TestCase {
 			int puntajeFruta=100;
 			
 			pacman.vivir();
-			assertTrue(juego.getPuntaje()>puntajeFruta );//come fruta y punto de poder
+			
+			assertTrue(juego.getPuntaje()==puntajeFruta );//come fruta y punto de poder
 	}
 
 	// probar que desaparece cuando es comido por pacman y no desaparece cuando pasa un fantasma
@@ -54,9 +60,8 @@ public class FrutaTest extends TestCase {
 
 		public void testNoComidoPorFantasma(){
 			
-			clyde.vivir();
-			clyde.vivir(); //clyde esta en el misma casillero que la fruta
-			Casillero casilleroFruta=clyde.getCasilleroActual();
+			clyde.vivir(); //clyde esta al lado de la fruta
+			Casillero casilleroFruta=clyde.getCasilleroActual().getDerecha();
 		
 			assertFalse(casilleroFruta.getItem()==null); //la fruta sigue estando, el fantasma no la come
 			assertEquals(0, juego.getPuntaje());

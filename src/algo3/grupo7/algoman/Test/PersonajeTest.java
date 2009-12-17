@@ -14,13 +14,17 @@ public class PersonajeTest extends TestCase {
 	private Blinky blinky;
 
 	public void setUp(){
+		MapaLargoConPuntoDePoder mapa=new MapaLargoConPuntoDePoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  blinky=juego.getBlinky();
+		  
+		  
+		  blinky.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		
-		juego= new Juego();
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
-		blinky=juego.getBlinky();
-		pacman=juego.getPacman();
-	
 	}
 
 

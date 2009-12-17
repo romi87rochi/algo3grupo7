@@ -1,7 +1,6 @@
 package algo3.grupo7.algoman.Test;
 
 
-import algo3.grupo7.algoman.modelo.Blinky;
 import algo3.grupo7.algoman.modelo.Casillero;
 import algo3.grupo7.algoman.modelo.Clyde;
 import algo3.grupo7.algoman.modelo.Juego;
@@ -16,11 +15,18 @@ public class PacmanTest extends TestCase {
 	Clyde clyde;
 	
 	public void setUp(){
+		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		
-		juego = new Juego();
-		
-		pacman=juego.getPacman();
-		clyde=juego.getClyde();
+	
 
 
 	}
@@ -37,22 +43,20 @@ public class PacmanTest extends TestCase {
 	}
 
 	public void testMover() {
-		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
+	
 		pacman.vivir();
 		
 		assertFalse(pacman.getCasilleroActual() == juego.getMapa().getOrigenPacman());
 	}
 
 	public void testReubicar() {
-		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
-		juego.cargarMapa(mapa, 0);
-		Blinky blinky=juego.getBlinky();
-		pacman.vivir();// come pastilla de poder
-		blinky.vivir(); //fantasma come a pacman
+		
+		pacman.vivir();
+		pacman.vivir();//intenta comer fantasma
+		
 
 		assertEquals(pacman.getCasilleroActual(), juego.getMapa().getOrigenPacman());
-		assertEquals(blinky.getCasilleroActual(), juego.getMapa().getOrigenFantasmas());
+		assertEquals(clyde.getCasilleroActual(), juego.getMapa().getOrigenFantasmas());
 	}
 
 	public void testPacman() {
