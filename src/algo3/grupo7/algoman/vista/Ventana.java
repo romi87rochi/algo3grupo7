@@ -64,8 +64,11 @@ public class Ventana extends Frame implements SuperficieDeDibujo {
 		this.repaint();
 	}
 
-	public Ventana(int ancho, int alto, ControladorJuego unControlador) {
+	public void setControlador(ControladorJuego unControlador){
 		this.addMouseListener(new MouseClickController(unControlador));
+			}
+	public Ventana(int ancho, int alto) {
+		
 		setSize(ancho, alto);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
