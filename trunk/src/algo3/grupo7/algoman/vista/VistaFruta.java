@@ -5,12 +5,16 @@ import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 public class VistaFruta extends Imagen {
 	Fruta fruta;
-
+	private static final int IMGMANZANA = 0;
+	private static final int IMGNADA = 1;
 	public VistaFruta(Fruta fruta) {
 
 				this.fruta=fruta;
-				this.setNombreArchivoImagen("manzana.jpg");
-		        this.setPosicionable(fruta);
+				this.setPosicionable(fruta);
+				this.agregarImagenes(IMGMANZANA,"manzana.jpg");
+				this.agregarImagenes(IMGNADA, "nada.jpg");
+				this.setImagenAgregada(IMGMANZANA);
+		        
 			}
 
 			
@@ -18,9 +22,9 @@ public class VistaFruta extends Imagen {
 			
 			public void dibujar(SuperficieDeDibujo superficeDeDibujo) {
 				if (this.fruta.getCasilleroActual().hayItem()) {
-					this.setNombreArchivoImagen("manzana.jpg");
+					this.setImagenAgregada(IMGMANZANA);
 				} else {
-					this.setNombreArchivoImagen("nada.jpg");
+					this.setImagenAgregada(IMGNADA);
 				}
 			
 				super.dibujar(superficeDeDibujo);
