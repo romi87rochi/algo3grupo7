@@ -4,7 +4,7 @@ public class MapaNivel4 extends Tablero {
 
 	private static final int PUNTAJEPUNTO = 20;
 	private static final int PUNTAJEPUNTOPODER = 70;
-	private static final int TIEMPODEPODER = 775;
+	private static final int TIEMPODEPODER = 1200;
 	private static final int PUNTAJEFRUTA = 500;
 	
 	public MapaNivel4(){
