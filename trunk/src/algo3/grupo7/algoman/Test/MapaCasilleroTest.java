@@ -32,7 +32,7 @@ public class MapaCasilleroTest extends Tablero{
 		Casillero casilleroTemp=getMatCasilleros()[9][411];
 		PuntoDePoder puntoPoderTemp=new PuntoDePoder(PUNTAJEPUNTOPODER, TIEMPODEPODER,casilleroTemp);
 		casilleroTemp.setItem(puntoPoderTemp);
-		this.incrementarPunto();
+		this.incrementarCantidadDePuntos();
           
 	}
 	
