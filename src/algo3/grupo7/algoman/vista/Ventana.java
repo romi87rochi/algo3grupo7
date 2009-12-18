@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 
 
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
+import ar.uba.fi.algo3.titiritero.MouseClickController;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 /*

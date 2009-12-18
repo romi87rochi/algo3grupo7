@@ -7,7 +7,7 @@ public class Pacman extends Personaje {
 
 	private int vidas;
 	private boolean vivo;
-	private static final int CANTVIDAS = 3;
+	private static final int CANTVIDAS =15;
 	private static final int VELOCIDAD = 5;
 	private int itemsComidos;
 	private int tiempoDeEfecto;
