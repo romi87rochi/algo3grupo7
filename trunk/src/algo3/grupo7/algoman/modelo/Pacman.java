@@ -7,7 +7,7 @@ public class Pacman extends Personaje {
 
 	private int vidas;
 	private boolean vivo;
-	private static final int CANTVIDAS =15;
+	private static final int CANTVIDAS =3;
 	private static final int VELOCIDAD = 5;
 	private int itemsComidos;
 	private int tiempoDeEfecto;
@@ -119,7 +119,7 @@ public class Pacman extends Personaje {
 
 	/* Intenta comer algun item que exista en el casillero */
 	private void comerItem() {
-		if (this.getCasilleroActual().hayItem()) {
+		if (this.getCasilleroActual().hayItem() && this.getCasilleroActual().getItem().puedeSerComido()) {
 			
 			ItemComible itemAux = this.getCasilleroActual().getItem();
 			// Si no fue comido se le pasa el item para que el juego determine
@@ -136,7 +136,7 @@ public class Pacman extends Personaje {
 				tiempoDeEfecto = ((PuntoDePoder) itemAux).getTiempDeEfecto();
 				++this.idEfectoGroso; //Es un nuevo efecto 
 			}
-			this.getCasilleroActual().setItem(null);
+			itemAux.encontrado();
 			++itemsComidos;
 			this.comprobarSiDebeSerFinNivel();
 		}
