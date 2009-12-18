@@ -63,7 +63,7 @@ public class Juego {
 		/* si tira error de heap, ingresar como parametros: -Xmx512m -Xms512m en
 		 * Run Configurations
 		 */
-		this.tablero.add(new MapaNivel4());
+		this.tablero.add(new MapaNive4());
 		this.tablero.add(new MapaNivel1());
 		this.tablero.add(new MapaNivel2());
 		this.tablero.add(new MapaNivel3());
