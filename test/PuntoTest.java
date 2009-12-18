@@ -5,6 +5,7 @@ import algo3.grupo7.algoman.modelo.Casillero;
 import algo3.grupo7.algoman.modelo.Clyde;
 import algo3.grupo7.algoman.modelo.Juego;
 import algo3.grupo7.algoman.modelo.Pacman;
+import algo3.grupo7.algoman.modelo.Punto;
 import junit.framework.TestCase;
 
 
@@ -23,6 +24,9 @@ public class PuntoTest extends TestCase {
 		pacman=juego.getPacman();
 		clyde=juego.getClyde();
 
+		 clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 
 	}
 	
@@ -30,8 +34,11 @@ public class PuntoTest extends TestCase {
 
 		public void testComido(){
 			
-			
+			int puntajePunto=100;
 			pacman.vivir();
+			Casillero casilleroPunto=pacman.getCasilleroActual().getIzquierda();
+			Punto punto=new Punto(puntajePunto,casilleroPunto);
+			casilleroPunto.setItem(punto);
 			pacman.vivir();
 		
 			assertTrue(juego.getPuntaje()>0);
@@ -45,13 +52,16 @@ public class PuntoTest extends TestCase {
 
 		public void testNoComidoPorFantasma(){
 		//VER!	
+			int puntajePunto=100;
 			clyde.vivir();
+			Casillero casilleroPunto=clyde.getCasilleroActual().getDerecha();
+			Punto punto=new Punto(puntajePunto,casilleroPunto);
+			casilleroPunto.setItem(punto);
 			clyde.vivir(); 
+
 			
-			
-			Casillero casilleroFruta=clyde.getCasilleroActual();
 		
-			assertFalse(casilleroFruta.getItem()==null); //la fruta sigue estando, el fantasma no la come
+			assertFalse(casilleroPunto.getItem()==null); //el punto sigue estando, el fantasma no la come
 			assertEquals(0, juego.getPuntaje());
 
 					

@@ -6,7 +6,7 @@ public class PuntoDePoder extends ItemComible {
 
 	public PuntoDePoder(int nuevoPuntaje, int tiempoDeEfecto,
 			Casillero casilleroActual) {
-		super(nuevoPuntaje, true, casilleroActual);
+		super(nuevoPuntaje, true, casilleroActual,true);
 		this.tiempoDeEfecto = tiempoDeEfecto;
 	}
 

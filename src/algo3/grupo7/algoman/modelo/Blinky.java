@@ -2,7 +2,7 @@ package algo3.grupo7.algoman.modelo;
 
 public class Blinky extends Fantasma {
 
-	private static final int VELOCIDADDEFECTO = 4;
+	private static final int VELOCIDADDEFECTO = 3;
 
 	public Blinky(Juego nuevoJuego, Personaje pacman) {
 		super(nuevoJuego, pacman, VELOCIDADDEFECTO);

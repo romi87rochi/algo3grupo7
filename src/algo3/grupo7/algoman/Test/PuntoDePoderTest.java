@@ -47,10 +47,9 @@ public class PuntoDePoderTest extends TestCase {
 
 		public void testGetPuntaje(){
 			
-			int puntajeFruta=100;
 			
 			pacman.vivir();
-			assertTrue(juego.getPuntaje()>=puntajeFruta );//come fruta y punto de poder
+			assertTrue(juego.getPuntaje()>0 );//come fruta y punto de poder
 	}
 
 	// probar que desaparece cuando es comido por pacman y no desaparece cuando pasa un fantasma

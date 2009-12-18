@@ -21,12 +21,13 @@ public class VistaFruta extends Imagen {
 				
 			
 			public void dibujar(SuperficieDeDibujo superficeDeDibujo) {
-				if (this.fruta.getCasilleroActual().hayItem()) {
+				if (this.fruta!= null && this.fruta.getCasilleroActual().hayItem() && this.fruta.puedeSerComido()) {
 					this.setImagenAgregada(IMGMANZANA);
 				} else {
 					this.setImagenAgregada(IMGNADA);
 				}
-			
+			 
+				
 				super.dibujar(superficeDeDibujo);
 			}
 		

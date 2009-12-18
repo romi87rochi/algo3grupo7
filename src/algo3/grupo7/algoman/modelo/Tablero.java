@@ -6,6 +6,7 @@ import algo3.grupo7.algoman.vista.VistaFruta;
 import algo3.grupo7.algoman.vista.VistaPastilla;
 import algo3.grupo7.algoman.vista.vistaPuntoDePoder;
 import ar.uba.fi.algo3.titiritero.Dibujable;
+import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 
 public abstract class Tablero {
 	private int filas;
@@ -17,6 +18,7 @@ public abstract class Tablero {
 	private Casillero origenFantasmas;
 	private String directorioMapa;
 	private ArrayList<Dibujable> vistasItemsComibles; 
+	private ArrayList<ObjetoVivo> listaFrutas;
 
 	/*
 	 * El tablero es instancianciado con la cantidad de filas y columnas dadas,
@@ -30,6 +32,7 @@ public abstract class Tablero {
 		posiciones = new MatrizPosiciones(filas, columnas);
 		incializar();
 		vistasItemsComibles=new ArrayList<Dibujable>();
+		listaFrutas=new ArrayList<ObjetoVivo>();
 		cantidadPuntos = 0;
 	}
 
@@ -119,6 +122,7 @@ public abstract class Tablero {
 	protected void posicionarFruta(Casillero unCasillero,
 			int puntaje) {
 		Fruta fruta = new Fruta(puntaje, unCasillero);
+		this.listaFrutas.add(fruta); 
 		unCasillero.setItem(fruta);
 		this.getVistasItems().add(new VistaFruta(fruta));
 		this.incrementarCantidadDePuntos();
@@ -151,6 +155,10 @@ public abstract class Tablero {
 
 	public ArrayList<Dibujable> getVistasItems(){
 		return this.vistasItemsComibles;
+	}
+	
+	public ArrayList<ObjetoVivo> getFrutas(){
+		return this.listaFrutas;
 	}
 	// cuando no se quiera mostrar camino quitar agregar dibujables
 

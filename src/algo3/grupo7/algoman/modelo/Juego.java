@@ -2,6 +2,7 @@ package algo3.grupo7.algoman.modelo;
 
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
 import ar.uba.fi.algo3.titiritero.Dibujable;
+import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 
 import algo3.grupo7.algoman.vista.VistaMapa;
 import algo3.grupo7.algoman.vista.VistaPacman;
@@ -63,7 +64,7 @@ public class Juego {
 		/* si tira error de heap, ingresar como parametros: -Xmx512m -Xms512m en
 		 * Run Configurations
 		 */
-		this.tablero.add(new MapaNive4());
+		this.tablero.add(new MapaNivel4());
 		this.tablero.add(new MapaNivel1());
 		this.tablero.add(new MapaNivel2());
 		this.tablero.add(new MapaNivel3());
@@ -122,6 +123,7 @@ public class Juego {
 			 */
 			this.agregarDibujablesPastillas();
 			this.cargarControlador();
+			this.agregarFruta();
 			this.cantPastillasDelNivel =this.getMapa().getCantidadPuntos();
    			this.finNivel = false;
 			if (this.nivel != 0)
@@ -129,7 +131,16 @@ public class Juego {
 		}
 
 	}
-
+	/*Obtiene la lista de frutas del mapa y las agrega  a la lista de objetos vivos ya que estan
+	 * pueden cambiar de estado(puedesercomido o no) cuando se le aplique el metodo vivir
+	 */
+    private void agregarFruta(){
+    	ArrayList<ObjetoVivo> listaFruta=this.mapa.getFrutas();
+    	Iterator<ObjetoVivo> itListaFruta = listaFruta.iterator();
+    	   while(itListaFruta.hasNext()){
+    		   this.controlador.agregarObjetoVivo(itListaFruta.next());
+    	   }
+    }
 	public Tablero getMapa() {
 		return mapa;
 	}
@@ -190,7 +201,7 @@ public class Juego {
 	public ControladorJuego getControlador() {
 		return controlador;
 	}
-
+   
 	private void agregarDibujablesMapa() {
 		VistaMapa vistaMapa = new VistaMapa(this.getMapa().getDirectorioMapa());
 		controlador.agregarDibujable(vistaMapa);
