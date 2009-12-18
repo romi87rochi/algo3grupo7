@@ -1,3 +1,10 @@
+package algo3.grupo7.algoman.Test;
+
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Clyde;
+import algo3.grupo7.algoman.modelo.Fantasma;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.Pacman;
 import junit.framework.TestCase;
 
 public class estrategiaTest extends TestCase {
@@ -8,56 +15,112 @@ public class estrategiaTest extends TestCase {
 
 	
 	 public void setUp(){
-		  MapaNivel1 mapa=new MapaNivel1();
-		  juego= new Juego(mapa);
-		  pacman=new Pacman(juego);
-		  fan1=new Blinky(juego,pacman); }
+		  MapaParaPruebaEstrategia mapa=new MapaParaPruebaEstrategia();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  fan1=juego.getBlinky();
+		  
+		  
+		  fan1.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir(); }
 	
 
 	  public void testFantasmaPersigue(){
-		  MapaNivel1 mapa=new MapaNivel1();
-			juego= new Juego(mapa);
-		  pacman=new Pacman(juego);
-		  fan1=new Blinky(juego,pacman);
 		  
-	  fan1.mover(fan1.getCasilleroActual().getIzquierda());
-	  fan1.mover(fan1.getCasilleroActual().getAbajo());// pacman esta en uno para arriba y 
-	   													//dos para la derecha
+      Casillero casilleroPacman=pacman.getCasilleroActual();
+      int distanciaInicial=(fan1.getCasilleroActual().getPosicion().getPosX() - casilleroPacman.getPosicion().getPosX());
+      fan1.vivir(); 
+	  int distanciaDespuesDeMoverse=(fan1.getCasilleroActual().getPosicion().getPosX() - casilleroPacman.getPosicion().getPosX());
+	  assertTrue(distanciaInicial>distanciaDespuesDeMoverse); //fan1 esta mas cerca de Pacman
+	  fan1.vivir();
+	  int distanciaDespuesDeMoverse2Veces=(fan1.getCasilleroActual().getPosicion().getPosX() - casilleroPacman.getPosicion().getPosX());
+	  assertTrue(distanciaDespuesDeMoverse>distanciaDespuesDeMoverse2Veces); //fan1 esta mas cerca de Pacman aun
+	  fan1.vivir();
+	  int distanciaDespuesDeMoverse3Veces=(fan1.getCasilleroActual().getPosicion().getPosX() - casilleroPacman.getPosicion().getPosX());
+	  assertTrue(distanciaDespuesDeMoverse2Veces>distanciaDespuesDeMoverse3Veces); //fan1 esta mas cerca de Pacman aun
+	  fan1.vivir();
+	
 	  
-	  Casillero CasilleroDeEstrategia=fan1.getCasilleroActual().getArriba();
-	  fan1.vivir(); 
-	  assertEquals(CasilleroDeEstrategia,fan1.getCasilleroActual());
-	  CasilleroDeEstrategia=fan1.getCasilleroActual().getDerecha();
-	  fan1.vivir(); assertEquals(CasilleroDeEstrategia,
-	  fan1.getCasilleroActual());
 	  
-	  fan1.vivir();//come a pacman
-	  assertEquals(juego.getTablero().getCasilleroOrigenFantasma(),fan1.getCasilleroActual()); }
+}
 	 
 
 	public void testFantasmaEscapa() {
-		  MapaNivel1 mapa=new MapaNivel1();
-			juego= new Juego(mapa);
-		  pacman=new Pacman(juego);
-		  fan1=new Blinky(juego,pacman);
+		  //pacman tiene la pastilla de poder a su izquierda
+		MapaParaPruebaEstrategiaEvasiva mapa=new MapaParaPruebaEstrategiaEvasiva();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  fan1=juego.getBlinky();
+		  
+		  
+		  fan1.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+		 //come pastilla de poder
+		 
+	      Casillero casilleroPacman=pacman.getCasilleroActual();
+	      int distanciaInicial=(fan1.getCasilleroActual().getPosicion().getPosY() - casilleroPacman.getPosicion().getPosY());
+	      fan1.vivir(); 
+	      fan1.vivir(); 
+		  int distanciaDespuesDeMoverse=(casilleroPacman.getPosicion().getPosY() - fan1.getCasilleroActual().getPosicion().getPosY());
+		  assertTrue(distanciaInicial<distanciaDespuesDeMoverse); //fan1 esta mas cerca de Pacman
+		  fan1.vivir();
+		  int distanciaDespuesDeMoverse2Veces=(fan1.getCasilleroActual().getPosicion().getPosX() - casilleroPacman.getPosicion().getPosX());
+		  assertTrue(distanciaDespuesDeMoverse<distanciaDespuesDeMoverse2Veces); //fan1 esta mas cerca de Pacman aun
 		
-		pacman.setPuedeSerComido(false);
+	}
+	
+	public void testFantasmasEncierran(){
 		
-		Casillero CasilleroDeEstrategia = fan1.getCasilleroActual()
-				.getIzquierda();
-		fan1.mover(fan1.getCasilleroActual().getIzquierda());// pacman esta a
-																// dos
-																// casilleros a
-																// la derecha,
-																// fan1 solo
-																// puede ir
-																// hacia la
-																// derecha o
-																// hacia abajo
-		CasilleroDeEstrategia = fan1.getCasilleroActual().getAbajo();
-		fan1.vivir();
-		assertEquals(CasilleroDeEstrategia, fan1.getCasilleroActual());
+		 
+		MapaCuadrado mapa=new MapaCuadrado();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  fan1=juego.getBlinky();
+	     Clyde fan2=juego.getClyde();
 
+		  fan1.vivir();
+		  fan2.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+	     
+	     int distanciaPorXInicial=(pacman.getCasilleroActual().getPosicion().getPosX() - fan2.getCasilleroActual().getPosicion().getPosX());
+	     int distanciaPorYInicial=(pacman.getCasilleroActual().getPosicion().getPosY() - fan1.getCasilleroActual().getPosicion().getPosY());
+	     fan2.vivir();
+	     fan1.vivir();
+	     int distanciaPorX=(pacman.getCasilleroActual().getPosicion().getPosX() - fan2.getCasilleroActual().getPosicion().getPosX());
+	     int distanciaPorY=(pacman.getCasilleroActual().getPosicion().getPosY() - fan1.getCasilleroActual().getPosicion().getPosY());
+		  
+	     assertTrue(distanciaPorXInicial > distanciaPorX); //inky se acerca por x
+	     assertTrue(distanciaPorYInicial>distanciaPorY);// fanq se acerca por y
+	     
+	     distanciaPorXInicial=distanciaPorX;
+	     distanciaPorYInicial=distanciaPorY;
+	     
+	     fan2.vivir();
+	     fan1.vivir();
+	     distanciaPorX=(pacman.getCasilleroActual().getPosicion().getPosX() - fan2.getCasilleroActual().getPosicion().getPosX());
+	     assertTrue(distanciaPorXInicial > distanciaPorX); //inky se acerca por x
+	     //fan1  quedo con misma coordenada y que pacman
+	    
+	     
+
+	     distanciaPorYInicial=(pacman.getCasilleroActual().getPosicion().getPosY() - fan2.getCasilleroActual().getPosicion().getPosY());
+	     distanciaPorXInicial=(pacman.getCasilleroActual().getPosicion().getPosX() - fan1.getCasilleroActual().getPosicion().getPosX());
+	     fan2.vivir();
+	     fan1.vivir();
+	     distanciaPorY=(pacman.getCasilleroActual().getPosicion().getPosY() - fan2.getCasilleroActual().getPosicion().getPosY());
+	     distanciaPorX=(pacman.getCasilleroActual().getPosicion().getPosX() - fan1.getCasilleroActual().getPosicion().getPosX());
+		  
+	     assertTrue(distanciaPorXInicial >= distanciaPorX); //inky se acerca por y ahora
+	     assertTrue(distanciaPorYInicial>=distanciaPorY);// fanq se acerca por x ahora
+	     
+	     
+	     
 	}
 
 }

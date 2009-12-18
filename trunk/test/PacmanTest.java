@@ -1,4 +1,12 @@
+package algo3.grupo7.algoman.Test;
 
+
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Clyde;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.MatrizPosiciones;
+import algo3.grupo7.algoman.modelo.Pacman;
+import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 
@@ -6,46 +14,59 @@ public class PacmanTest extends TestCase {
 	
 	Juego juego;
 	Pacman pacman;
-	
-
+	Clyde clyde;
 	
 	public void setUp(){
-	MapaNivel1 mapa=new MapaNivel1();
+		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		
-		juego = new Juego(mapa); 
-		
-		pacman=new Pacman(juego);
-		
+	
+
+
 	}
 	
+	public void testEstaVivo(){
+		assertTrue(pacman.estaVivo());
+	}
 	
 
 	public void testComer() {
-		int puntaje=100;
-		ItemComible punto=new Punto( puntaje);
-		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
-		otraCelda.setItem(punto);
-		pacman.mover(otraCelda);
+		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
+		juego.cargarMapa(mapa, 0);
+		Casillero otraCelda=pacman.getCasilleroActual();
+		pacman.vivir();
 		
 		assertNull(otraCelda.getItem());
 	}
 
 	public void testMover() {
-		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
-		pacman.mover(otraCelda);
+		MatrizPosiciones matriz=new MatrizPosiciones(30,30);
+		Posicion posicionAMoverse= new Posicion(18,9,matriz);
+		Casillero casilleroAMoverse=juego.getMapa().getCasillero(posicionAMoverse);
 		
-		assertEquals(pacman.getCasilleroActual(), otraCelda);
+		assertFalse(pacman.getCasilleroActual() == casilleroAMoverse);
 	}
 
 	public void testReubicar() {
 		
-		pacman.mover(pacman.getCasilleroActual().getDerecha());
-		pacman.reubicar();
-		assertEquals(pacman.getCasilleroActual(), juego.getTablero().getCasilleroOrigenPacman());
+		pacman.vivir();
+		pacman.vivir();//intenta comer fantasma
+		
+
+		assertEquals(pacman.getCasilleroActual(), juego.getMapa().getOrigenPacman());
+		assertEquals(clyde.getCasilleroActual(), juego.getMapa().getOrigenFantasmas());
 	}
 
 	public void testPacman() {
-		setUp();
+		
 		assertNotNull(pacman);
 	}
 

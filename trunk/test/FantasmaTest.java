@@ -1,4 +1,12 @@
+package algo3.grupo7.algoman.Test;
 
+
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Clyde;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.MatrizPosiciones;
+import algo3.grupo7.algoman.modelo.Pacman;
+import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 
@@ -6,59 +14,61 @@ public class FantasmaTest extends TestCase {
 
 
 	Juego juego;
+	Pacman pacman;
+	Clyde clyde;
 	
 	public void setUp(){
-		MapaNivel1 mapa=new MapaNivel1();
-		juego = new Juego(mapa);
-
-
+		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+		   
+		
 	}
 
 	public void testComer() {	
 	
-
-		Pacman pacman=new Pacman(juego);
-		Fantasma fantasma=new Blinky(juego, pacman);
-		fantasma.mover(fantasma.getCasilleroActual().getIzquierda());
-		pacman.mover(pacman.getCasilleroActual().getIzquierda());//pacman persigue al fantasma
-		Casillero celda=pacman.getCasilleroActual();
-		pacman.mover(fantasma.getCasilleroActual());
+		Casillero casilleroEnComun=pacman.getCasilleroActual();
 		
-		assertNull(celda.getPacman());
-		assertTrue(pacman.getVidas()==2);
+		clyde.vivir();
+		clyde.vivir(); //ambos estan en el mismo casillero, fantasma intenta comer pacman
+		
+		
+		assertTrue(casilleroEnComun.getFantasmas().isEmpty()); //clyde se reubica
+		assertTrue(pacman.getVidas()==2);//fantasma comio a pacman
 	}
 
 	public void testMover() {
-	
+		MatrizPosiciones matriz=new MatrizPosiciones(20,20);
+		Posicion posicionDondeSeMovera=new Posicion(12,9,matriz);
+		Casillero casilleroDondeSeMovera=juego.getMapa().getCasillero(posicionDondeSeMovera);
 		
-		Pacman pacman=new Pacman(juego);
-		Fantasma fantasma=new Blinky(juego,pacman);
 		
-		fantasma.mover(fantasma.getCasilleroActual().getIzquierda());
-		Casillero otraCelda=fantasma.getCasilleroActual();
-		assertEquals(fantasma.getCasilleroActual(), otraCelda);
+		clyde.vivir();//pacman esta a su derecha y tiene 3 de velocidad
+		assertEquals(clyde.getCasilleroActual(), casilleroDondeSeMovera);
 	}
 
 	public void testReubicar() {
 	
-		Pacman pacman=new Pacman(juego);
-	
-		Fantasma fantasma=new Blinky(juego,pacman);
+		clyde.vivir();
+		clyde.vivir();
+		clyde.vivir();
+		clyde.vivir();
+		clyde.vivir(); // come a pacman, se reubica
 		
-		fantasma.mover(pacman.getCasilleroActual());  // come a pacman, se reubica
-		
-		assertEquals(fantasma.getCasilleroActual(), fantasma.getTablero().getCasilleroOrigenFantasma());
+		assertEquals(clyde.getCasilleroActual(), juego.getMapa().getOrigenFantasmas());
 	}
 
 	public void testFantasma() {
-		Pacman pacman=new Pacman(juego);
-		
-		Fantasma fantasma=new Blinky(juego,pacman);
-		assertNotNull(fantasma);
+
+		assertNotNull(clyde);
 	}
 
-	public void testCambiarVelocidad() {
-		//falta implementarlo
-	}
 
 }

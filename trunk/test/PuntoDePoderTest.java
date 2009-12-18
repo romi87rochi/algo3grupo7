@@ -1,155 +1,74 @@
+package algo3.grupo7.algoman.Test;
 
 
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Clyde;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.Pacman;
+import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 
 public class PuntoDePoderTest extends TestCase {
+		
 	
 	Juego juego;
-	int puntaje;
-	PuntoDePoder punto;
 	Pacman pacman;
-	int tiempo;
-	Fantasma fantasma;
-	
+	Clyde clyde;
 	
 	public void setUp(){
-	MapaNivel1 mapa=new MapaNivel1();
 		
-		juego = new Juego(mapa); 
-		puntaje=100;
-		tiempo=30;
-		punto=new PuntoDePoder(puntaje,tiempo);
-		pacman=new Pacman(juego);
-		
-		fantasma=new Blinky(juego,pacman);
-		
+		MapaLargoConPuntoDePoder mapa=new MapaLargoConPuntoDePoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+
 	}
 	
-	public void testPuntoCreado(){
-		
-		assertNotNull(punto);
-
-		}
 
 
-	public void testComido(){
-		Casillero celda=pacman.getCasilleroActual().getDerecha();
-		celda.setItem(punto);
-		
-		pacman.mover(celda);
-		
-		
-		assertTrue(juego.getPuntaje()>0);
-		assertTrue(pacman.getCasilleroActual().getItem()==null);
+		public void testComido(){
 			
-}
-
-	public void testGetPuntaje(){
-		
-		Casillero celda=pacman.getCasilleroActual().getDerecha();
-		celda.setItem(punto);
-		
-		pacman.mover(celda);
-		assertEquals(100, punto.getPuntaje());
-}
-
-	public void testCambiaEstadoPacman(){
-
-		Mapa mapas=new Mapa();
-		int tiempoDePoder=4;
-		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
-		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
-		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
-		pacman.mover(otraCelda);
-		assertFalse(pacman.puedeSerComido()); //si comio punto de poder no puede ser comido
- 
-}
-
-
-// probar que los fantasmas tambien cambian de estado
-
-	public void testCambiaEstadoFantasmas(){
-		
-		Mapa mapas=new Mapa();
-		int tiempoDePoder=4;
-		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
-		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
-		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
-		pacman.mover(otraCelda);
-		
-		mapas.insertarPastillaDePoder(otraCelda, punto);  //setItem de casillero deberia ser privado??
-		pacman.mover(otraCelda);
-		int i=0;
-		
-		while(i<3){
-		Fantasma fantasmaEnCuestion=fantasma.getCasilleroActual().getFantasmas().get(0);
-		fantasmaEnCuestion.vivir();
-		assertTrue(fantasmaEnCuestion.puedeSerComido());
-		i++;}
-		
-}
-
-
-
-// probar que los fantasmas no comen los puntos de poder
-	public void testFantasmasNoComenPuntoDePoder(){
-		Mapa mapas=new Mapa();
-		int tiempoDePoder=4;
-		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
-		
-		  //setItem de casillero deberia ser privado??
-		pacman.mover(pacman.getCasilleroActual().getDerecha());
-		
-	
-		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
-		mapas.insertarPastillaDePoder(otraCelda, punto);
-		
-		mapas.insertarPastillaDePoder(otraCelda, punto);
-		fantasma.mover(otraCelda);
-	
-		
-		assertTrue(otraCelda.getItem()!=null);  // no desaparece item
-		assertFalse(otraCelda.getFantasmas().get(0).puedeSerComido()); // no cambio estado de fantasma
-		
-	
-		
-	}
-	
-	
- //probar que despues de un tiempo todos vuelven a su estado natural 
- 
-	public void testTiempoDePoderSeAcaba(){
-		
-		Mapa mapas=new Mapa();
-		int tiempoDePoder=2;
-		ItemComible punto=new PuntoDePoder(puntaje,tiempoDePoder);
-		Casillero otraCelda=pacman.getCasilleroActual().getDerecha();
-		mapas.insertarPastillaDePoder(otraCelda, punto); 
-		pacman.mover(otraCelda);
-		
-		mapas.insertarPastillaDePoder(otraCelda, punto); 
-		pacman.mover(otraCelda);
-	
-		mapas.insertarPastillaDePoder(otraCelda, punto);
-		pacman.mover(otraCelda); 
-		fantasma.vivir(); //cambia estado
-		
-		assertFalse(pacman.puedeSerComido());//cambia estado, tiempo=2
-		assertTrue(fantasma.puedeSerComido());
-		
-		pacman.mover(pacman.getCasilleroActual().getDerecha()); //tiempo=1
-		assertFalse(pacman.puedeSerComido());
-		assertTrue(fantasma.puedeSerComido());
-	
-		
-		pacman.mover(otraCelda); //tiempo=0
-		fantasma.vivir();
-		assertTrue(pacman.puedeSerComido());
-		assertFalse(fantasma.puedeSerComido());
-		
-		
+			
+			pacman.vivir();
+			Posicion posicionFruta=pacman.getCasilleroActual().getPosicion();
+			Casillero casilleroFruta=juego.getMapa().getCasillero(posicionFruta);
+			
+			
+			assertTrue(juego.getPuntaje()>0);
+			assertTrue(casilleroFruta.getItem()==null);
 	}
 
+		public void testGetPuntaje(){
+			
+			int puntajeFruta=100;
+			
+			pacman.vivir();
+			assertTrue(juego.getPuntaje()>=puntajeFruta );//come fruta y punto de poder
+	}
+
+	// probar que desaparece cuando es comido por pacman y no desaparece cuando pasa un fantasma
+
+
+		public void testNoComidoPorFantasma(){
+		
+			clyde.vivir(); //clyde esta al lado de la fruta
+			Casillero casilleroPoder=clyde.getCasilleroActual();
+		
+			assertFalse(casilleroPoder.getItem()==null); //la fruta sigue estando, el fantasma no la come
+
+					
+			
+
+	}
+
+	
 
 }
+

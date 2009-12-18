@@ -1,19 +1,32 @@
+package algo3.grupo7.algoman.Test;
 
-
+import algo3.grupo7.algoman.modelo.Clyde;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.Pacman;
 import junit.framework.TestCase;
 
 
 public class JuegoTest extends TestCase {
 
-	
-	Juego juego; 
+	Juego juego;
+	Pacman pacman;
+	Clyde clyde;
 	
 	public void setUp(){
-		MapaNivel1 mapa=new MapaNivel1();
-		
-		juego = new Juego(mapa); 
-	}
+		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
+	
 
+
+	}
 
 	public void testConstructor(){
 		assertNotNull(juego);
@@ -33,29 +46,25 @@ public class JuegoTest extends TestCase {
 
 
 	public void testComeItems(){
-		setUp();
-		int puntaje=100;
 		
-		Pacman pacman=new Pacman(juego);
-
-		Punto punto=new Punto(puntaje);
-		Casillero celda=pacman.getCasilleroActual().getDerecha();
-		celda.setItem(punto);
-		//int itemsIniciales=juego.getCantPastillasDelNivel();
-		pacman.mover(celda);
-		
-		
-		assertTrue(pacman.getItemsComidos()==1);
+		pacman.vivir();
+		assertTrue(pacman.getItemsComidos()==1); //come fruta
 }
 
 
 
 	public void testIsFinJuego() {
 			
-		Pacman pacman=new Pacman(juego);
-		pacman.morir();
-		pacman.morir();
-		pacman.morir();
+		int pasos=0;
+		while(pasos<4){
+			clyde.vivir();
+			clyde.vivir();
+			clyde.vivir();
+			 while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+			       pacman.vivir();//para que vuelva a vivir, sino queda como muerto y fantasma no lo come
+			pasos++;
+		}//llega hasta donde esta pacman 3 veces y lo come las 3 veces
+		
 		assertTrue(juego.esFinJuego());
 	}
 
