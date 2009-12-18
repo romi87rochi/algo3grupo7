@@ -1,7 +1,12 @@
+package algo3.grupo7.algoman.Test;
+
 
 
 import junit.framework.TestCase;
 import java.util.ArrayList;
+
+import algo3.grupo7.algoman.modelo.MatrizPosiciones;
+import algo3.grupo7.algoman.modelo.Posicion;
 
 public class MatrizPosicionesTest extends TestCase {
 
@@ -28,8 +33,7 @@ public class MatrizPosicionesTest extends TestCase {
 			assertTrue(false);
 		}
 		
-		System.out.println("Adyacente1 " + arriba1);
-		System.out.println("Adyacente2 " + arriba2);
+		
 		
 	}
 	
@@ -53,8 +57,7 @@ public class MatrizPosicionesTest extends TestCase {
 			assertTrue(false);
 		}
 		
-		System.out.println("Adyacente1 " + abajo1);
-		System.out.println("Adyacente2 " + abajo2);
+	
 		
 	}
 	
@@ -78,8 +81,7 @@ public class MatrizPosicionesTest extends TestCase {
 			assertTrue(false);
 		}
 		
-		System.out.println("Adyacente1 " + izquierda1);
-		System.out.println("Adyacente2 " + izquierda2);
+		
 		
 	}
 	
@@ -103,8 +105,6 @@ public class MatrizPosicionesTest extends TestCase {
 			assertTrue(false);
 		}
 		
-		System.out.println("Adyacente1 " + derecha1);
-		System.out.println("Adyacente2 " + derecha2);
 		
 	}
 	

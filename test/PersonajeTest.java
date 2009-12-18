@@ -1,19 +1,29 @@
+package algo3.grupo7.algoman.Test;
 
+
+import algo3.grupo7.algoman.modelo.Blinky;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.Pacman;
 import junit.framework.TestCase;
 
 
 public class PersonajeTest extends TestCase {
-	Juego juego;
-	Pacman pacman;
-	Fantasma fantasma;
 	
-	
+	private Juego juego;
+	private Pacman pacman;
+	private Blinky blinky;
+
 	public void setUp(){
-	MapaNivel1 mapa=new MapaNivel1();
-		
-		juego = new Juego(mapa); 
-		pacman=new Pacman(juego);
-		fantasma=new Blinky(juego, pacman);
+		MapaLargoConPuntoDePoder mapa=new MapaLargoConPuntoDePoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  blinky=juego.getBlinky();
+		  
+		  
+		  blinky.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		
 	}
 
@@ -21,18 +31,18 @@ public class PersonajeTest extends TestCase {
 	public void testCambiarEstado() {
 		
 		assertTrue(pacman.puedeSerComido());
-		assertFalse(fantasma.puedeSerComido());
-		pacman.setPuedeSerComido(false);
-		fantasma.vivir();
+		assertFalse(blinky.puedeSerComido());
+		pacman.vivir();
+		blinky.vivir();
 		
-		assertTrue(fantasma.puedeSerComido());
+		assertTrue(blinky.puedeSerComido());
 		assertFalse(pacman.puedeSerComido());
 	}
 
 	public void testPuedeSerComido() {
 		
 		assertTrue(pacman.puedeSerComido());
-		assertFalse(fantasma.puedeSerComido());
+		assertFalse(blinky.puedeSerComido());
 	}
 
 }

@@ -1,4 +1,11 @@
+package algo3.grupo7.algoman.Test;
 
+
+import algo3.grupo7.algoman.modelo.Casillero;
+import algo3.grupo7.algoman.modelo.Clyde;
+import algo3.grupo7.algoman.modelo.Juego;
+import algo3.grupo7.algoman.modelo.Pacman;
+import algo3.grupo7.algoman.modelo.Posicion;
 import junit.framework.TestCase;
 
 
@@ -6,48 +13,46 @@ public class FrutaTest extends TestCase {
 		
 	
 	Juego juego;
-	int puntaje;
-	Fruta fruta;
 	Pacman pacman;
-	
-	Fantasma fantasma;
-	
+	Clyde clyde;
 	
 	public void setUp(){
-		MapaNivel1 mapa=new MapaNivel1();
-		juego= new Juego(mapa);
-		puntaje=100;
-		fruta=new Fruta(puntaje);
-		pacman=new Pacman(juego);
 		
-		fantasma=new Blinky(juego,pacman);
+		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
+		  juego= new Juego();
+		  juego.cargarMapa(mapa, 0);
+		  pacman=juego.getPacman();
+		  clyde=juego.getClyde();
+		  
+		  
+		  clyde.vivir();
+		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		       pacman.vivir();
 		
+
 	}
 	
-		public void testFrutaCreada(){
-			
-			assertNotNull(fruta);
-
-			}
 
 
 		public void testComido(){
-			Casillero celda=pacman.getCasilleroActual().getDerecha();
-			celda.setItem(fruta);
 			
-			pacman.mover(celda);
+			
+			pacman.vivir();
+			Posicion posicionFruta=pacman.getCasilleroActual().getPosicion().getDerecha();
+			Casillero casilleroFruta=juego.getMapa().getCasillero(posicionFruta);
 			
 			
 			assertTrue(juego.getPuntaje()>0);
-			assertTrue(pacman.getCasilleroActual().getItem()==null);
+			assertTrue(casilleroFruta.getItem()==null);
 	}
 
 		public void testGetPuntaje(){
-			Casillero celda=pacman.getCasilleroActual().getDerecha();
-			celda.setItem(fruta);
 			
-			pacman.mover(celda);
-			assertEquals(100, fruta.getPuntaje());
+			int puntajeFruta=100;
+			
+			pacman.vivir();
+			
+			assertTrue(juego.getPuntaje()==puntajeFruta );//come fruta y punto de poder
 	}
 
 	// probar que desaparece cuando es comido por pacman y no desaparece cuando pasa un fantasma
@@ -55,16 +60,10 @@ public class FrutaTest extends TestCase {
 
 		public void testNoComidoPorFantasma(){
 			
-			Pacman pacman=new Pacman(juego);
-			
-			
-			Blinky fan1 = new Blinky(juego,pacman);
-			Casillero celda=fan1.getCasilleroActual().getDerecha();
-			celda.setItem(fruta);
-			
-			fan1.mover(celda);
+			clyde.vivir(); //clyde esta al lado de la fruta
+			Casillero casilleroFruta=clyde.getCasilleroActual().getDerecha();
 		
-			assertFalse(celda.getItem()==null);
+			assertFalse(casilleroFruta.getItem()==null); //la fruta sigue estando, el fantasma no la come
 			assertEquals(0, juego.getPuntaje());
 
 					
