@@ -26,20 +26,17 @@ public class ControladorJuego {
 		estaEnEjecucion = true;
 
 		try {
-			while (estaEnEjecucion && !juego.esFinNivel() && !juego.esFinJuego()) {
+			while (estaEnEjecucion  && !juego.esFinJuego()) {
 				simular();
 				dibujar();
 				Thread.sleep(intervaloSimulacion);
+				if(juego.esFinNivel()){					
+				  juego.setNivel(juego.getNivel()+1);
+				  juego.nuevoNivel(juego.getNivel());
+				  estaEnEjecucion=true;
+				}
 			}
-			if(juego.esFinNivel()){
-				
-				juego.setNivel(juego.getNivel()+1);
-			  juego.nuevoNivel(juego.getNivel());
-			}else{
-				this.detener();
-			}
-				
-			
+		
 				
 		} catch (Exception e) {
 			e.printStackTrace();
