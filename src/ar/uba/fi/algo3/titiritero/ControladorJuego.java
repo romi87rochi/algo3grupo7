@@ -6,16 +6,17 @@ import java.util.List;
 
 import algo3.grupo7.algoman.modelo.Juego;
 
+
 /**
  * @author Nicolas Esta clase es la encargada de manejar todo el gameloop.
  *         Básicamente tiene una lista de ObjetosVivos y una Dibujables que son
  *         recorridas en cada gameloop.
  */
 public class ControladorJuego {
-	
+	Juego juego;
 
-	public ControladorJuego() {
-		
+	public ControladorJuego(Juego unJuego) {
+		this.juego=unJuego;
 		this.objetosVivos = new ArrayList();
 		this.dibujables = new ArrayList();
 		this.mouseClickObservadores = new ArrayList();
@@ -25,11 +26,21 @@ public class ControladorJuego {
 		estaEnEjecucion = true;
 
 		try {
-			while (estaEnEjecucion) {
+			while (estaEnEjecucion && !juego.esFinNivel() && !juego.esFinJuego()) {
 				simular();
 				dibujar();
 				Thread.sleep(intervaloSimulacion);
 			}
+			if(juego.esFinNivel()){
+				
+				juego.setNivel(juego.getNivel()+1);
+			  juego.nuevoNivel(juego.getNivel());
+			}else{
+				this.detener();
+			}
+				
+			
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,7 +127,7 @@ public class ControladorJuego {
 		Object dibujableTemp;
 		   while (itDibujables.hasNext()){
 			   itDibujables.next();
-			  itDibujables.remove();
+			   itDibujables.remove();
 			   
 			   
 		   }
@@ -131,6 +142,12 @@ public class ControladorJuego {
 			  
 		  }
 	}
+	
+	public void vaciarControlador(){
+		this.removerTodosLosObjetosVivos();
+		this.removerTodosLosDibujables();
+	}
+	
 	private long intervaloSimulacion;
 	private boolean estaEnEjecucion;
 	private List objetosVivos;

@@ -24,8 +24,8 @@ public class Pacman extends Personaje {
 		this.vivo = false;
 		this.itemsComidos=0;
 		this.idEfectoGroso=0;
-		this.setCasilleroActual(nuevoJuego.getMapa().getOrigenPacman());
-		//this.inicializar();
+	//	this.setCasilleroActual(nuevoJuego.getMapa().getOrigenPacman());
+	
 	}
 
 	protected void mover(Casillero nuevoCasillero) {
@@ -74,8 +74,9 @@ public class Pacman extends Personaje {
 		if (!this.estaVivo()) {
 			if (this.tiempoDeResurreccion > 0) {
 				--this.tiempoDeResurreccion;
+				this.reubicar(); //lo mantiene reubicado para los nuevos mapas
 			} else {
-				this.inicializar();
+				this.inicializar(); //lo trae a la vida :P
 			}
 		}
          
@@ -148,8 +149,8 @@ public class Pacman extends Personaje {
 	 * fantasmas
 	 */
 	private void comer() {
-		this.comerItem();
 		this.comerFantasmas();
+		this.comerItem();
 	}
 
 	private void comprobarSiDebeSerFinNivel(){
@@ -190,12 +191,18 @@ public class Pacman extends Personaje {
 	 * encontraba
 	 */
 	protected void reubicar() {
+		
 		Casillero casilleroAux = this.getCasilleroActual();
+
+		
 		this.setCasilleroActual(this.getJuego().getMapa().getOrigenPacman());
 		this.getCasilleroActual().agregarPacman(this);
 		this.idEfectoGroso=0; 
-		if (casilleroAux != this.getJuego().getMapa().getOrigenPacman())
-			casilleroAux.removerPacman(this);
+		//if (casilleroAux != this.getJuego().getMapa().getOrigenPacman())
+		try{casilleroAux.removerPacman(this);
+		}catch(Exception e){
+			
+		}
 	}
 
 	/*

@@ -43,6 +43,7 @@ public abstract class Fantasma extends Personaje {
 		if (tiempoDeEspera > 0) {
 			pasos = this.getVelocidad();
 			--tiempoDeEspera;
+			
 		}
 		if (pacman.estaVivo()) {
 			while (pasos < this.getVelocidad()) { // ver cuando cambia de nivel
@@ -62,11 +63,12 @@ public abstract class Fantasma extends Personaje {
 	 */
 	protected void reubicar() {
 		Casillero casilleroAux = this.getCasilleroActual();
-		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
-		this.getCasilleroActual().agregarFantasma(this);
-		casilleroAux.removerFantasma(this);
 		this.setPuedeSerComido(false);
 		this.idDebilidad=pacman.getIdEfectoGroso();	
+		this.setCasilleroActual(this.getJuego().getMapa().getOrigenFantasmas());
+		this.getCasilleroActual().agregarFantasma(this);
+		try {casilleroAux.removerFantasma(this);
+		} catch (Exception e) {}
 	}
 
 	protected void mover(Casillero nuevoCasillero) {

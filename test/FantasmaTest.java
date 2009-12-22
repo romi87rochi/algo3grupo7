@@ -20,7 +20,7 @@ public class FantasmaTest extends TestCase {
 	public void setUp(){
 		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  clyde=juego.getClyde();
 		  

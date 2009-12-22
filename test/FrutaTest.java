@@ -23,7 +23,7 @@ public class FrutaTest extends TestCase {
 		
 		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  clyde=juego.getClyde();
 		  MatrizPosiciones matriz=new MatrizPosiciones(30,30);

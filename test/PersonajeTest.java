@@ -16,7 +16,7 @@ public class PersonajeTest extends TestCase {
 	public void setUp(){
 		MapaLargoConPuntoDePoder mapa=new MapaLargoConPuntoDePoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  blinky=juego.getBlinky();
 		  
