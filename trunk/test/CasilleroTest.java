@@ -26,7 +26,7 @@ public class CasilleroTest extends TestCase {
 		
 		juego= new Juego();
 		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		fan1=juego.getBlinky();
 		fan2=juego.getClyde();
 		pacman=juego.getPacman();
@@ -65,12 +65,7 @@ public class CasilleroTest extends TestCase {
 		
 		assertTrue(fan1.getCasilleroActual()==fan2.getCasilleroActual());
 		
-		
-		
-	
-		juego=null;
-		
-	
+
 	}
 	
 	public void testCeldaFantasmaComePacman(){
@@ -93,7 +88,7 @@ public class CasilleroTest extends TestCase {
 	public void testPacmanComeFantasma(){  //suponiendo que pacman se mueve hacia la izquierda al principio del juego
 		//pacman con velocidad 5
 		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		fan1=juego.getBlinky();
 		fan2=juego.getClyde();
 		pacman=juego.getPacman();
@@ -109,7 +104,7 @@ public class CasilleroTest extends TestCase {
 		fan1.vivir(); // pacman se encuentra con fan1
 		assertTrue(pacman.getVidas()==3); //pacman no pierde vidas
 		assertFalse(pacman.getCasilleroActual()==otracelda); // pacman NO sigue en su posicion
-		juego=null;
+		
 
 	}
 	
@@ -122,7 +117,7 @@ public class CasilleroTest extends TestCase {
 		fan1.vivir();
 		assertTrue(fan1.getCasilleroActual().getFantasmas().get(0)== fan1); //cuando se mueve se agrega al nuevo casillero
 		
-		juego=null;
+		
 	}
 
 	public void testAgregarPacman() {
@@ -132,7 +127,7 @@ public class CasilleroTest extends TestCase {
 		assertTrue(celda.hayPacman());
 		pacman.vivir();
 		assertTrue(pacman.getCasilleroActual().getPacman()== pacman); //cuando se mueve se agrega al nuevo casillero
-		juego=null;
+		
 	}
 
 	public void testSetItem() {
@@ -144,7 +139,7 @@ public class CasilleroTest extends TestCase {
 		
 		assertTrue(fan1.getCasilleroActual().getItem()==pastilla);
 		assertTrue(casilleroPastilla.hayItem());
-		juego=null;
+		
 	}
 
 	public void testRemoverItem() {
@@ -157,7 +152,7 @@ public class CasilleroTest extends TestCase {
 		casilleroPastilla.removerItem();
 		assertTrue(casilleroPastilla.getItem()==null);
 		assertFalse(casilleroPastilla.hayItem());
-		juego=null;
+		
 	}
 
 
@@ -172,7 +167,7 @@ public class CasilleroTest extends TestCase {
 		casilleroFantasma.removerFantasma(fan3);
 		casilleroFantasma.removerFantasma(fan4);
 		assertTrue(casilleroFantasma.getFantasmas().isEmpty());//el casillero queda vacio
-		juego=null;
+		
 	}
 
 
@@ -182,7 +177,7 @@ public class CasilleroTest extends TestCase {
 		celda.removerPacman(pacman);
 		assertTrue(celda.getPacman()==null);
 		assertFalse(celda.hayPacman());
-		juego=null;
+		
 		
 	}
 

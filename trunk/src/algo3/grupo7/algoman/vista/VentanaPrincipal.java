@@ -1,18 +1,11 @@
 package algo3.grupo7.algoman.vista;
 
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Color;
+
 import java.awt.Label;
 import java.awt.Rectangle;
-
-import javax.swing.JPanel;
-
 import algo3.grupo7.algoman.modelo.Juego;
-import algo3.grupo7.algoman.modelo.Teclado;
-
 import algo3.grupo7.algoman.vista.VentanaPrincipal;
-import ar.uba.fi.algo3.titiritero.ControladorJuego;
+
 
 
 public class VentanaPrincipal extends Ventana {

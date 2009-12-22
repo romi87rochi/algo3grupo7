@@ -15,8 +15,6 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 public class Juego {
-
-	private ArrayList<Tablero> tablero;
 	
 	private Tablero mapa;
 	private boolean finJuego;
@@ -31,6 +29,7 @@ public class Juego {
 	private Inky inky;
 	private Clyde clyde; 
 	private ControladorJuego controlador;
+	
 
 	/*
 	 * El juego recibe una lista de fantasmas y otra de packman para que este
@@ -38,56 +37,37 @@ public class Juego {
 	 */
 
 	public Juego() {
-
-		this.tablero = new ArrayList<Tablero>();
-		this.cargarMapas();
+		
 		puntaje = 0;
-
 		finJuego = false;
 		finNivel = true;
 		nivel = 0;
-		this.controlador = new ControladorJuego();
-		this.mapa = tablero.get(0);
+		
 		this.pacman= new Pacman(this);
 		this.blinky = new Blinky(this, pacman);
 		this.pinky = new Pinky(this, pacman);
 		this.inky = new Inky(this, pacman);
 		this.clyde = new Clyde(this, pacman);
         this.controladorPacman=new Teclado(pacman);
-   		this.nuevoNivel(this.nivel);
+        this.controlador = new ControladorJuego(this); 
 
-	}
+   		}
 
-	
-
-	private void cargarMapas() {
-		/* si tira error de heap, ingresar como parametros: -Xmx512m -Xms512m en
-		 * Run Configurations
-		 */
-		this.tablero.add(new MapaNivel4());
-		this.tablero.add(new MapaNivel1());
-		this.tablero.add(new MapaNivel2());
-		this.tablero.add(new MapaNivel3());
-		//this.tablero.add(new MapaNivel4());
-	}
-
-	public void cargarMapa(Tablero mapa, int nivel) {
-		this.tablero.add(nivel, mapa);
-		this.nuevoNivel(nivel);
-	}
-
-	public void iniciar() {
-		finNivel = false;
+	public void iniciar() {		
 		controlador.comenzar();
+	}
+	
+	public void cargarMapa(Tablero mapatest){
+		this.mapa=mapatest;
+		mapa.cargarTablero();
+	;
 	}
 
 	public void pausar() {
 		this.controlador.detener();
 	}
-  
 
 	private void cargarControlador() {
-		
 
 		VistaBlinky vistaBlinky = new VistaBlinky(blinky);
 		VistaPinky vistaPinky = new VistaPinky(pinky);
@@ -110,27 +90,43 @@ public class Juego {
 
 	}
 
+	/*Devuelve la instanacia del mapa segun el nivel*/
+	private Tablero devolverMapaDelNivel(int nivel){
+		switch (nivel){
+		case 1:
+		 return new MapaNivel4();
+		case 2: 
+		 return new MapaNivel2();
+		case 3:
+			return new MapaNivel3();
+        default:
+        	return new MapaNivel1();
+		}	
+	}
+	
 	public void nuevoNivel(int nivel) {
-		if (this.nivel < tablero.size()) {
-			controlador.removerTodosLosDibujables();
-			controlador.removerTodosLosObjetosVivos();
-			this.mapa = tablero.get(nivel);
+		if (this.nivel <= 4) {
+   			if (nivel!=1) //si no lo es no es necesario desvincular el mapa xq es el unico q hubo
+            mapa.desvincular();
+			controlador.vaciarControlador();
+			this.mapa= devolverMapaDelNivel(nivel) ;//el primer mapa ya esta cargado
 			this.agregarDibujablesMapa();
-			tablero.get(nivel).cargarTablero();
-			/*
-			 * se agregan pastillas en otro metodo porque sino se pinta el
-			 * camino sobre ellas
-			 */
+			mapa.cargarTablero();
 			this.agregarDibujablesPastillas();
 			this.cargarControlador();
 			this.agregarFruta();
 			this.cantPastillasDelNivel =this.getMapa().getCantidadPuntos();
    			this.finNivel = false;
-			if (this.nivel != 0)
-			this.controlador.comenzar();
+		}else{
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+			e.printStackTrace();}
+	        controlador.vaciarControlador();
 		}
 
 	}
+
 	/*Obtiene la lista de frutas del mapa y las agrega  a la lista de objetos vivos ya que estan
 	 * pueden cambiar de estado(puedesercomido o no) cuando se le aplique el metodo vivir
 	 */
@@ -143,10 +139,6 @@ public class Juego {
     }
 	public Tablero getMapa() {
 		return mapa;
-	}
-
-	public ArrayList<Tablero> getTablero() {
-		return this.tablero;
 	}
 
 	public boolean esFinJuego() {
@@ -180,17 +172,12 @@ public class Juego {
 
 	public void finalizarNivel() {
 		finNivel = true;
-		controlador.detener();
-		this.setNivel(this.getNivel() + 1);
-	    this.nuevoNivel(this.getNivel());
 	}
 
 	/*
 	 * Finaliza el juego cuando la cantidad de vidas de pacman es cero.
 	 */
 	public void finalizarJuego() {
-		controlador.detener();
-		controlador.removerTodosLosDibujables();
 		this.finJuego = true;
 	}
 

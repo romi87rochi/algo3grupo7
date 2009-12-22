@@ -23,7 +23,7 @@ public class PosicionesCasillerosTest extends TestCase {
 		
 		MapaFormaCruz mapa=new MapaFormaCruz();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  
 		  

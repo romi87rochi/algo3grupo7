@@ -18,7 +18,7 @@ public class InkyTest extends TestCase {
 	public void testInky() {
 		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getInky();
 		  
@@ -33,7 +33,7 @@ public class InkyTest extends TestCase {
 	public void testMover() {
 		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getInky();
 		  
@@ -59,7 +59,7 @@ public class InkyTest extends TestCase {
 		  juego= new Juego();
 		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
 		
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		fan1=juego.getInky();
 		pacman=juego.getPacman();
 		
@@ -84,7 +84,7 @@ public class InkyTest extends TestCase {
 		//pacman con velocidad 5
 		MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getInky();
 		  

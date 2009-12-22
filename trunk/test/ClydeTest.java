@@ -17,7 +17,7 @@ public class ClydeTest extends TestCase {
 	public void testClyde() { 
 		MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 	  juego= new Juego();
-	  juego.cargarMapa(mapa, 0);
+	  juego.cargarMapa(mapa);
 	  pacman=juego.getPacman();
 	  fan1=juego.getClyde();
 	  
@@ -31,7 +31,7 @@ public class ClydeTest extends TestCase {
 	public void testMover() {
 		 MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getClyde();
 		  
@@ -56,7 +56,7 @@ public class ClydeTest extends TestCase {
 		  juego= new Juego();
 		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
 		
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		fan1=juego.getClyde();
 		pacman=juego.getPacman();
 		
@@ -84,7 +84,7 @@ public class ClydeTest extends TestCase {
 		//pacman con velocidad 5
 		MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getClyde();
 		  

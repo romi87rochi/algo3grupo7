@@ -111,11 +111,10 @@ public abstract class Tablero {
 
 	protected void posicionarPuntosDePoder(Casillero unCasillero,
 			int puntaje, int tiempo) {
-		PuntoDePoder unPuntoPoder = new PuntoDePoder(puntaje,
-				tiempo, unCasillero);
+		PuntoDePoder unPuntoPoder = new PuntoDePoder(puntaje,tiempo, unCasillero);
 		unCasillero.setItem(unPuntoPoder);
 		this.getVistasItems().add(new vistaPuntoDePoder(unPuntoPoder));
-		this.incrementarCantidadDePuntos();
+		this.incrementarCantidadDePuntos(); 
 	}
 	
 
@@ -159,6 +158,10 @@ public abstract class Tablero {
 	
 	public ArrayList<ObjetoVivo> getFrutas(){
 		return this.listaFrutas;
+	}
+	public void desvincular(){
+		this.posiciones=null;
+		this.casilleros=null;
 	}
 	// cuando no se quiera mostrar camino quitar agregar dibujables
 

@@ -20,7 +20,7 @@ public class JuegoTest extends TestCase {
 	public void setUp(){
 		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  clyde=juego.getClyde();
 		  MatrizPosiciones matriz=new MatrizPosiciones(30,30);
@@ -46,11 +46,7 @@ public class JuegoTest extends TestCase {
 		assertNotNull(juego);
 }
 
-	public void testPrimerNivel(){
-		setUp();
-		assertEquals(0, juego.getNivel());
-}
-	
+
 
 	public void testTerminaJuegoFalso(){
 		setUp();

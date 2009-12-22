@@ -17,7 +17,7 @@ public class estrategiaTest extends TestCase {
 	 public void setUp(){
 		  MapaParaPruebaEstrategia mapa=new MapaParaPruebaEstrategia();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getBlinky();
 		  
@@ -51,7 +51,7 @@ public class estrategiaTest extends TestCase {
 		  //pacman tiene la pastilla de poder a su izquierda
 		MapaParaPruebaEstrategiaEvasiva mapa=new MapaParaPruebaEstrategiaEvasiva();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getBlinky();
 		  
@@ -78,7 +78,7 @@ public class estrategiaTest extends TestCase {
 		 
 		MapaCuadrado mapa=new MapaCuadrado();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getBlinky();
 	     Clyde fan2=juego.getClyde();

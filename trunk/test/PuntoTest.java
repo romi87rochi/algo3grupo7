@@ -14,19 +14,16 @@ public class PuntoTest extends TestCase {
 	
 	Juego juego;
 	Pacman pacman;
-	Clyde clyde;
+	
 	
 	public void setUp(){
 		
 		juego = new Juego();
 		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		pacman=juego.getPacman();
-		clyde=juego.getClyde();
-
-		 clyde.vivir();
-		   while (!pacman.estaVivo()) //baja el tiempo de resurreccion
-		       pacman.vivir();
+		 //  while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+		   //    pacman.vivir();
 
 	}
 	
@@ -35,6 +32,8 @@ public class PuntoTest extends TestCase {
 		public void testComido(){
 			
 			int puntajePunto=100;
+			 while (!pacman.estaVivo()) //baja el tiempo de resurreccion
+			       pacman.vivir();
 			pacman.vivir();
 			Casillero casilleroPunto=pacman.getCasilleroActual().getIzquierda();
 			Punto punto=new Punto(puntajePunto,casilleroPunto);
@@ -53,11 +52,12 @@ public class PuntoTest extends TestCase {
 		public void testNoComidoPorFantasma(){
 		//VER!	
 			int puntajePunto=100;
-			clyde.vivir();
+			Clyde clyde=juego.getClyde();
+			clyde.vivir();//hace q se reubique el fantasma y este listo listo para salir
 			Casillero casilleroPunto=clyde.getCasilleroActual().getDerecha();
 			Punto punto=new Punto(puntajePunto,casilleroPunto);
 			casilleroPunto.setItem(punto);
-			clyde.vivir(); 
+			clyde.vivir(); // se mueve y pasa por encima de la pastilla
 
 			
 		

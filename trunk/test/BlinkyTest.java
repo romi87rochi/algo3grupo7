@@ -17,7 +17,7 @@ public class BlinkyTest extends TestCase {
 	public void testBlinky() {
 		MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getBlinky();
 		  
@@ -31,7 +31,7 @@ public class BlinkyTest extends TestCase {
 	public void testVivir() {
 		MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getBlinky();
 		  
@@ -61,7 +61,7 @@ public void testCeldaFantasmaComePacman(){
 	  juego= new Juego();
 	MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
 	
-	juego.cargarMapa(mapa, 0);
+	juego.cargarMapa(mapa);
 	fan1=juego.getBlinky();
 	pacman=juego.getPacman();
 	
@@ -89,7 +89,7 @@ public void testPacmanComeFantasma(){  //suponiendo que pacman se mueve hacia la
 	//pacman con velocidad 5
 	MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 	  juego= new Juego();
-	  juego.cargarMapa(mapa, 0);
+	  juego.cargarMapa(mapa);
 	  pacman=juego.getPacman();
 	  fan1=juego.getBlinky();
 	  

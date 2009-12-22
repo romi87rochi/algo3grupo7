@@ -19,7 +19,7 @@ public class PacmanTest extends TestCase {
 	public void setUp(){
 		MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  clyde=juego.getClyde();
 		  
@@ -40,7 +40,7 @@ public class PacmanTest extends TestCase {
 
 	public void testComer() {
 		MapaCaminoHorizontal mapa= new MapaCaminoHorizontal();
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		Casillero otraCelda=pacman.getCasilleroActual();
 		pacman.vivir();
 		

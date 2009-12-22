@@ -16,7 +16,7 @@ public class PinkyTest extends TestCase {
 	public void testPinky() {
 		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		 fan1=juego.getPinky();
 		  
@@ -30,7 +30,7 @@ public class PinkyTest extends TestCase {
 	public void testMover() {
 		 MapaCaminoHorizontalSinPoder mapa=new MapaCaminoHorizontalSinPoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		 fan1=juego.getPinky();
 		  
@@ -55,7 +55,7 @@ public class PinkyTest extends TestCase {
 		  juego= new Juego();
 		MapaCaminoHorizontalSinPoder mapa= new MapaCaminoHorizontalSinPoder();
 		
-		juego.cargarMapa(mapa, 0);
+		juego.cargarMapa(mapa);
 		fan1=juego.getPinky();
 		pacman=juego.getPacman();
 		
@@ -80,7 +80,7 @@ public class PinkyTest extends TestCase {
 		//pacman con velocidad 5
 		MapaCaminoHorizontal mapa=new MapaCaminoHorizontal();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  fan1=juego.getPinky();
 		  

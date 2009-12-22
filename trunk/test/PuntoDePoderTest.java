@@ -20,7 +20,7 @@ public class PuntoDePoderTest extends TestCase {
 		
 		MapaLargoConPuntoDePoder mapa=new MapaLargoConPuntoDePoder();
 		  juego= new Juego();
-		  juego.cargarMapa(mapa, 0);
+		  juego.cargarMapa(mapa);
 		  pacman=juego.getPacman();
 		  clyde=juego.getClyde();
 		  
