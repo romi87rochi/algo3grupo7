@@ -66,7 +66,7 @@ public class JuegoTest extends TestCase {
 	public void testIsFinJuego() {
 			
 		int pasos=0;
-		while(pasos<4){
+		while(pasos<9){
 			clyde.vivir();
 			clyde.vivir();
 			clyde.vivir();

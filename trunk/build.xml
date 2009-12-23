@@ -1,23 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="Pacman" default="src" basedir=".">
- 
- <target name="compilar">
-  <javac srcdir="./src" destdir="." target="1.4" source="1.4">
-   <classpath path="./lib/junit.jar" />
-  </javac>
- </target>
- 
- <target name="test" depends="compilar">
-  <javac srcdir="./test" destdir=".">
-  <junit>
-   <classpath>
-    <path location="./lib/junit.jar" /> 
-	
-	<path location="."/>
-   </classpath>
-   <test name="test" /> 
-   <formatter type="brief" usefile="false" />
-  </junit>
- </target>
- 
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="AyPIII_Grupo7" default="ejecutar">
+
+
+<mkdir dir="bin"/>
+        <copy todir="bin/algo3/grupo7/algoman/vista">        
+          <fileset dir="src/algo3/grupo7/algoman/vista">          
+           <include name="**/*.png"/>               
+           <include name="**/*.gif"/>                     
+           <include name="**/*.jpg"/> 
+      </fileset>      
+   </copy> 
+
+<path id="classpath_a_utilizar">
+        <!-- pathelement location="bin"/ -->
+        <pathelement location="bin"/>
+
+ <pathelement location="jar/junit.jar"/>
+      
+</path>
+
+<target name="compilar">
+        <!-- compilo todos los archivos fuente y dejo los .class generados en la carpeta creada bin -->
+        <javac srcdir="." destdir="bin" target="1.5" source="1.5">
+                <classpath path="jar/junit.jar"/>
+        </javac>
+</target>
+
+<target name="testear" depends="compilar">
+        <junit>
+                <classpath>
+                        <path location="jar/junit.jar"/>
+                        <path location="bin"/>
+                </classpath>
+               
+                <formatter type="brief" usefile="false" />
+               
+                <test name="algo3.grupo7.algoman.Test.BlinkyTest"/>
+                <test name="algo3.grupo7.algoman.Test.CasilleroTest"/>
+                <test name="algo3.grupo7.algoman.Test.ClydeTest"/>
+                <test name="algo3.grupo7.algoman.Test.EstrategiaTest"/>
+                <test name="algo3.grupo7.algoman.Test.FantasmaTest"/>
+                <test name="algo3.grupo7.algoman.Test.FrutaTest"/>
+                <test name="algo3.grupo7.algoman.Test.InkyTest"/>
+                <test name="algo3.grupo7.algoman.Test.ItemComibleTest"/>
+                <test name="algo3.grupo7.algoman.Test.JuegoTest"/>
+                <test name="algo3.grupo7.algoman.Test.PacmanTest"/>
+                <test name="algo3.grupo7.algoman.Test.PersonajeTest"/>
+                <test name="algo3.grupo7.algoman.Test.PinkyTest"/>
+                <test name="algo3.grupo7.algoman.Test.PosicionesCasillerosTest"/>
+                <test name="algo3.grupo7.algoman.Test.PuntoDePoderTest"/>
+                <test name="algo3.grupo7.algoman.Test.PuntoTest"/>
+        </junit>
+</target>
+
+<target name="ejecutar" depends="testear">
+        <java
+                classname="algo3.grupo7.algoman.vista.VentanaPrincipal"
+                classpathref="classpath_a_utilizar"
+                fork="true"
+                dir="${basedir}">
+        </java>
+</target>
+
 </project>
+
