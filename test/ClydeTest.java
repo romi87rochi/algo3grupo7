@@ -74,7 +74,7 @@ public class ClydeTest extends TestCase {
 		assertTrue(pacman.getCasilleroActual()==juego.getMapa().getOrigenPacman());
 		assertTrue(fan1.getCasilleroActual()==juego.getMapa().getOrigenFantasmas()); // el fantasma vuelve a su posicion original
 		
-		assertTrue(pacman.getVidas()==2); // baja vidas de pacman
+		assertTrue(pacman.getVidas()==6); // baja vidas de pacman
 		juego=null;
 		
 	}
@@ -96,7 +96,7 @@ public class ClydeTest extends TestCase {
 		Casillero otracelda=pacman.getCasilleroActual();
 		 //pacman come punto de poder
 		fan1.vivir(); // pacman se encuentra con fan1
-		assertTrue(pacman.getVidas()==3); //pacman no pierde vidas
+		assertTrue(pacman.getVidas()==7); //pacman no pierde vidas
 		assertTrue(pacman.getCasilleroActual()==otracelda); // pacman sigue en su posicion
 		juego=null;
 

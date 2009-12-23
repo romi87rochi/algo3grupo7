@@ -41,7 +41,7 @@ public class FantasmaTest extends TestCase {
 		
 		
 		assertTrue(casilleroEnComun.getFantasmas().isEmpty()); //clyde se reubica
-		assertTrue(pacman.getVidas()==2);//fantasma comio a pacman
+		assertTrue(pacman.getVidas()==6);//fantasma comio a pacman
 	}
 
 	public void testMover() {
