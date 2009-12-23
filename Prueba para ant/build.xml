@@ -7,6 +7,10 @@
 
 <mkdir dir="${archivos}/bin"/>
 
+<copy todir="${archivos}/bin/algo3/grupo7/algoman/vista">
+	<fileset dir="${archivos}/src/algo3/grupo7/algoman/vista" excludes="**/*.java"/>
+</copy>
+
 <path id="classpath_a_utilizar">
 	<!-- pathelement location="${archivos}/bin"/ -->
 	<pathelement location="${archivos}"/>
